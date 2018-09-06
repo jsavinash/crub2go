@@ -1,25 +1,37 @@
 import * as React from "react"
-import { Dimensions, ImageBackground, StyleSheet, TouchableOpacity, View, Text, Image, ScrollView } from "react-native";
+import { Dimensions, ImageBackground, StyleSheet, ScrollView } from "react-native";
 import SplashScreen from 'react-native-splash-screen';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 import { AccountMain } from '../components';
+import Toaster from 'anx-react-native-toaster';
+
 export interface Props {
     navigation: any
 }
 interface State {
 
 }
+
 export class Account extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
     }
     componentDidMount() {
         SplashScreen.hide();
+        this.showToaster();
     }
+
+    showToaster = () => {
+        setTimeout(() => {
+            Toaster.show('Awesome', Toaster.SHORT);
+         }, 3000);
+    }
+
     navigateTo = (screen: string): any => {
         this.props.navigation.navigate(`${screen}`);
     };
+
     render() {
         return (
             <ScrollView>
@@ -38,7 +50,6 @@ var styles = StyleSheet.create({
         top: 0,
         left: 0
     },
-
     topContainer: {
         alignItems: 'center'
     },

@@ -3,6 +3,7 @@ package com.reactnativedevelopment;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.github.alinz.reactnativewebviewbridge.WebViewBridgePackage;
 import com.github.yamill.orientation.OrientationPackage;
 import com.rnfs.RNFSPackage;
@@ -13,7 +14,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-
+import com.avinash.RNAnxReactNativeToasterPackage;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,14 +29,15 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new WebViewBridgePackage(),
-            new OrientationPackage(),
-            new RNFSPackage(),
-            new ImageResizerPackage(),
-            new ImagePickerPackage(),
-            new SplashScreenReactPackage()
-      );
+        new MainReactPackage(), 
+        new VectorIconsPackage(),
+        new WebViewBridgePackage(),
+        new OrientationPackage(),
+        new RNFSPackage(),
+        new ImageResizerPackage(),
+        new RNAnxReactNativeToasterPackage(),
+        new ImagePickerPackage(), 
+        new SplashScreenReactPackage());
     }
 
     @Override

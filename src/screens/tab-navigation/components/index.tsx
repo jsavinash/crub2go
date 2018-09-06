@@ -48,12 +48,13 @@ export default TabNavigator(
             activeTintColor: '#ACD472',
             inactiveTintColor: 'gray',
         },
-        initialRouteName: 'Home',
+        initialRouteName: 'My Account',
         animationEnabled: false,
         swipeEnabled: false,
         
     }
 );
+
 
 
 const styles = StyleSheet.create({
