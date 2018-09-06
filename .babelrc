@@ -1,0 +1,33 @@
+{
+  "presets": [
+    "react-native"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "cwd": "babelrc",
+        "root": [
+          "./"
+        ],
+        "alias": {
+          "@components": "./src/components",
+          "@screens": "./src/screens",
+          "@themes": "./src/themes",
+          "@rest_service": "./src/service",
+          "@sages": "./src/sages",
+          "@models": "./src/models",
+          "@constant": "./src/constants",
+          "@config": "./src/config",
+          "@state_action": "./src/state_action",
+          "@store": "./src/store",
+          "@common_Component": "./src/components/common",
+          "@common_service": "./src/common/services"
+        }
+      }
+    ],
+    [
+      "transform-object-rest-spread"
+    ]
+  ]
+}
