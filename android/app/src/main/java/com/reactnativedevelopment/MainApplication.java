@@ -14,7 +14,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.avinash.RNAnxReactNativeToasterPackage;
+//import com.avinash.RNAnxReactNativeToasterPackage;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,7 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
         new OrientationPackage(),
         new RNFSPackage(),
         new ImageResizerPackage(),
-        new RNAnxReactNativeToasterPackage(),
+     //   new RNAnxReactNativeToasterPackage(),
         new ImagePickerPackage(), 
         new SplashScreenReactPackage());
     }

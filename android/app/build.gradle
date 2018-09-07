@@ -151,7 +151,7 @@ signingConfigs {
 }
 
 dependencies {
-    compile project(':anx-react-native-toaster')
+  //  compile project(':anx-react-native-toaster')
     compile project(':react-native-vector-icons')
     compile project(':react-native-webview-bridge')
     compile project(':react-native-orientation')
