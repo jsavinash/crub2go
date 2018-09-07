@@ -4,7 +4,7 @@ import SplashScreen from 'react-native-splash-screen';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 import { AccountMain } from '../components';
-import Toaster from 'anx-react-native-toaster';
+//import Toaster from 'anx-react-native-toaster';
 
 export interface Props {
     navigation: any
@@ -24,7 +24,7 @@ export class Account extends React.Component<Props, State> {
 
     showToaster = () => {
         setTimeout(() => {
-            Toaster.show('Awesome', Toaster.SHORT);
+     //       Toaster.show('Awesome', Toaster.SHORT);
          }, 3000);
     }
 
