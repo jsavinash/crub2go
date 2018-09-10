@@ -14,20 +14,6 @@ export class Payment extends React.Component<Props, State> {
     render() {
         return (
             <ScrollView contentContainerStyle={styles.contentContainer}>
-                <View style={{
-                    height: 40,
-                    width: 350,
-                    backgroundColor: 'white',
-                    alignContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    <Text
-                        style={{
-                            marginTop: 10,
-                            fontSize: 15,
-                            color: 'black'
-                        }}>Payment Method</Text>
-                </View>
                 <Image
                     source={require('../../../assets/app-images/img_americanexp.png')}
                     style={{

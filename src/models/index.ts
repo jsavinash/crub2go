@@ -91,6 +91,10 @@ interface Page {
 interface FavoriteParams {
   restaurant_id?: any
 }
+
+interface CustomerCard {
+  user_stripe_id: string
+}
 export {
   Customer as ICustomer,
   Login as ILogin,
@@ -104,5 +108,6 @@ export {
   Restaurants as IRestaurants,
   Page as IPage,
   EditProfile as IEditProfile,
-  FavoriteParams as IFavoriteParams
+  FavoriteParams as IFavoriteParams,
+  CustomerCard as ICustomerCard
 }

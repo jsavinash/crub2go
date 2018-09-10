@@ -17,7 +17,7 @@ import CheckoutScreen from './checkout/container/index';
 import FavouriteScreen from './favourite';
 import OrdersScreen from './orders';
 import OrderSummaryScreen from './order-summary/container/index';
-import PaymentScreen from './payment/container/index';
+import PaymentScreen from './payment';
 import PaymentSuccessScreen from './payment-success';
 import TabNavigatorScreen from './tab-navigation/container/index';
 import CityScreen from './city-list';

@@ -7,7 +7,7 @@ const restApiConfig = apisauce.create({
         'APIKEY': 'APIKEY',
         'APIVERSION': 1.0,
         'Content-Type': 'multipart/form-data',
-        'AUTHTOKEN': 'f59eef3a8d22cac4f44ae8bf393ff920'
+        'AUTHTOKEN': '68eca6812431dfe2449a879d1e8b0827'
     },
     timeout: 10000,
 })

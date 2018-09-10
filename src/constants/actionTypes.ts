@@ -31,3 +31,6 @@ export const HOW_IT_WORKS_PAGE = 'page/HOWITWORKS'
 export const TERMS_OF_SERVICE_PAGE = 'page/TERMSOFSERVICE'
 export const PRIVACY_POLICY_PAGE = 'page/PRIVACYPOLICY'
 
+//Cards
+export const LIST_CARDS = 'card/LIST'
+

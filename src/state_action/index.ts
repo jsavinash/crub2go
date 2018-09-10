@@ -7,3 +7,4 @@ export * from './cities';
 export * from './restaurants';
 export * from './static-pages';
 export * from './faq';
+export * from './card';

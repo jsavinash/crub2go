@@ -58,8 +58,9 @@ import {
 import styles from './styles/NavigationStyles'
 
 const initialRoute = (): string => {
-  return 'AppEntry';
+  return 'Payment';
 }
+
 
 const stackRouterConfig: any = {
   headerMode: 'float',
