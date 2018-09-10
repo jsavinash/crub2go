@@ -1,45 +1,30 @@
 import * as React from "react"
-import { ScrollView, View, StyleSheet, Image, Text } from "react-native"
-export interface Props {
+import { ScrollView, StyleSheet, Image } from "react-native"
+export interface PaymentProps {
 
 }
 
-interface State {
+interface PaymentState {
 }
 
-export class Payment extends React.Component<Props, State> {
-    constructor(props: Props) {
+export class Payment extends React.Component<PaymentProps, PaymentState> {
+    constructor(props: PaymentProps) {
         super(props)
     }
     render() {
         return (
-            <ScrollView contentContainerStyle={styles.contentContainer}>
+            <ScrollView>
                 <Image
                     source={require('../../../assets/app-images/img_americanexp.png')}
-                    style={{
-                        height: 200,
-                        width: 350,
-                        margin: 5,
-                        borderRadius: 20
-                    }}>
+                    style={styles.image}>
                 </Image>
                 <Image
                     source={require('../../../assets/app-images/img_mastrcrd.png')}
-                    style={{
-                        height: 200,
-                        width: 355,
-                        margin: 5,
-                        borderRadius: 20
-                    }}>
+                    style={styles.image}>
                 </Image>
                 <Image
                     source={require('../../../assets/app-images/img_visa.png')}
-                    style={{
-                        height: 200,
-                        width: 355,
-                        margin: 5,
-                        borderRadius: 20
-                    }}>
+                    style={styles.image}>
                 </Image>
             </ScrollView>
         )
@@ -48,7 +33,10 @@ export class Payment extends React.Component<Props, State> {
 
 
 const styles = StyleSheet.create({
-    contentContainer: {
-        //   paddingVertical: 20
+    image: {
+        height: 200,
+        width: 350,
+        margin: 5,
+        borderRadius: 20
     }
 })

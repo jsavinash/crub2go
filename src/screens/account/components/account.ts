@@ -48,21 +48,21 @@ export const supports: any = [
     {
         title: "FAQ's",
         image: require('../../../assets/app-images/img_faq.png'),
-        path: "Home"
+        path: "FAQ"
     },
     {
         title: "Contact Us",
         image: require('../../../assets/app-images/email_active.png'),
-        path: "Home"
+        path: "contactUs"
     },
     {
         title: "Tell a Friend",
         image: require('../../../assets/app-images/img_tellafrnd.png'),
-        path: "Home"
+        path: "tellFriends"
     },
     {
         title: "Logout",
         image: require('../../../assets/app-images/img_logout.png'),
-        path: "Home"
+        path: "logout"
     }
 ];

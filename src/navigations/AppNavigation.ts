@@ -58,7 +58,7 @@ import {
 import styles from './styles/NavigationStyles'
 
 const initialRoute = (): string => {
-  return 'Payment';
+  return 'AppEntry';
 }
 
 

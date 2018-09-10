@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, Image, Dimensions, TouchableOpacity } from "rea
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 import { settings, supports } from './account';
+import { removeAsync } from '@common_service';
 export interface AccountBottomProps {
     navigation?: any
 }
@@ -30,9 +31,30 @@ export class AccountBottom extends React.Component<AccountBottomProps, AccountBo
             case "privacypolicy":
                 this.props.navigation.navigate(`Page`, { type: "privacypolicy" });
                 break;
+            case "contactUs":
+                this.contactUs()
+                break;
+            case "tellFriends":
+                this.tellFriends()
+                break;
+            case "logout":
+                this.logout()
+                break;
             default:
                 this.props.navigation.navigate(`${path}`);
         }
+    }
+    private contactUs = () => {
+
+    }
+    private tellFriends = () => {
+
+        
+    }
+    private logout = () => {
+        removeAsync('user_access_token');
+        removeAsync('user_stripe_id');
+        this.props.navigation.navigate(`Login`);
     }
     private initBlock = () => {
         settings.forEach((setting: any, idx: number) => {
@@ -133,7 +155,7 @@ const styles = StyleSheet.create({
         color: '#9b9b9b'
     },
     sallowView: {
-        height: ((SCREEN_HEIGHT * 9) / 100),
+        height: ((SCREEN_HEIGHT * 10) / 100),
         backgroundColor: 'white',
         paddingLeft: '3%',
         paddingRight: '3%'

@@ -13,6 +13,7 @@ export class AppEntry extends React.Component<Props, State> {
         super(props);
     }
 
+    
     navigateIfToken = () => {
         const { navigation } = this.props;
         const receiveLoginDetails = (value: any) => {
@@ -27,8 +28,8 @@ export class AppEntry extends React.Component<Props, State> {
 
     componentDidMount() {
         const { navigation } = this.props;
-        navigation.navigate('Home');
-       // this.navigateIfToken();
+        //navigation.navigate('Home');
+    this.navigateIfToken();
     }
 
     render() {
