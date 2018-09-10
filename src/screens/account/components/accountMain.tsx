@@ -2,7 +2,8 @@ import * as React from "react";
 import { View } from "react-native";
 import { AccountTop, AccountBottom } from './';
 export interface AccountMainProps {
-    navigation?: any
+    navigation?: any,
+    customer: any
 }
 
 interface AccountMainState {
@@ -15,8 +16,10 @@ export class AccountMain extends React.Component<AccountMainProps, AccountMainSt
     render() {
         return (
             <View>
-                <AccountTop navigation={this.props.navigation}/>
-                <AccountBottom navigation={this.props.navigation}/>
+                <AccountTop
+                    customer={this.props.customer}
+                    navigation={this.props.navigation} />
+                <AccountBottom navigation={this.props.navigation} />
             </View>
         )
     }

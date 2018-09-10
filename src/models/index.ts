@@ -13,6 +13,10 @@ interface Cities {
   city_name: string,
   city_id: string
 }
+interface EditProfile {
+  user_name?: any,
+  user_profile?: any
+}
 interface Register {
   user_profile?: any,
   user_name?: string,
@@ -84,6 +88,9 @@ interface Page {
   content: string,
   title: string
 };
+interface FavoriteParams {
+  restaurant_id?: any
+}
 export {
   Customer as ICustomer,
   Login as ILogin,
@@ -95,5 +102,7 @@ export {
   Cities as ICities,
   RestaurantsParams as IRestaurantsParams,
   Restaurants as IRestaurants,
-  Page as IPage
+  Page as IPage,
+  EditProfile as IEditProfile,
+  FavoriteParams as IFavoriteParams
 }

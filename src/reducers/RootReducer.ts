@@ -6,6 +6,7 @@ import { DealsReducer as deals } from './deals';
 import { CitiesReducer as cities } from './cities';
 import { RestaurantReducer as restaurants } from './restaurants';
 import { StaticPageReducer as page } from './static-pages';
+import { FAQReducer as faq } from './faq';
 import { reducer as network } from 'react-native-offline';
 import { NavigationReducer as navReducer } from './navigation';
 /* ------------- Assemble The Reducers ------------- */
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   deals,
   cities,
   restaurants,
-  page
+  page,
+  faq
 })
 export type RootState = StateType<typeof rootReducer>
 export default rootReducer

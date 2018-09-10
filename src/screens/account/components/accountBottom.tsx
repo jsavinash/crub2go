@@ -22,7 +22,7 @@ export class AccountBottom extends React.Component<AccountBottomProps, AccountBo
                 this.props.navigation.navigate(`Page`, { type: "aboutus" });
                 break;
             case "howitworks":
-                this.props.navigation.navigate(`Page`, { type: "howitworks" });
+                this.props.navigation.navigate(`Page`, { type: "how_it_works" });
                 break;
             case "termsofservices":
                 this.props.navigation.navigate(`Page`, { type: "termsconditions" });

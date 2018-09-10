@@ -1,16 +1,15 @@
 import * as React from "react";
-import { Text, StyleSheet, View, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, View, Dimensions, ScrollView, Image, TouchableOpacity, TouchableHighlight } from 'react-native';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ActionSheet from 'react-native-actionsheet';
-import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards';
-import { IRestaurants } from '@models';
-import { PlaceCard, SearchBar, } from '@common_Component';
+import { IRestaurants, IFavoriteParams } from '@models';
+import { SearchBar, } from '@common_Component';
+import { RestaurantRestService } from '../../../services';
 export interface MainBoxProps {
     navigation: any,
-    restaurants: IRestaurants[],
-
+    restaurants: IRestaurants[]
 }
 interface MainBoxState {
 
@@ -29,14 +28,24 @@ export class MainBox extends React.Component<MainBoxProps, MainBoxState> {
             console.log("idx", idx, 'Rating');
         }
     }
-    
+
     public navigateTo = () => {
         this.props.navigation.navigate('City');
     }
 
+    public favorite = (restaurant: any) => {
+        console.log("restaurant", restaurant);
+        const favorite: IFavoriteParams = {
+            restaurant_id: restaurant['restaurant_id']
+        };
+        RestaurantRestService.markFavoriteRestaurant(favorite).then((favoriteRes: any) => {
+            console.log("favoriteRes", favoriteRes);
+        }).catch((error) => {
+            console.log("favoriteRes errrior", error);
+        })
+    }
     render() {
         return (
-
             <View style={styles.container}>
                 <View style={styles.div1}>
                     <View style={styles.div2}>
@@ -44,7 +53,7 @@ export class MainBox extends React.Component<MainBoxProps, MainBoxState> {
                         </Icon.Button>
                     </View>
                     <View style={styles.div3}>
-                        <Text style={styles.div3Txt1}>Your Location</Text>  
+                        <Text style={styles.div3Txt1}>Your Location</Text>
                         <TouchableOpacity onPress={this.navigateTo}>
                             <Text style={styles.div3Txt2}>Ahmedabad</Text>
                         </TouchableOpacity>
@@ -56,24 +65,56 @@ export class MainBox extends React.Component<MainBoxProps, MainBoxState> {
                 </View>
                 <SearchBar />
                 <ScrollView>
-                    {this.props.restaurants.map((restaurant, idx) => {
-                        return (
-                            <Card key={idx}>
-                                <CardImage
-                                    source={{ uri: restaurant.restaurant_image }}
-                                />
+                    <View style={{
+                        backgroundColor: 'white',
+                    }}>
+                        {this.props.restaurants.map((restaurant, idx) => {
+                            return (
+                                <View style={{
+                                    flex: 1,
+                                    marginBottom: 10,
+                                }} key={idx}>
+                                    <Image
+                                        source={{ uri: restaurant.restaurant_image }}
+                                        style={{
+                                            width: SCREEN_WIDTH,
+                                            height: ((SCREEN_HEIGHT * 35) / 100)
+                                        }} />
+                                    <TouchableHighlight
+                                        style={{
+                                            marginTop: 4,
+                                            right: 4,
+                                            position: 'absolute'
+                                        }}
+                                        onPress={() => { this.favorite(restaurant) }}>
+                                        <Image
+                                            source={require('../../../assets/app-images/heart-outline.png')}
+                                            style={{
+                                                height: 30,
+                                                width: 30
 
-                                <View style={styles.scrollContainer}>
-                                    <Text style={styles.content1left}>{restaurant.restaurant_name}</Text>
-                                    <Text style={styles.content1right}>Rating</Text>
+                                            }}
+                                        />
+                                    </TouchableHighlight>
+                                    <View style={{
+                                        width: SCREEN_WIDTH,
+                                        height: ((SCREEN_HEIGHT * 10) / 100),
+                                        backgroundColor: 'white',
+                                        borderBottomWidth: 2,
+                                    }}>
+                                        <View style={styles.scrollContainer}>
+                                            <Text style={styles.content1left}>{restaurant.restaurant_name}</Text>
+                                            <Text style={styles.content1right}>Rating</Text>
+                                        </View>
+                                        <View style={styles.scrollContainer}>
+                                            <Text style={styles.content2left}>{restaurant.restaurant_distance} Miles away</Text>
+                                            <Text style={styles.content2right}>{restaurant.restaurant_rating}</Text>
+                                        </View>
+                                    </View>
                                 </View>
-                                <View style={styles.scrollContainer}>
-                                    <Text style={styles.content2left}>{restaurant.restaurant_distance} Miles away</Text>
-                                    <Text style={styles.content2right}>{restaurant.restaurant_rating}</Text>
-                                </View>
-                            </Card>
-                        )
-                    })}
+                            )
+                        })}
+                    </View>
                 </ScrollView>
                 <ActionSheet
                     ref={o => this.ActionSheet = o}
@@ -106,17 +147,18 @@ var styles = StyleSheet.create({
         justifyContent: 'flex-start',
         flexDirection: 'column',
         marginLeft: 0
-    },   
+    },
     div3Txt1: {
         fontSize: 14,
         color: '#ACD472'
     },
-     div3Txt2: {
-       color: 'black',
-       fontSize: 16,
-       fontWeight: '600'
+    div3Txt2: {
+        color: 'black',
+        fontSize: 16,
+        fontWeight: '600'
     },
     scrollContainer: {
+        marginTop: '2%',
         flexDirection: 'row',
         justifyContent: 'space-between'
     },

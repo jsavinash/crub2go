@@ -3,7 +3,7 @@ import { getType } from 'typesafe-actions'
 import { CitiesActions, CitiesState, citiesAction } from '../state_action'
 import { ICities } from '@models';
 
-export const CitiesReducer = combineReducers<CitiesState, CitiesActions>({
+export const FAQReducer = combineReducers<CitiesState, CitiesActions>({
     cities: (state = [], action) => {
         switch (action.type) {
             case getType(citiesAction.listCites):

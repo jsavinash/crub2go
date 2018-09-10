@@ -23,7 +23,10 @@ import {
   PaymentSuccessScreen,
   TabNavigatorScreen,
   CityScreen,
-  PageScreen
+  PageScreen,
+  AppEntryScreen,
+  EditProfile,
+  FAQScreen
 } from '../screens';
 import {
   Home,
@@ -55,9 +58,8 @@ import {
 import styles from './styles/NavigationStyles'
 
 const initialRoute = (): string => {
-  return 'Login';
+  return 'AppEntry';
 }
-
 
 const stackRouterConfig: any = {
   headerMode: 'float',
@@ -66,9 +68,25 @@ const stackRouterConfig: any = {
     headerStyle: styles.header,
   },
 };
+
 // Manifest of possible screens
 const PrimaryNavigation = StackNavigator(
   {
+    FAQ: {
+      screen: FAQScreen,
+      path: 'faq',
+      navigationOptions: () => (Home),
+    },
+    EditProfile: {
+      screen: EditProfile,
+      path: 'edit-profile',
+      navigationOptions: () => (Home),
+    },
+    AppEntry: {
+      screen: AppEntryScreen,
+      path: 'app',
+      navigationOptions: () => (Home),
+    },
     Home: {
       screen: TabNavigatorScreen,
       path: 'home',
@@ -199,7 +217,7 @@ const PrimaryNavigation = StackNavigator(
   },
   stackRouterConfig
 )
-
+//e0a65b6f625a2ad0db051c49f54d6d64
 
 
 

@@ -3,11 +3,23 @@ import { Dimensions, ImageBackground, StyleSheet, ScrollView } from "react-nativ
 import SplashScreen from 'react-native-splash-screen';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
+
+
+import { ErrTitle, ErrInternetCon, LoginErrorMessage, InternalServerError, InternalServerErrorTitle } from '@constant';
+import { showAlert, transformToFromData, storeAsync, logger } from '@common_service';
+import { ICustomer, ILogin } from '@models';
+import {
+    CustomerRestService
+} from '../../../services';
+
+
 import { AccountMain } from '../components';
-//import Toaster from 'anx-react-native-toaster';
 
 export interface Props {
-    navigation: any
+    customerCreate: (payload: any) => any,
+    navigation: any,
+    customer: any,
+    connection: boolean
 }
 interface State {
 
@@ -17,28 +29,19 @@ export class Account extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
     }
-    componentDidMount() {
-        SplashScreen.hide();
-        this.showToaster();
-    }
-
-    showToaster = () => {
-        setTimeout(() => {
-     //       Toaster.show('Awesome', Toaster.SHORT);
-         }, 3000);
-    }
-
     navigateTo = (screen: string): any => {
         this.props.navigation.navigate(`${screen}`);
     };
-
     render() {
         return (
             <ScrollView>
                 <ImageBackground
                     source={require('../../../assets/app-images/bg.png')}
                     style={styles.bgImage}>
-                    <AccountMain navigation={this.props.navigation} />
+                    <AccountMain
+                        navigation={this.props.navigation}
+                        customer={this.props.customer}
+                    />
                 </ImageBackground>
             </ScrollView>
         )

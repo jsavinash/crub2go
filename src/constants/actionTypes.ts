@@ -23,6 +23,7 @@ export const LIST_CITIES = 'city/LIST'
 
 //Restaurants
 export const LIST_RESTAURANTS = 'restaurants/LIST'
+export const LIST_FAV_RESTAURANTS = 'restaurants/FAVORITE'
 
 //Static Pages
 export const ABOUT_US_PAGE = 'page/ABOUTUS'

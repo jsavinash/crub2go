@@ -64,7 +64,7 @@ export const Favourite = {
     headerStyle: { backgroundColor: 'white' },
     headerTitleStyle: {
         color: '#4E4E4E',
-        marginLeft: ((SCREEN_WIDTH * 38) / 100)
+        marginLeft: ((SCREEN_WIDTH * 22) / 100)
     }
 }
 export const Orders = {

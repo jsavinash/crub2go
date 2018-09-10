@@ -22,7 +22,9 @@ import PaymentSuccessScreen from './payment-success';
 import TabNavigatorScreen from './tab-navigation/container/index';
 import CityScreen from './city-list';
 import PageScreen from './page';
-
+import AppEntryScreen from './app-entry';
+import EditProfile from './edit-profile';
+import FAQScreen from './faq';
 export {
     TabNavigatorScreen,
     LoginScreen,
@@ -47,5 +49,8 @@ export {
     PaymentScreen,
     PaymentSuccessScreen,
     CityScreen,
-    PageScreen
+    PageScreen,
+    AppEntryScreen,
+    EditProfile,
+    FAQScreen
 }

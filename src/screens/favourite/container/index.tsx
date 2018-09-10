@@ -1,13 +1,18 @@
 import * as React from "react";
-import { Text, View, StyleSheet, Dimensions } from "react-native";
-import SplashScreen from 'react-native-splash-screen';
+import { View, StyleSheet, Text, Dimensions } from "react-native";
 import { MainBox } from '../components/mainBox';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
+import { ICities, IRestaurants, ICustomer, IRestaurantsParams } from '@models';
+import { RestaurantRestService, CitiesRestService } from '../../../services';
+import { transformToFromData } from '@common_service';
+import SplashScreen from 'react-native-splash-screen';
+
 export interface Props {
-
+    listFavRestaurant: (payload: any) => any,
+    favRestaurants: IRestaurants[],
+    navigation: any
 }
-
 interface State {
 
 }
@@ -16,12 +21,37 @@ export class Favourite extends React.Component<Props, State> {
         super(props)
     }
     componentDidMount() {
+        this.initRestaurants();
         SplashScreen.hide();
     }
+    initRestaurants = () => {
+        let params = {
+            city_id: 10,
+            page_index: 1,
+            num_records: 10
+        };
+        let reconstruct: any = [];
+        RestaurantRestService.listFavoriteRestaurant({}).then((restaurantData: any) => {
+            console.log("restaurantData..........", restaurantData);
+            restaurantData['data']['data'].forEach((restaurant: any, idx: number) => {
+                restaurant.restaurant_image = restaurant.restaurant_image[0];
+                reconstruct.push(restaurant);
+            });
+            this.props.listFavRestaurant(reconstruct);
+        }).catch((error) => {
+            console.log("restaurantData error", error);
+        })
+    }
+
+
+
     render() {
         return (
             <View style={styles.container}>
-                <MainBox/>
+                <MainBox
+                    navigation={this.props.navigation}
+                    favRestaurants={this.props.favRestaurants}
+                />
             </View>
         )
     }
@@ -34,5 +64,20 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
-    }
+    },
+    headerContainer: {
+        flex: 0.1,
+        borderColor: '#aaa',
+        borderWidth: 2,
+        alignContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'white',
+    },
+    headerText: {
+        //   fontSize: 20,
+
+        marginTop: '4%',
+        color: 'black',
+        fontWeight: '700'
+    },
 })

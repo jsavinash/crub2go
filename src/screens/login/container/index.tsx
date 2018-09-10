@@ -29,23 +29,22 @@ export class Login extends React.Component<Props, State> {
         super(props);
         this.state = {
             keyboard: 0
-        };     
+        };
     }
-    
+
     navigateIfToken = () => {
-        const receiveLoginDetails = (value:any) => {
-            if(value){
+        const receiveLoginDetails = (value: any) => {
+            if (value) {
                 console.log('token', value);
                 this.props.navigation.navigate('Home');
             }
         }
         AsyncStorage.getItem("user_access_token").then(receiveLoginDetails);
- 
+
     }
 
     componentDidMount() {
         SplashScreen.hide();
-        this.props.navigation.navigate('Home');
         this.getRouteParams();
         this.navigateIfToken();
     }

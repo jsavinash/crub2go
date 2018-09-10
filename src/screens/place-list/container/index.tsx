@@ -6,6 +6,8 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 import { ICities, IRestaurants, ICustomer, IRestaurantsParams } from '@models';
 import { RestaurantRestService, CitiesRestService } from '../../../services';
 import { transformToFromData } from '@common_service';
+import SplashScreen from 'react-native-splash-screen';
+
 export interface Props {
     listCites: (payload: any) => any,
     listRestaurants: (payload: any) => any,
@@ -25,6 +27,7 @@ export class PlaceList extends React.Component<Props, State> {
         this.getCustomer();
         this.getCities();
         this.initRestaurants();
+        SplashScreen.hide();
     }
     initRestaurants = () => {
         let params = {

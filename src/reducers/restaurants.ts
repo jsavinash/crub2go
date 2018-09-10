@@ -10,6 +10,14 @@ export const RestaurantReducer = combineReducers<RestaurantsState, RestaurantsAc
             default:
                 return state
         }
+    },
+    favRestaurants: (state: IRestaurants[] = [], action) => {
+        switch (action.type) {
+            case getType(restaurantsAction.listFavRestaurant):
+                return action['payload'];
+            default:
+                return state
+        }
     }
 })
 

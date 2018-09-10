@@ -48,10 +48,9 @@ export default TabNavigator(
             activeTintColor: '#ACD472',
             inactiveTintColor: 'gray',
         },
-        initialRouteName: 'My Account',
+        initialRouteName: 'Home',
         animationEnabled: false,
         swipeEnabled: false,
-        
     }
 );
 

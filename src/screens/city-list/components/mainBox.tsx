@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Text, StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native';
 const SCREEN_WIDTH = Dimensions.get('window').width;
-const SCREEN_HEIGHT = Dimensions.get('window').height;
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ActionSheet from 'react-native-actionsheet';
 import { PlaceCard, SearchBar, CountrySelectBar } from '@common_Component';
