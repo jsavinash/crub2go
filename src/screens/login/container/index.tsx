@@ -32,21 +32,10 @@ export class Login extends React.Component<Props, State> {
         };
     }
 
-    navigateIfToken = () => {
-        const receiveLoginDetails = (value: any) => {
-            if (value) {
-                console.log('token', value);
-                this.props.navigation.navigate('Home');
-            }
-        }
-        AsyncStorage.getItem("user_access_token").then(receiveLoginDetails);
-
-    }
 
     componentDidMount() {
         SplashScreen.hide();
         this.getRouteParams();
-        this.navigateIfToken();
     }
 
 
@@ -65,11 +54,9 @@ export class Login extends React.Component<Props, State> {
                 return;
             }
             console.log('enter', success);
-
             if (success['data']['settings']['success'] == 1) {
                 let customerData: ICustomer = success['data']['data'][0];
-                storeAsync('user_access_token', customerData['user_access_token']);
-                storeAsync('user_stripe_id', customerData['user_stripe_id']);
+                storeAsync('user', JSON.stringify(customerData));
                 _self.props.customerCreate(customerData);
                 _self.props.navigation.navigate('Home');
             } else if (success['data']['settings']['success'] == 0) {

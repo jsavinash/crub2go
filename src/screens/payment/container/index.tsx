@@ -9,7 +9,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 export interface PaymentProps {
     cards: any,
-    listCards: (data: any[]) => any
+    listCards: (data: any[]) => any,
+    customer: any,
+    navigation: any
 }
 interface PaymentState {
 
@@ -24,10 +26,11 @@ export class Payment extends React.Component<PaymentProps, PaymentState> {
         this.getCard();
     }
     getCard = () => {
+        let token = this.props.customer['user_access_token'];
         let cardParams: ICustomerCard = {
             user_stripe_id: "cus_DWXvlTTqnUG6SW"
         };
-        CardRestService.listCard(transformToFromData(cardParams)).then((success: any) => {
+        CardRestService.listCard(transformToFromData(cardParams), token).then((success: any) => {
             if (success['data']['settings']['success'] == 1) {
                 this.props.listCards(success['data']['data'][0]['customer_cards']);
             } else if (success['data']['settings']['success'] == 0) {
@@ -78,7 +81,7 @@ export class Payment extends React.Component<PaymentProps, PaymentState> {
                         })
                     }
                 </ScrollView>
-                <FAB buttonColor="red" iconTextColor="#FFFFFF" onClickAction={() => { console.log("FAB pressed") }} visible={true} iconTextComponent={<Icon name="plus" />} />
+                <FAB buttonColor="red" iconTextColor="#FFFFFF" onClickAction={() => { this.props.navigation.navigate('AddCard'); }} visible={true} iconTextComponent={<Icon name="plus" />} />
             </View>
         )
     }

@@ -3,10 +3,9 @@ import { ScrollView, StyleSheet, Image } from "react-native"
 export interface PaymentProps {
 
 }
-
 interface PaymentState {
-}
 
+}
 export class Payment extends React.Component<PaymentProps, PaymentState> {
     constructor(props: PaymentProps) {
         super(props)

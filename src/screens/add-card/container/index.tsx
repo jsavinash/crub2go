@@ -1,23 +1,33 @@
 import * as React from "react"
-import { Dimensions, ImageBackground, StyleSheet, View, ScrollView, Text, Image } from "react-native";
+import { Dimensions, ImageBackground, StyleSheet, View, ScrollView, AsyncStorage, Text, Image } from "react-native";
 import SplashScreen from 'react-native-splash-screen';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 import { Card } from '../components';
-export interface Props {
-    navigation: any
+export interface AddCardProps {
+    navigation: any,
+    customerCreate: (payload: any) => any,
+    customer: any,
+    connection: boolean
 }
 
-
-interface State {
+interface AddCardState {
 
 }
-export class AddCard extends React.Component<Props, State> {
-    constructor(props: Props) {
+export class AddCard extends React.Component<AddCardProps, AddCardState> {
+    constructor(props: AddCardProps) {
         super(props);
     }
     componentDidMount() {
         SplashScreen.hide();
+        this.initCustomer();
+    }
+    initCustomer = () => {
+        const getUser = (retrievedUser: any) => {
+            const user = JSON.parse(retrievedUser);
+            this.props.customerCreate(user);
+        }
+        AsyncStorage.getItem("user").then(getUser);
     }
     navigateTo = (screen: string): any => {
         this.props.navigation.navigate(`${screen}`);
@@ -42,7 +52,7 @@ export class AddCard extends React.Component<Props, State> {
                             fontSize: 25
                         }}>Add Card</Text>
                 </View>
-                <Card/>
+                <Card />
             </ImageBackground>
 
         )

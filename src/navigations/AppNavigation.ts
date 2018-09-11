@@ -57,8 +57,9 @@ import {
 
 import styles from './styles/NavigationStyles'
 
+
 const initialRoute = (): string => {
-  return 'AppEntry';
+  return 'ItemDetail';
 }
 
 

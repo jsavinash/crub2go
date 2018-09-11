@@ -8,7 +8,7 @@ import PlaceListScreen from './place-list';
 import LocationScreen from './location/container/index';
 import ProfileScreen from './profile';
 import PlaceDetailScreen from './place-detail';
-import ItemDetailScreen from './item-detail/container/index';
+import ItemDetailScreen from './item-detail';
 import AccountScreen from './account';
 import DealsScreen from './deals';
 import RateReviewScreen from './rate-review';

@@ -3,6 +3,8 @@ package com.reactnativedevelopment;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.airbnb.android.react.maps.MapsPackage;
+import com.gettipsi.stripe.StripeReactPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.github.alinz.reactnativewebviewbridge.WebViewBridgePackage;
 import com.github.yamill.orientation.OrientationPackage;
@@ -29,7 +31,9 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-        new MainReactPackage(), 
+        new MainReactPackage(),
+            new MapsPackage(),
+            new StripeReactPackage(), 
         new VectorIconsPackage(),
         new WebViewBridgePackage(),
         new OrientationPackage(),

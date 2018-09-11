@@ -151,6 +151,8 @@ signingConfigs {
 }
 
 dependencies {
+    compile project(':react-native-maps')
+    compile project(':tipsi-stripe')
   //  compile project(':anx-react-native-toaster')
     compile project(':react-native-vector-icons')
     compile project(':react-native-webview-bridge')

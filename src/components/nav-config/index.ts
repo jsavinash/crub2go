@@ -28,7 +28,12 @@ export const PlaceList = {
     header: null
 }
 export const Locations = {
-    header: null
+    title: 'Location',
+    headerStyle: { backgroundColor: 'white' },
+    headerTitleStyle: {
+        color: '#4E4E4E',
+        marginLeft: ((SCREEN_WIDTH * 38) / 100)
+    }
 }
 export const PlaceDetail = {
     header: null

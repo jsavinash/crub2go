@@ -1,35 +1,34 @@
 import * as React from "react"
 import { StyleSheet, View, Text, ActivityIndicator } from "react-native";
 import { AsyncStorage } from "react-native"
-export interface Props {
-    navigation: any
+export interface AppEntryProps {
+    navigation: any,
+    customerCreate: any,
 }
 
-interface State {
+interface AppEntryState {
 
 }
-export class AppEntry extends React.Component<Props, State> {
-    constructor(props: Props) {
+export class AppEntry extends React.Component<AppEntryProps, AppEntryState> {
+    constructor(props: AppEntryProps) {
         super(props);
     }
-
-    
     navigateIfToken = () => {
         const { navigation } = this.props;
-        const receiveLoginDetails = (value: any) => {
-            if (value) {
+        const getUser = (retrievedUser: any) => {
+            const user = JSON.parse(retrievedUser);
+            this.props.customerCreate(user);
+            if (user != null) {
                 navigation.navigate('Home');
             } else {
                 navigation.navigate('Login');
             }
         }
-        AsyncStorage.getItem("user_access_token").then(receiveLoginDetails);
+        AsyncStorage.getItem("user").then(getUser);
     }
 
     componentDidMount() {
-        const { navigation } = this.props;
-        //navigation.navigate('Home');
-    this.navigateIfToken();
+        this.navigateIfToken();
     }
 
     render() {
