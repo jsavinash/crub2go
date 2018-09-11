@@ -1,5 +1,7 @@
 import * as React from "react";
 import { StyleSheet, View, TextInput } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 export interface AddNoteProps {
 }
 
@@ -13,12 +15,14 @@ export class AddNote extends React.Component<AddNoteProps, AddNoteState> {
     render() {
         return (
             <View style={styles.container}>
-                <View>
-                    <TextInput
-                        placeholder="Add a note (extra sauce, no onions, etc.)"
-                        style={styles.txt} />
-                    <View style={styles.border}></View>
-                </View>
+                <KeyboardAwareScrollView>
+                    <View>
+                        <TextInput
+                            placeholder="Add a note (extra sauce, no onions, etc.)"
+                            style={styles.txt} />
+                        <View style={styles.border}></View>
+                    </View>
+                </KeyboardAwareScrollView>
             </View>
         )
     }
@@ -27,7 +31,7 @@ export class AddNote extends React.Component<AddNoteProps, AddNoteState> {
 var styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: '11%',
+        height: '15%',
         backgroundColor: 'white'
     },
     txt: {
@@ -38,6 +42,6 @@ var styles = StyleSheet.create({
     },
     border: {
         borderBottomColor: '#aaa',
-        borderBottomWidth: 1  
+        borderBottomWidth: 1
     }
 });

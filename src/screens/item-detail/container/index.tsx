@@ -1,9 +1,8 @@
 import * as React from "react";
-import { Text, View, StyleSheet, Dimensions, AsyncStorage, TouchableHighlight, Image } from "react-native";
+import { View, StyleSheet, KeyboardAvoidingView } from "react-native";
 import SplashScreen from 'react-native-splash-screen';
 import { MainContainer } from '../components';
-const SCREEN_WIDTH = Dimensions.get('window').width;
-const SCREEN_HEIGHT = Dimensions.get('window').height;
+
 export interface PlaceDetailProps {
 
 }
@@ -19,9 +18,11 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
     }
     render() {
         return (
+           
             <View style={styles.container}>
                 <MainContainer />
             </View>
+
         )
     }
 }

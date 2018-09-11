@@ -16,15 +16,11 @@ export class AddToCart extends React.Component<AddToCartProps, AddToCartState> {
         return (
             <View style={styles.container}>
                 <View style={styles.content}>
-
-
                     <Button
                         onPress={() => { }}
-                        title="Submit"
+                        title="ADD TO CART"
                         buttonStyle={styles.containerInBtnStyle}
                         containerViewStyle={styles.containerInBtnCnt} />
-
-                    {/* <Text style={styles.contentTxt}>Menu</Text> */}
                 </View>
                 <View style={styles.imageCtn}>
                     <Text style={{

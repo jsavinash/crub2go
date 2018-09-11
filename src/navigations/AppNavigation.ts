@@ -59,7 +59,7 @@ import styles from './styles/NavigationStyles'
 
 
 const initialRoute = (): string => {
-  return 'ItemDetail';
+  return 'AppEntry';
 }
 
 

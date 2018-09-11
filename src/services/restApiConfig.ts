@@ -1,4 +1,5 @@
-import apisauce from 'apisauce'
+import apisauce from 'apisauce';
+import Config from 'react-native-config';
 
 const restApiConfig = apisauce.create({
     baseURL: 'http://curb2go.projectspreview.net/WS/',
@@ -6,8 +7,7 @@ const restApiConfig = apisauce.create({
         'Cache-Control': 'no-cache',
         'APIKEY': 'APIKEY',
         'APIVERSION': 1.0,
-        'Content-Type': 'multipart/form-data',
-        'AUTHTOKEN': '68eca6812431dfe2449a879d1e8b0827'
+        'Content-Type': 'multipart/form-data'
     },
     timeout: 10000,
 })
