@@ -1,6 +1,6 @@
 import * as React from "react";
 import { View, StyleSheet, Text, Dimensions } from "react-native";
-import { MainBox } from '../components/mainBox';
+import { MainContainer } from '../components';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 import { ICities, IRestaurants, ICustomer, IRestaurantsParams } from '@models';
@@ -63,7 +63,7 @@ export class PlaceList extends React.Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
-                <MainBox
+                <MainContainer
                     navigation={this.props.navigation}
                     restaurants={this.props.restaurants}
                 />

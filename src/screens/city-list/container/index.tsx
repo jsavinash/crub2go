@@ -2,6 +2,8 @@ import * as React from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Dimensions, TextInput } from "react-native";
 import { ICities, } from '@models';
 import { ListItem } from 'react-native-elements'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 export interface Props {
@@ -24,30 +26,15 @@ export class CityList extends React.Component<Props, State> {
     render() {
         return (
             <View style={styles.container} >
-                <View style={{
-                    flex: .1,
-                    width: SCREEN_WIDTH,
-                    height: ((SCREEN_HEIGHT * 10) / 100),
-                    flexDirection: 'row',
-                    borderColor: '#aaa',
-                    borderWidth: 2,
-                    alignContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: 'white',
-                }}>
-                    <TextInput
-                        style={{
-
-
-
-                            width: SCREEN_WIDTH
-                        }}
-                        placeholder={'Serach city name'}
-
-
-                    ></TextInput>
-
-
+                <View style={styles.header}>
+                    <KeyboardAwareScrollView>
+                        <TextInput
+                            style={{
+                                width: SCREEN_WIDTH
+                            }}
+                            placeholder={'Serach city name'}
+                        ></TextInput>
+                    </KeyboardAwareScrollView>
                 </View>
                 <View style={styles.div1}>
                     <Text style={styles.div1Txt}>We are available in</Text>
@@ -73,7 +60,17 @@ const styles = StyleSheet.create({
     container: {
         flex: 1
     },
-
+    header: {
+        flex: .1,
+        width: SCREEN_WIDTH,
+        height: ((SCREEN_HEIGHT * 10) / 100),
+        flexDirection: 'row',
+        borderColor: '#aaa',
+        borderWidth: 2,
+        alignContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'white',
+    },
     div1: {
         flex: 0.9,
         backgroundColor: 'white'

@@ -31,7 +31,7 @@ export class PlaceDetail extends React.Component<PlaceDetailProps, PlaceDetailPr
     render() {
         return (
             <View style={styles.container}>
-                <MainContainer/>
+                <MainContainer />
             </View>
         )
     }

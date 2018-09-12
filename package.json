@@ -44,6 +44,7 @@
     "react-native-htmlview": "^0.13.0",
     "react-native-image-overlay": "^0.1.2",
     "react-native-image-picker": "^0.26.10",
+    "react-native-infinite-scroll-view": "^0.4.5",
     "react-native-keyboard-aware-scroll-view": "^0.7.1",
     "react-native-keyboard-aware-view": "^0.0.14",
     "react-native-loading-spinner-overlay": "^0.5.2",

@@ -104,10 +104,10 @@ export class MainBox extends React.Component<MainBoxProps, MainBoxState> {
                                     }}>
                                         <View style={styles.scrollContainer}>
                                             <Text style={styles.content1left}>{restaurant.restaurant_name}</Text>
-                                            <Text style={styles.content1right}>Rating</Text>
+                                            <Text style={styles.content1right}>Ratings</Text>
                                         </View>
                                         <View style={styles.scrollContainer}>
-                                            <Text style={styles.content2left}>{restaurant.restaurant_distance} Miles away</Text>
+                                            <Text style={styles.content2left}>{restaurant.restaurant_distance} 5 Miles away</Text>
                                             <Text style={styles.content2right}>{restaurant.restaurant_rating}</Text>
                                         </View>
                                     </View>
@@ -158,7 +158,7 @@ var styles = StyleSheet.create({
         fontWeight: '600'
     },
     scrollContainer: {
-        marginTop: '2%',
+        marginTop: '1%',
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
@@ -180,6 +180,8 @@ var styles = StyleSheet.create({
         marginLeft: '2%'
     },
     content2right: {
-        marginRight: "5%"
+        marginRight: "5%",
+        fontSize: 20,
+        color: '#ACD472'
     }
 });

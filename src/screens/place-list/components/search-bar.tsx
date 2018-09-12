@@ -18,7 +18,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
             <View style={styles.container}>
                 <View style={{ marginTop: '3%', marginLeft: '2%' }}>
                     <Image
-                        source={require('../../assets/app-images/search_icon_s_3_h.png')}
+                        source={require('../../../assets/app-images/search_icon_s_3_h.png')}
                         style={styles.image}
                     ></Image>
                 </View>
