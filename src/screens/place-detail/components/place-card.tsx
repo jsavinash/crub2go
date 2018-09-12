@@ -3,14 +3,14 @@ import { Text, StyleSheet, View, Dimensions, Image, TouchableHighlight } from 'r
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 export interface PlaceCardProps {
-
+    resturant: any
 }
 export const PlaceCard: React.StatelessComponent<PlaceCardProps> = (props) => {
     return (
-        <View style={styles.card}>
+        < View style={styles.card} >
             <View>
                 <Image
-                    source={{ uri: "http://curb2go.projectspreview.net/public/upload/restaurant_images/vOVU04zYDLaMsS9m_rimage.jpeg" }}
+                    source={{ uri: props.resturant.restaurant_image }}
                     style={styles.cardImg} />
                 <TouchableHighlight
                     style={styles.fav}
@@ -29,26 +29,25 @@ export const PlaceCard: React.StatelessComponent<PlaceCardProps> = (props) => {
                 </TouchableHighlight>
                 <View style={styles.cardContent}>
                     <View style={styles.row1}>
-                        <Text style={styles.row1Left}>{'Salad Fusion (Satellite)'}</Text>
+                        <Text style={styles.row1Left}>{props.resturant.restaurant_name}</Text>
                         <Text style={styles.row1Right}>Ratings</Text>
                     </View>
                     <View style={styles.row2}>
-                        <Text style={styles.row2Left}>{'10'} Miles away</Text>
-                        <Text style={styles.row2Right}>{'3.6'}</Text>
+                        <Text style={styles.row2Left}>{props.resturant.restaurant_distance} Miles away</Text>
+                        <Text style={styles.row2Right}>{props.resturant.restaurant_rating}</Text>
                     </View>
                     <View style={styles.row2}>
-                        <Text style={styles.row2Left}>Prahlad Nagar, Ahmedabad, Gujarat, India</Text>
+                        <Text style={styles.row2Left}>{props.resturant.restaurant_address}</Text>
                     </View>
                 </View>
             </View>
-        </View>
+        </View >
     )
 }
 var styles = StyleSheet.create({
     card: {
-        flex: 0.54
+        flex: 1
     },
-
     cardImg: {
         width: SCREEN_WIDTH,
         height: ((SCREEN_HEIGHT * 28) / 100)

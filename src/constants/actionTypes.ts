@@ -24,6 +24,13 @@ export const LIST_CITIES = 'city/LIST'
 //Restaurants
 export const LIST_RESTAURANTS = 'restaurants/LIST'
 export const LIST_FAV_RESTAURANTS = 'restaurants/FAVORITE'
+export const RESTAURANTS_PARAMS = 'restaurants/PARAMS'
+export const SELECTED_RESTAURANTS = 'restaurants/SELECTED'
+export const LIST_CATEGORIES = 'restaurants/CATEGORIES'
+export const LIST_MENULIST = 'restaurants/_MENULIST'
+export const SELECTED_CATEGORY = 'restaurants/CATEGORY'
+export const SELECTED_MENU = 'restaurants/MENU'
+
 
 //Static Pages
 export const ABOUT_US_PAGE = 'page/ABOUTUS'

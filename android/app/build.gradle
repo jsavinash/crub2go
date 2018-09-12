@@ -151,6 +151,7 @@ signingConfigs {
 }
 
 dependencies {
+    compile project(':react-native-geocoder')
     compile project(':react-native-maps')
     compile project(':tipsi-stripe')
   //  compile project(':anx-react-native-toaster')

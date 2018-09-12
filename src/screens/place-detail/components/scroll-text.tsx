@@ -1,54 +1,26 @@
 import * as React from "react";
 import { FlatList, Text, TouchableOpacity, StyleSheet, View } from "react-native";
-
+import { ICategories } from '@models';
 export interface ScrollTextProps {
+    categories: ICategories,
+    categorySelect: (categorie: any) => any
 }
-
-const data = [
-    {
-        title: "something"
-    },
-    {
-        title: "something two"
-    },
-    {
-        title: "something three"
-    },
-    {
-        title: "something four"
-    },
-    {
-        title: "something five"
-    },
-    {
-        title: "something six"
-    }
-];
 export const ScrollText: React.StatelessComponent<ScrollTextProps> = (props) => {
-    const select = (data: any) => {
-
+    const select = (rowData: any) => {
+        props.categorySelect(rowData);
     }
     return (
-        <View style={{
-            width: '100%',
-            height: '10%',
-            backgroundColor: 'white',
-            borderBottomWidth: 1,
-            borderColor: '#aaa'
-        }}>
+        <View style={styles.container}>
             <FlatList
                 horizontal
-                data={data}
+                data={props.categories}
                 renderItem={({ item: rowData }) => {
                     return (
-                        <View style={{
-                            alignSelf: 'center',
-                            marginLeft: 15
-                        }}>
-                            <TouchableOpacity onPress={(rowData) => {
+                        <View style={styles.div1}>
+                            <TouchableOpacity onPress={() => {
                                 select(rowData);
                             }}>
-                                <Text>{rowData.title}</Text>
+                                <Text>{rowData.cat_name}</Text>
                             </TouchableOpacity>
                         </View>
                     );
@@ -60,6 +32,15 @@ export const ScrollText: React.StatelessComponent<ScrollTextProps> = (props) => 
 }
 const styles = StyleSheet.create({
     container: {
+        width: '100%',
+        height: '10%',
+        backgroundColor: 'white',
+        borderBottomWidth: 1,
+        borderColor: '#aaa'
     },
+    div1: {
+        alignSelf: 'center',
+        marginLeft: 15
+    }
 
 });

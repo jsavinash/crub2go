@@ -5,9 +5,9 @@ const customerRegister = (customer: any) => RestApiConfig.post('customer_signup'
 const customerVerification = (customer: any) => RestApiConfig.post('check_unique_user', customer);
 const customerForgot = (customer: any) => RestApiConfig.post('forgot_password', customer);
 const customerPassword = (customer: any) => RestApiConfig.post('reset_password', customer);
-const customerPasswordChange = (customer: any) => RestApiConfig.post('change_password', customer);
-const customerProfileEdit = (customer: any) => RestApiConfig.post('edit_profile', customer);
-
+const customerPasswordChange = (customer: any, token: any) => RestApiConfig.post('change_password', customer, { headers: { 'AUTHTOKEN': token } });
+const customerProfileEdit = (customer: any, token: any) => RestApiConfig.post('edit_profile', customer, { headers: { 'AUTHTOKEN': token } });
+const customerUpdateLocation = (customer: any, token: any) => RestApiConfig.post('update_user_location', customer, { headers: { 'AUTHTOKEN': token } });
 export const CustomerRestService = {
     customerLogin,
     customerRegister,
@@ -15,7 +15,8 @@ export const CustomerRestService = {
     customerForgot,
     customerPassword,
     customerPasswordChange,
-    customerProfileEdit
+    customerProfileEdit,
+    customerUpdateLocation
 }
 
 export type CustomerRestServiceType = typeof CustomerRestService

@@ -6,6 +6,10 @@ import ActionSheet from 'react-native-actionsheet';
 
 export interface MainContainerProps {
     navigation: any,
+    reactToEnd: () => any,
+    searchTerm: (keyword: string) => any,
+    sortTo: (param: string) => any,
+    selectedResturant: (resturant: string) => any,
     restaurants: IRestaurants[]
 }
 
@@ -21,9 +25,11 @@ export class MainContainer extends React.Component<MainContainerProps, MainConta
     }
     onAction = (idx: number) => {
         if (idx === 0) {
+            this.props.sortTo('Distance');
             console.log("idx", idx, 'Distance');
         } else if (idx === 1) {
             console.log("idx", idx, 'Rating');
+            this.props.sortTo('Rating');
         }
     }
     render() {
@@ -32,14 +38,17 @@ export class MainContainer extends React.Component<MainContainerProps, MainConta
                 <Header
                     navigation={this.props.navigation}
                     onSort={this.openActionSheet} />
-                <SearchBar />
+                <SearchBar searchTerm={this.props.searchTerm} />
                 <Card
+                    selectedResturant={this.props.selectedResturant}
                     navigation={this.props.navigation}
-                    restaurants={this.props.restaurants} />
+                    restaurants={this.props.restaurants}
+                    reactToEnd={this.props.reactToEnd} />
                 <ActionSheet
                     title={'Sort By'}
                     ref={o => this.ActionSheet = o}
-                    options={['Distance', 'Rating']}
+                    options={['Distance', 'Rating', 'cancel']}
+                    cancelButtonIndex={2}
                     onPress={this.onAction}
                 />
             </View>
@@ -48,6 +57,7 @@ export class MainContainer extends React.Component<MainContainerProps, MainConta
 }
 var styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: 'white'
     }
 });

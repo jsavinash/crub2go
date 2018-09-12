@@ -1,14 +1,25 @@
 import * as React from "react";
-import { Text, View, StyleSheet, Dimensions, AsyncStorage, TouchableHighlight, Image } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
 import SplashScreen from 'react-native-splash-screen';
 import { MainContainer } from '../components';
+import * as _ from 'lodash';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
+import { IMenuParams, IRestaurants, IMenuList, ICategories } from '@models';
+import { RestaurantRestService } from '../../../services';
+import { transformToFromData } from '@common_service';
 export interface PlaceDetailProps {
     navigation: any,
-    customerCreate: (payload: any) => any,
     customer: any,
-    connection: boolean
+    listMenuListAction: (payload: any) => any,
+    listCategoriesAction: (payload: any) => any,
+    selectedCategoryAction: (payload: any) => any,
+    selectedMenuAction: (payload: any) => any,
+    selectedCategory: ICategories
+    selectedMenu: IMenuList[],
+    selectedResturant: IRestaurants,
+    categories: ICategories[],
+    menuList: IMenuList[]
 }
 interface PlaceDetailPropsState {
 
@@ -19,19 +30,48 @@ export class PlaceDetail extends React.Component<PlaceDetailProps, PlaceDetailPr
     }
     componentDidMount() {
         SplashScreen.hide();
-    }
-    initCustomer = () => {
-        const getUser = (retrievedUser: any) => {
-            const user = JSON.parse(retrievedUser);
-            this.props.customerCreate(user);
-        }
-        AsyncStorage.getItem("user").then(getUser);
+        this.getMenuDetails();
     }
 
+    getMenuDetails = () => {
+        let menuParams: IMenuParams = {
+            restaurant_id: this.props.selectedResturant['restaurant_id']
+        };
+        let currentCategory: any = {};
+        let filterData: any = [];
+        RestaurantRestService.listMenuRestaurant(transformToFromData(menuParams)).then((menu: any) => {
+            if (menu['data']['settings']['success'] == 1) {
+                this.props.listCategoriesAction(menu['data']['data'][0]['category']);
+                this.props.listMenuListAction(menu['data']['data'][0]['item']);
+                currentCategory = menu['data']['data'][0]['category'][0];
+                filterData = _.filter(menu['data']['data'][0]['item'], function (o) {
+                    return o.item_cat_id == currentCategory['cat_id'];
+                });
+                this.props.selectedCategoryAction(currentCategory);
+                this.props.selectedMenuAction(filterData);
+            } else if (menu['data']['settings']['success'] == 0) {
+
+            }
+        }).catch((error) => {
+            console.log("error", error);
+        })
+    }
+    menuSelect = (data: any) => {
+        const { menuList } = this.props;
+        const filterData = _.filter(menuList, (menu) => {
+            return menu.item_cat_id == data['cat_id'];
+        });
+        this.props.selectedMenuAction(filterData);
+    }
     render() {
         return (
             <View style={styles.container}>
-                <MainContainer />
+                <MainContainer
+                    onMenuSelect={this.menuSelect}
+                    resturant={this.props.selectedResturant}
+                    categories={this.props.categories}
+                    menuList={this.props.selectedMenu}
+                />
             </View>
         )
     }

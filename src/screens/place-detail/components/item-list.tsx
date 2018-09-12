@@ -1,39 +1,60 @@
 import * as React from "react";
 import { StyleSheet, View, Text, Image, ScrollView } from 'react-native';
+import { IMenuList } from '@models';
 export interface ItemListProps {
+    menuList: IMenuList[]
 }
-
 export const ItemList: React.StatelessComponent<ItemListProps> = (props) => {
     return (
         <ScrollView>
-            <View>
-                <View style={styles.container}>
-                    <View style={styles.textContent}>
-                        <Text style={styles.text1}>Mexican Fusion</Text>
-                        <Text style={styles.text2}>Kidney beans, corn, capsicum, tomato, onion, and lettuce</Text>
-                        <Text style={styles.text3}>$ 1234</Text>
-                    </View>
-                    <View style={styles.imgContent}>
-                        <Image
-                            source={require('../../../assets/app-images/search_icon_s_3.png')}
-                            style={styles.img}
-                        ></Image>
-                    </View>
-                </View>
-                <View style={styles.border}>
-                </View>
-            </View>
+            <View style={styles.title}>
+                <Text style={styles.titleTxt}>
+                    {(props.menuList && props.menuList[0]) ? props.menuList[0].item_cat_name : ''}</Text></View>
+            {
+                props.menuList.map((item: any, idx: number) => {
+                    return (
+                        <View key={idx}>
+                            <View style={styles.container}>
+                                <View style={styles.textContent}>
+                                    <Text style={styles.text1}>{item.item_name}</Text>
+                                    <Text style={styles.text2}>{item.item_discription}</Text>
+                                    <Text style={styles.text3}>$ {item.item_discounted_price}</Text>
+                                </View>
+                                <View style={styles.imgContent}>
+                                    <Image
+                                        source={{ uri: item.item_image }}
+                                        resizeMode={'cover'}
+
+                                        style={styles.img}
+                                    ></Image>
+                                </View>
+                            </View>
+                            <View style={styles.border}>
+                            </View>
+                        </View>
+                    )
+                })
+            }
+
         </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         flexDirection: 'row',
         backgroundColor: 'white',
         justifyContent: 'space-between',
         borderBottomColor: '#aaa'
+    },
+    title: {
+        marginTop: '2%',
+        marginLeft: '2%'
+    },
+    titleTxt: {
+        fontWeight: '200',
+        fontSize: 22,
+        color: 'black'
     },
     textContent: {
         borderRadius: 22,
@@ -61,6 +82,8 @@ const styles = StyleSheet.create({
     img: {
         height: 90,
         width: 90,
+        borderRadius: 22
+
     },
     border: {
         borderBottomColor: 'black',

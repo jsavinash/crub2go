@@ -3,15 +3,19 @@ import { View, StyleSheet, Image, TextInput, Dimensions } from 'react-native'
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export interface SearchBarProps {
+    searchTerm: (keyword: string) => any
 }
 
 interface SearchBarState {
-
+    keyword: string
 }
 
 export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
     constructor(props: SearchBarProps) {
         super(props);
+        this.state = {
+            keyword: ''
+        }
     }
     render() {
         return (
@@ -26,6 +30,10 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
                     <TextInput
                         placeholder="Restaurant or Cuisine or Food .."
                         style={styles.regularTxt}
+                        onChangeText={(keyword: string) => {
+                            this.setState({ keyword });
+                            this.props.searchTerm(keyword)
+                        }}
                     />
                 </View>
             </View>

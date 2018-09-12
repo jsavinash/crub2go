@@ -20,6 +20,7 @@ export const Menu: React.StatelessComponent<MenuProps> = (props) => {
 
 const styles = StyleSheet.create({
     container: {
+        marginTop: 30,
         justifyContent: 'space-between',
         flexDirection: 'row',
         height: '9%',

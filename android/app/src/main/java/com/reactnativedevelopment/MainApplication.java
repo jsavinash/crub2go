@@ -3,6 +3,7 @@ package com.reactnativedevelopment;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.devfd.RNGeocoder.RNGeocoderPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.gettipsi.stripe.StripeReactPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -32,6 +33,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
+            new RNGeocoderPackage(),
             new MapsPackage(),
             new StripeReactPackage(), 
         new VectorIconsPackage(),

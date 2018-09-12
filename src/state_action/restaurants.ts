@@ -1,10 +1,30 @@
 import { ActionType, createStandardAction } from 'typesafe-actions'
-import { IRestaurants } from '@models';
-import { LIST_RESTAURANTS, LIST_FAV_RESTAURANTS } from '../constants/actionTypes'
+import {
+    IRestaurants,
+    IRestaurantsParams,
+    ICategories,
+    IMenuList
+} from '@models';
+import {
+    LIST_RESTAURANTS,
+    LIST_FAV_RESTAURANTS,
+    RESTAURANTS_PARAMS,
+    SELECTED_RESTAURANTS,
+    LIST_CATEGORIES,
+    LIST_MENULIST,
+    SELECTED_CATEGORY,
+    SELECTED_MENU
+} from '../constants/actionTypes'
 
 export const restaurantsAction = {
     listRestaurant: createStandardAction(LIST_RESTAURANTS)<IRestaurants[]>(),
     listFavRestaurant: createStandardAction(LIST_FAV_RESTAURANTS)<IRestaurants[]>(),
+    restaurantParamsValue: createStandardAction(RESTAURANTS_PARAMS)<IRestaurantsParams>(),
+    selectedRestaurantValue: createStandardAction(SELECTED_RESTAURANTS)<IRestaurants>(),
+    listcategories: createStandardAction(LIST_CATEGORIES)<ICategories[]>(),
+    listMenuList: createStandardAction(LIST_MENULIST)<IMenuList[]>(),
+    selectedCategory: createStandardAction(SELECTED_CATEGORY)<ICategories>(),
+    selectedMenu: createStandardAction(SELECTED_MENU)<IMenuList[]>(),
 
 }
 
@@ -12,5 +32,11 @@ export type RestaurantsActions = ActionType<typeof restaurantsAction>
 
 export type RestaurantsState = Readonly<{
     restaurants: IRestaurants[],
-    favRestaurants: IRestaurants[]
+    favRestaurants: IRestaurants[],
+    restaurantParamsValue: IRestaurantsParams,
+    selectedRestaurant: IRestaurants,
+    categories: ICategories[]
+    menuList: IMenuList[]
+    selectedCategory: ICategories,
+    selectedMenu: IMenuList[]
 }>

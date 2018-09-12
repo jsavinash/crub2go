@@ -1,14 +1,15 @@
 import * as React from "react";
-import { View, StyleSheet, Text, Image, TouchableHighlight, ScrollView, Dimensions } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { View, StyleSheet, Text, Image, TouchableHighlight, TouchableOpacity, ScrollView, Dimensions } from 'react-native'
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 export interface CardProps {
     navigation: any,
-    restaurants: any
-}
+    restaurants: any,
+    reactToEnd: () => any,
+    selectedResturant: (resturant: string) => any,
 
+}
 interface CardState {
 
 }
@@ -16,7 +17,6 @@ export class Card extends React.Component<CardProps, CardState> {
     constructor(props: CardProps) {
         super(props);
     }
-
     public navigateTo = () => {
         this.props.navigation.navigate('City');
     }
@@ -24,35 +24,43 @@ export class Card extends React.Component<CardProps, CardState> {
     render() {
         return (
             <ScrollView
-                pagingEnabled={true}
-            >
+                onScroll={(e: any) => {
+                    let paddingToBottom = 10;
+                    paddingToBottom += e.nativeEvent.layoutMeasurement.height;
+                    if (e.nativeEvent.contentOffset.y >= e.nativeEvent.contentSize.height - paddingToBottom) {
+                        this.props.reactToEnd();
+                    }
+                }}
+                pagingEnabled={true}>
                 <View style={styles.container}>
                     {this.props.restaurants.map((restaurant: any, idx: any) => {
                         return (
-                            <View style={styles.card} key={idx}>
-                                <Image
-                                    source={{ uri: restaurant.restaurant_image }}
-                                    style={styles.image} />
-                                <TouchableHighlight
-                                    style={styles.tchImg}
-                                // onPress={() => { this.favorite(restaurant) }}
-                                >
+                            <TouchableOpacity onPress={() => { this.props.selectedResturant(restaurant) }} key={idx}>
+                                <View style={styles.card}>
                                     <Image
-                                        source={require('../../../assets/app-images/heart-outline.png')}
-                                        style={styles.tchImgDim}
-                                    />
-                                </TouchableHighlight>
-                                <View style={styles.content}>
-                                    <View style={styles.scrollContainer}>
-                                        <Text style={styles.content1left}>{restaurant.restaurant_name}</Text>
-                                        <Text style={styles.content1right}>Ratings</Text>
-                                    </View>
-                                    <View style={styles.scrollContainer}>
-                                        <Text style={styles.content2left}>{restaurant.restaurant_distance} 5 Miles away</Text>
-                                        <Text style={styles.content2right}>{restaurant.restaurant_rating}</Text>
+                                        source={{ uri: restaurant.restaurant_image }}
+                                        style={styles.image} />
+                                    <TouchableHighlight
+                                        style={styles.tchImg}
+                                    // onPress={() => { this.favorite(restaurant) }}
+                                    >
+                                        <Image
+                                            source={require('../../../assets/app-images/heart-outline.png')}
+                                            style={styles.tchImgDim}
+                                        />
+                                    </TouchableHighlight>
+                                    <View style={styles.content}>
+                                        <View style={styles.scrollContainer}>
+                                            <Text style={styles.content1left}>{restaurant.restaurant_name}</Text>
+                                            <Text style={styles.content1right}>Ratings</Text>
+                                        </View>
+                                        <View style={styles.scrollContainer}>
+                                            <Text style={styles.content2left}>{restaurant.restaurant_distance} 5 Miles away</Text>
+                                            <Text style={styles.content2right}>{restaurant.restaurant_rating}</Text>
+                                        </View>
                                     </View>
                                 </View>
-                            </View>
+                            </TouchableOpacity>
                         )
                     })}
                 </View>

@@ -55,34 +55,37 @@ interface Customer {
 }
 
 interface Restaurants {
-  restaurant_id: string,
-  restaurant_name: string,
-  restaurant_distance: string,
-  restaurant_open: string,
-  restaurant_rating: string,
-  restaurant_review_count: string,
-  restaurant_favourite: string,
-  restaurant_address: string,
-  restaurant_latitude: string,
-  restaurant_longitude: string,
-  restaurant_image: any,
-  restaurant_city: string,
-  restaurant_cuisines: string,
-  restaurant_slug: string,
-  restaurant_time_zone: string,
-  restaurant_message: string,
-  restaurant_time: any
-
+  restaurant_id?: string,
+  restaurant_name?: string,
+  restaurant_distance?: string,
+  restaurant_open?: string,
+  restaurant_rating?: string,
+  restaurant_review_count?: string,
+  restaurant_favourite?: string,
+  restaurant_address?: string,
+  restaurant_latitude?: string,
+  restaurant_longitude?: string,
+  restaurant_image?: any,
+  restaurant_city?: string,
+  restaurant_cuisines?: string,
+  restaurant_slug?: string,
+  restaurant_time_zone?: string,
+  restaurant_message?: string,
+  restaurant_time?: any
 }
 interface RestaurantsParams {
-  city_id?: number,
-  filter?: number,
-  keyword?: number,
-  user_latitude?: number,
-  user_longitude?: number,
-  user_id?: number,
-  page_index?: number,
-  num_records?: number
+  city_id?: any,
+  filter?: any,
+  keyword?: any,
+  user_latitude?: any,
+  user_longitude?: any,
+  user_id?: any,
+  page_index?: any,
+  num_records?: any
+}
+interface LocationParams {
+  user_longitude?: any,
+  user_latitude?: any
 }
 interface Page {
   content: string,
@@ -91,10 +94,33 @@ interface Page {
 interface FavoriteParams {
   restaurant_id?: any
 }
-
 interface CustomerCard {
   user_stripe_id: string
 }
+
+interface Categories {
+  cat_id?: any
+  cat_menu_id?: any,
+  cat_restaurant_id?: any,
+  cat_name?: any
+}
+
+interface MenuParams {
+  restaurant_id?: any
+}
+
+interface MenuList {
+  item_id: any,
+  item_cat_id: any,
+  item_name: any,
+  item_discription: any,
+  item_vegetarian: any,
+  item_discounted_price: any,
+  item_original_price: any,
+  item_cat_name: any,
+  item_image: any,
+}
+
 export {
   Customer as ICustomer,
   Login as ILogin,
@@ -109,5 +135,9 @@ export {
   Page as IPage,
   EditProfile as IEditProfile,
   FavoriteParams as IFavoriteParams,
-  CustomerCard as ICustomerCard
+  CustomerCard as ICustomerCard,
+  LocationParams as ILocationParams,
+  Categories as ICategories,
+  MenuList as IMenuList,
+  MenuParams as IMenuParams
 }
