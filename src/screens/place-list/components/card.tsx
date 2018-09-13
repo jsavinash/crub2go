@@ -45,7 +45,7 @@ export class Card extends React.Component<CardProps, CardState> {
                                     // onPress={() => { this.favorite(restaurant) }}
                                     >
                                         <Image
-                                            source={require('../../../assets/app-images/heart-outline.png')}
+                                            source={require('../../../assets/app-images/like_btn_s_3_h.png')}
                                             style={styles.tchImgDim}
                                         />
                                     </TouchableHighlight>

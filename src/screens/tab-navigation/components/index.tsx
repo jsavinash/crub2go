@@ -27,7 +27,7 @@ export default TabNavigator(
                 const { routeName } = navigation.state;
                 let iconName: any;
                 if (routeName === 'Home') {
-                    iconName = focused ? require('../../../assets/app-images/card_active.png') : require('../../../assets/app-images/card_deactive.png')
+                    iconName = focused ? require('../../../assets/app-images/home_icon_3_h.png') : require('../../../assets/app-images/home_icon_3.png')
                 } else if (routeName === 'My Orders') {
                     iconName = focused ? require('../../../assets/app-images/order_active.png') : require('../../../assets/app-images/order_deactive.png')
                 }

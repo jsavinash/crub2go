@@ -20,7 +20,7 @@ export const PlaceCard: React.StatelessComponent<PlaceCardProps> = (props) => {
                 // onPress={() => { this.favorite(restaurant) }}
                 >
                     <Image
-                        source={require('../../../assets/app-images/heart-outline.png')}
+                        source={require('../../../assets/app-images/like_btn_s_3_h.png')}
                         style={styles.favImg}
                     />
                 </TouchableHighlight>
