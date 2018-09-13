@@ -1,23 +1,14 @@
 import * as React from "react";
-import { StyleSheet, View, Text, Image } from 'react-native';
-import { Price } from './';
+import { StyleSheet, View, Text } from 'react-native';
 export interface InstructionProps {
+    instructions: string
 }
-
-interface InstructionState {
-
-}
-export class Instruction extends React.Component<InstructionProps, InstructionState> {
-    constructor(props: InstructionProps) {
-        super(props);
-    }
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.txt}>Special Instructions</Text>
-            </View>
-        )
-    }
+export const Instruction: React.StatelessComponent<InstructionProps> = (props) => {
+    return (
+        <View style={styles.container}>
+            <Text style={styles.txt}>{props.instructions}</Text>
+        </View>
+    )
 }
 
 var styles = StyleSheet.create({

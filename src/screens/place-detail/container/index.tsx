@@ -15,6 +15,7 @@ export interface PlaceDetailProps {
     listCategoriesAction: (payload: any) => any,
     selectedCategoryAction: (payload: any) => any,
     selectedMenuAction: (payload: any) => any,
+    selectedItemAction: (payload: any) => any,
     selectedCategory: ICategories
     selectedMenu: IMenuList[],
     selectedResturant: IRestaurants,
@@ -56,21 +57,28 @@ export class PlaceDetail extends React.Component<PlaceDetailProps, PlaceDetailPr
             console.log("error", error);
         })
     }
-    menuSelect = (data: any) => {
+    private menuSelect = (data: any) => {
         const { menuList } = this.props;
         const filterData = _.filter(menuList, (menu) => {
             return menu.item_cat_id == data['cat_id'];
         });
         this.props.selectedMenuAction(filterData);
     }
+    private itemSelect = (item: any) => {
+        const _self = this;
+        _self.props.selectedItemAction(item);
+        _self.props.navigation.navigate('ItemDetail');
+    }
     render() {
         return (
             <View style={styles.container}>
                 <MainContainer
+                    onItemSelect={this.itemSelect}
                     onMenuSelect={this.menuSelect}
                     resturant={this.props.selectedResturant}
                     categories={this.props.categories}
                     menuList={this.props.selectedMenu}
+                    navigation={this.props.navigation}
                 />
             </View>
         )

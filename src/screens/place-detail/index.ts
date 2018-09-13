@@ -7,7 +7,8 @@ const mapDispatchToProps = {
     listMenuListAction: restaurantsAction['listMenuList'],
     listCategoriesAction: restaurantsAction['listcategories'],
     selectedCategoryAction: restaurantsAction['selectedCategory'],
-    selectedMenuAction: restaurantsAction['selectedMenu']
+    selectedMenuAction: restaurantsAction['selectedMenu'],
+    selectedItemAction: restaurantsAction['selectedItem']
 }
 const mapStateToProps = (state: RootState) => ({
     customer: state['customer']['customer'],

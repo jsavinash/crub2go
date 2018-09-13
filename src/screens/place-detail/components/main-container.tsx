@@ -5,7 +5,9 @@ export interface MainBoxProps {
     resturant: any,
     categories: any,
     menuList: any,
-    onMenuSelect: (data: any) => any
+    navigation: any,
+    onMenuSelect: (data: any) => any,
+    onItemSelect: (data: any) => any,
 }
 
 interface MainBoxState {
@@ -26,7 +28,9 @@ export class MainContainer extends React.Component<MainBoxProps, MainBoxState> {
                     categorySelect={this.props.onMenuSelect}
                     categories={this.props.categories} />
                 <ItemList
+                    onItemSelect={this.props.onItemSelect}
                     menuList={this.props.menuList}
+                    navigation={this.props.navigation}
                 />
             </View>
         )

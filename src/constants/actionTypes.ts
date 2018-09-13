@@ -30,6 +30,8 @@ export const LIST_CATEGORIES = 'restaurants/CATEGORIES'
 export const LIST_MENULIST = 'restaurants/_MENULIST'
 export const SELECTED_CATEGORY = 'restaurants/CATEGORY'
 export const SELECTED_MENU = 'restaurants/MENU'
+export const SELECTED_ITEM = 'restaurants/ITEM'
+export const SELECTED_ITEM_DETAILS = 'restaurants/ITEMDETAILS'
 
 
 //Static Pages

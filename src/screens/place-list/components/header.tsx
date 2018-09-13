@@ -11,7 +11,6 @@ export interface HeaderProps {
 interface HeaderState {
 
 }
-
 export class Header extends React.Component<HeaderProps, HeaderState> {
     constructor(props: HeaderProps) {
         super(props);

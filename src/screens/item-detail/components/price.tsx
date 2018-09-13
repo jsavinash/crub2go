@@ -1,14 +1,30 @@
 import * as React from "react";
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 export interface PriceProps {
+    value: any
 }
 
 interface PriceState {
-
+    count: number
 }
-export class Price extends React.Component<PriceState, PriceProps> {
-    constructor(props: PriceState) {
+export class Price extends React.Component<PriceProps, PriceState> {
+    constructor(props: PriceProps) {
         super(props);
+        this.state = {
+            count: 1
+        }
+    }
+    private increment = () => {
+        let { count } = this.state;
+        let incrementCount: number = count + 1;
+        this.setState({ count: incrementCount });
+    }
+    private decrement = () => {
+        let { count } = this.state;
+        if (count > 1) {
+            let decrementCount: number = count - 1;
+            this.setState({ count: decrementCount });
+        }
     }
     render() {
         return (
@@ -17,19 +33,26 @@ export class Price extends React.Component<PriceState, PriceProps> {
                     <Text style={styles.contentTxt}>Original Price: </Text><Text style={{
                         color: '#ACD472',
                         fontSize: 18,
-                    }}>$125.00</Text>
+                    }}>$ {this.props.value}</Text>
                 </View>
                 <View style={styles.imageCtn}>
-                    <Image
-                        source={require('../../../assets/app-images/unsilrk_minus_s_4a.png')}
-                        style={styles.minusImage}
-                    ></Image>
-
-                    <Text style={styles.counter}>{'1'}</Text>
-                    <Image
-                        source={require('../../../assets/app-images/unsilrk_pluce_s_4a.png')}
-                        style={styles.plusImage}
-                    ></Image>
+                    <TouchableOpacity onPress={() => {
+                        this.decrement();
+                    }}>
+                        <Image
+                            source={require('../../../assets/app-images/unsilrk_minus_s_4a.png')}
+                            style={styles.minusImage}
+                        ></Image>
+                    </TouchableOpacity>
+                    <Text style={styles.counter}>{this.state.count}</Text>
+                    <TouchableOpacity onPress={() => {
+                        this.increment();
+                    }}>
+                        <Image
+                            source={require('../../../assets/app-images/unsilrk_pluce_s_4a.png')}
+                            style={styles.plusImage}
+                        ></Image>
+                    </TouchableOpacity>
                 </View>
             </View>
         )

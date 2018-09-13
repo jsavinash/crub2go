@@ -3,14 +3,15 @@ import { Text, StyleSheet, View, Dimensions, Image, TouchableHighlight } from 'r
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 export interface ItemCardProps {
-
+    image: any,
+    title: any
 }
 export const ItemCard: React.StatelessComponent<ItemCardProps> = (props) => {
     return (
         <View style={styles.container}>
             <View>
                 <Image
-                    source={{ uri: "http://curb2go.projectspreview.net/public/upload/restaurant_images/vOVU04zYDLaMsS9m_rimage.jpeg" }}
+                    source={{ uri: props.image }}
                     style={styles.cardImg} />
                 <TouchableHighlight
                     style={styles.back}>
@@ -19,7 +20,7 @@ export const ItemCard: React.StatelessComponent<ItemCardProps> = (props) => {
                         style={styles.backImg} />
                 </TouchableHighlight>
                 <View style={styles.txtContent}>
-                    <Text style={styles.txt}>Herb Pasta</Text>
+                    <Text style={styles.txt}>{props.title}</Text>
                 </View>
             </View>
         </View>
@@ -30,8 +31,6 @@ var styles = StyleSheet.create({
         flex: 0.34
     },
     cardImg: {
-
-        
         width: SCREEN_WIDTH,
         height: '100%'
     },

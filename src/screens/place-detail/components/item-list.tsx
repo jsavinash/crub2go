@@ -1,7 +1,9 @@
 import * as React from "react";
-import { StyleSheet, View, Text, Image, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { IMenuList } from '@models';
 export interface ItemListProps {
+    navigation: any,
+    onItemSelect: (data: any) => any,
     menuList: IMenuList[]
 }
 export const ItemList: React.StatelessComponent<ItemListProps> = (props) => {
@@ -13,25 +15,36 @@ export const ItemList: React.StatelessComponent<ItemListProps> = (props) => {
             {
                 props.menuList.map((item: any, idx: number) => {
                     return (
-                        <View key={idx}>
-                            <View style={styles.container}>
-                                <View style={styles.textContent}>
-                                    <Text style={styles.text1}>{item.item_name}</Text>
-                                    <Text style={styles.text2}>{item.item_discription}</Text>
-                                    <Text style={styles.text3}>$ {item.item_discounted_price}</Text>
+                        <TouchableOpacity key={idx}
+                            onPress={() => { props.onItemSelect(item) }}
+                        >
+                            <View>
+                                <View style={styles.container}>
+                                    <View style={styles.textContent}>
+                                        <Text style={styles.text1}>{item.item_name}</Text>
+                                        <Text style={styles.text2}>{item.item_discription}</Text>
+                                        <Text style={styles.text3}>$ {item.item_discounted_price}</Text>
+                                    </View>
+                                    <View style={styles.imgContent}>
+                                        {
+                                            (item && item.item_image) ?
+                                                <Image
+                                                    source={{ uri: item.item_image }}
+                                                    resizeMode={'cover'}
+                                                    style={styles.img}
+                                                ></Image>
+                                                : <Image
+                                                    source={require('../../../assets/app-images/search_icon_s_3.png')}
+                                                    resizeMode={'cover'}
+                                                    style={styles.img}
+                                                ></Image>
+                                        }
+                                    </View>
                                 </View>
-                                <View style={styles.imgContent}>
-                                    <Image
-                                        source={{ uri: item.item_image }}
-                                        resizeMode={'cover'}
-
-                                        style={styles.img}
-                                    ></Image>
+                                <View style={styles.border}>
                                 </View>
                             </View>
-                            <View style={styles.border}>
-                            </View>
-                        </View>
+                        </TouchableOpacity>
                     )
                 })
             }

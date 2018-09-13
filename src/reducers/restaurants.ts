@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { getType } from 'typesafe-actions'
 import { RestaurantsActions, RestaurantsState, restaurantsAction } from '../state_action'
-import { IRestaurants, IRestaurantsParams, ICategories, IMenuList } from '@models';
+import { IRestaurants, IRestaurantsParams, IItem, ICategories, IMenuList, IItemList, IItemListResponse } from '@models';
 export const RestaurantReducer = combineReducers<RestaurantsState, RestaurantsActions>({
     restaurants: (state: IRestaurants[] = [], action) => {
         switch (action.type) {
@@ -62,6 +62,22 @@ export const RestaurantReducer = combineReducers<RestaurantsState, RestaurantsAc
     selectedMenu: (state: IMenuList[] = [], action) => {
         switch (action.type) {
             case getType(restaurantsAction.selectedMenu):
+                return action['payload'];
+            default:
+                return state
+        }
+    },
+    selectedItem: (state: IItem = {}, action) => {
+        switch (action.type) {
+            case getType(restaurantsAction.selectedItem):
+                return action['payload'];
+            default:
+                return state
+        }
+    },
+    selectedItemDetail: (state: IItemListResponse[] = [], action) => {
+        switch (action.type) {
+            case getType(restaurantsAction.selectedItemDetail):
                 return action['payload'];
             default:
                 return state

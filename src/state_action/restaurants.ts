@@ -3,7 +3,9 @@ import {
     IRestaurants,
     IRestaurantsParams,
     ICategories,
-    IMenuList
+    IMenuList,
+    IItem,
+    IItemListResponse
 } from '@models';
 import {
     LIST_RESTAURANTS,
@@ -13,7 +15,9 @@ import {
     LIST_CATEGORIES,
     LIST_MENULIST,
     SELECTED_CATEGORY,
-    SELECTED_MENU
+    SELECTED_MENU,
+    SELECTED_ITEM,
+    SELECTED_ITEM_DETAILS
 } from '../constants/actionTypes'
 
 export const restaurantsAction = {
@@ -25,7 +29,8 @@ export const restaurantsAction = {
     listMenuList: createStandardAction(LIST_MENULIST)<IMenuList[]>(),
     selectedCategory: createStandardAction(SELECTED_CATEGORY)<ICategories>(),
     selectedMenu: createStandardAction(SELECTED_MENU)<IMenuList[]>(),
-
+    selectedItem: createStandardAction(SELECTED_ITEM)<IItem>(),
+    selectedItemDetail: createStandardAction(SELECTED_ITEM_DETAILS)<IItemListResponse[]>(),
 }
 
 export type RestaurantsActions = ActionType<typeof restaurantsAction>
@@ -38,5 +43,7 @@ export type RestaurantsState = Readonly<{
     categories: ICategories[]
     menuList: IMenuList[]
     selectedCategory: ICategories,
-    selectedMenu: IMenuList[]
+    selectedMenu: IMenuList[],
+    selectedItem: IItem,
+    selectedItemDetail: IItemListResponse[]
 }>
