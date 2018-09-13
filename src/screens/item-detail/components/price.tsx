@@ -1,7 +1,10 @@
 import * as React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { ITotalPrice } from '@models';
 export interface PriceProps {
-    value: any
+    value: any,
+    totalPriceAction: (payload: any) => any,
+    totalPrice: any
 }
 
 interface PriceState {
@@ -16,15 +19,49 @@ export class Price extends React.Component<PriceProps, PriceState> {
     }
     private increment = () => {
         let { count } = this.state;
+        let { quantity, realPrice, extraAmount } = this.props.totalPrice;
+        let totalBaseAmount = realPrice;
+        for (let key in extraAmount) {
+            totalBaseAmount = totalBaseAmount + extraAmount[key];
+        }
+        let changeQuantity = quantity + 1;
+        let total = totalBaseAmount * changeQuantity;
         let incrementCount: number = count + 1;
         this.setState({ count: incrementCount });
+        let price: ITotalPrice = {
+            realPrice: realPrice,
+            quantity: changeQuantity,
+            totalPrice: total,
+            extraAmount
+        }
+        this.props.totalPriceAction(price);
     }
     private decrement = () => {
         let { count } = this.state;
+        let { quantity, realPrice, extraAmount } = this.props.totalPrice;
+        let changeQuantity = quantity - 1;
+        let totalBaseAmount = realPrice;
+
+        console.log("extraAmount", extraAmount);
+        for (let key in extraAmount) {
+            totalBaseAmount = totalBaseAmount + extraAmount[key];
+        }
+        let total = totalBaseAmount * changeQuantity;
         if (count > 1) {
             let decrementCount: number = count - 1;
+            let price: ITotalPrice = {
+                realPrice: realPrice,
+                quantity: changeQuantity,
+                totalPrice: total,
+                extraAmount
+            }
+            this.props.totalPriceAction(price);
             this.setState({ count: decrementCount });
         }
+
+
+
+
     }
     render() {
         return (

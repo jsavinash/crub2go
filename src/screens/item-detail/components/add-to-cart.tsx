@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 
 export interface AddToCartProps {
+    price: any
 }
 
 interface AddToCartState {
@@ -27,7 +28,7 @@ export class AddToCart extends React.Component<AddToCartProps, AddToCartState> {
                         marginLeft: '4%',
                         fontSize: 20,
                         color: 'black'
-                    }}>$125.00</Text>
+                    }}>${this.props.price.totalPrice}.00</Text>
                 </View>
             </View>
         )

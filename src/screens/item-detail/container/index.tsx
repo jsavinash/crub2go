@@ -3,13 +3,15 @@ import { View, StyleSheet } from "react-native";
 import SplashScreen from 'react-native-splash-screen';
 import { MainContainer } from '../components';
 import { RestaurantRestService } from '../../../services'
-import { IItem, ICustomer, IItemVariationParams } from '@models';
+import { IItem, ICustomer, IItemVariationParams, ITotalPrice } from '@models';
 import { transformToFromData } from '@common_service';
 export interface PlaceDetailProps {
     customer: ICustomer,
     selectedItem: IItem,
     selectedItemDetailAction: (payload: any) => any,
-    selectedItemDetail: any
+    selectedItemDetail: any,
+    totalPriceAction: (payload: any) => any,
+    totalPrice: any,
 }
 interface PlaceDetailPropsState {
     isItemPresent: boolean;
@@ -24,8 +26,19 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
     componentDidMount() {
         SplashScreen.hide();
         this.itemDetails();
+        this.initPrice();
     }
 
+    initPrice = () => {
+        const { item_original_price } = this.props.selectedItem;
+        let data: ITotalPrice = {
+            totalPrice: parseFloat(item_original_price),
+            quantity: 1,
+            realPrice: parseFloat(item_original_price),
+            extraAmount: {}
+        }
+        this.props.totalPriceAction(data);
+    }
     itemDetails = () => {
         const _self = this;
         const { item_id } = _self.props.selectedItem;
@@ -52,9 +65,11 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
         return (
             <View style={styles.container}>
                 <MainContainer
+                    totalPriceAction={this.props.totalPriceAction}
                     selectedItem={this.props.selectedItem}
                     isItemPresent={this.state.isItemPresent}
                     selectedItemDetail={this.props.selectedItemDetail}
+                    totalPrice={this.props.totalPrice}
                 />
             </View>
         )

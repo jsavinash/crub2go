@@ -32,6 +32,7 @@ export const SELECTED_CATEGORY = 'restaurants/CATEGORY'
 export const SELECTED_MENU = 'restaurants/MENU'
 export const SELECTED_ITEM = 'restaurants/ITEM'
 export const SELECTED_ITEM_DETAILS = 'restaurants/ITEMDETAILS'
+export const TOTAL_PRICE = 'restaurants/PRICE'
 
 
 //Static Pages

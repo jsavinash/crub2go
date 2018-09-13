@@ -6,7 +6,9 @@ import { IItem } from '@models';
 export interface MainBoxProps {
     selectedItem: IItem,
     isItemPresent: any,
-    selectedItemDetail: any
+    selectedItemDetail: any,
+    totalPriceAction: (payload: any) => any,
+    totalPrice: any
 }
 
 interface MainBoxState {
@@ -27,8 +29,14 @@ export class MainContainer extends React.Component<MainBoxProps, MainBoxState> {
                     selectedItem={this.props.selectedItem}
                     isItemPresent={this.props.isItemPresent}
                     selectedItemDetail={this.props.selectedItemDetail}
+                    totalPriceAction={this.props.totalPriceAction}
+                    totalPrice={this.props.totalPrice}
+
+
                 />
-                <AddToCart />
+                <AddToCart
+                    price={this.props.totalPrice}
+                />
             </View>
         )
     }
