@@ -32,7 +32,7 @@ export const Locations = {
     headerStyle: { backgroundColor: 'white' },
     headerTitleStyle: {
         color: '#4E4E4E',
-        marginLeft: ((SCREEN_WIDTH * 38) / 100)
+        marginLeft: ((SCREEN_WIDTH * 24) / 100)
     }
 }
 export const PlaceDetail = {

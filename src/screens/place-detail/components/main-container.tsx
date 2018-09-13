@@ -22,7 +22,9 @@ export class MainContainer extends React.Component<MainBoxProps, MainBoxState> {
     render() {
         return (
             <View style={styles.container}>
-                <PlaceCard resturant={this.props.resturant} />
+                <PlaceCard
+                    navigation={this.props.navigation}
+                    resturant={this.props.resturant} />
                 <Menu />
                 <ScrollText
                     categorySelect={this.props.onMenuSelect}

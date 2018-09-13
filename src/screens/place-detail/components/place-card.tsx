@@ -3,9 +3,12 @@ import { Text, StyleSheet, View, Dimensions, Image, TouchableHighlight } from 'r
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 export interface PlaceCardProps {
+    navigation: any,
     resturant: any
 }
 export const PlaceCard: React.StatelessComponent<PlaceCardProps> = (props) => {
+    const navigateTo = () => {
+    }
     return (
         < View style={styles.card} >
             <View>
@@ -22,7 +25,9 @@ export const PlaceCard: React.StatelessComponent<PlaceCardProps> = (props) => {
                     />
                 </TouchableHighlight>
                 <TouchableHighlight
-                    style={styles.info}>
+                    style={styles.info} onPress={() => {
+                        props.navigation.navigate('Location', { resturant: props.resturant });
+                    }}>
                     <Image
                         source={require('../../../assets/app-images/img_info_h.png')}
                         style={styles.infoImg} />

@@ -19,28 +19,30 @@ export const ItemList: React.StatelessComponent<ItemListProps> = (props) => {
                             onPress={() => { props.onItemSelect(item) }}
                         >
                             <View>
-                                <View style={styles.container}>
-                                    <View style={styles.textContent}>
-                                        <Text style={styles.text1}>{item.item_name}</Text>
-                                        <Text style={styles.text2}>{item.item_discription}</Text>
-                                        <Text style={styles.text3}>$ {item.item_discounted_price}</Text>
-                                    </View>
-                                    <View style={styles.imgContent}>
-                                        {
-                                            (item && item.item_image) ?
+                                    {(item && item.item_image) ?
+                                        <View style={styles.container}>
+                                            <View style={styles.textContent}>
+                                                <Text style={styles.text1}>{item.item_name}</Text>
+                                                <Text style={styles.text2}>{item.item_discription}</Text>
+                                                <Text style={styles.text3}>$ {item.item_discounted_price}</Text>
+                                            </View>
+                                            <View style={styles.imgContent}>
                                                 <Image
                                                     source={{ uri: item.item_image }}
                                                     resizeMode={'cover'}
                                                     style={styles.img}
                                                 ></Image>
-                                                : <Image
-                                                    source={require('../../../assets/app-images/search_icon_s_3.png')}
-                                                    resizeMode={'cover'}
-                                                    style={styles.img}
-                                                ></Image>
-                                        }
-                                    </View>
-                                </View>
+                                            </View>
+                                        </View> :
+                                        <View style={styles.container}>
+                                            <View style={styles.textContent1}>
+                                                <Text style={styles.text1}>{item.item_name}</Text>
+                                                <Text style={styles.text2}>{item.item_discription}</Text>
+                                                <Text style={styles.text3}>$ {item.item_discounted_price}</Text>
+                                            </View>
+                                        </View>
+
+                                    }
                                 <View style={styles.border}>
                                 </View>
                             </View>
@@ -72,6 +74,12 @@ const styles = StyleSheet.create({
     textContent: {
         borderRadius: 22,
         width: '68%',
+        marginTop: 10,
+        marginLeft: 5
+    },
+    textContent1: {
+        borderRadius: 22,
+        width: '100%',
         marginTop: 10,
         marginLeft: 5
     },
