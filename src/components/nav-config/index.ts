@@ -1,10 +1,8 @@
 import { Dimensions } from "react-native";
 const SCREEN_WIDTH = Dimensions.get('window').width;
-
 export const Home = {
     header: null
 }
-
 export const Login = {
     header: null
 }
@@ -20,7 +18,6 @@ export const ResetPassword = {
 export const ChangePassword = {
     header: null
 }
-
 export const Register = {
     header: null
 }
@@ -48,12 +45,7 @@ export const Profile = {
     header: null
 }
 export const Deals = {
-    title: 'Deals',
-    headerStyle: { backgroundColor: 'white' },
-    headerTitleStyle: {
-        color: '#4E4E4E',
-        marginLeft: ((SCREEN_WIDTH * 43) / 100)
-    }
+    header: null
 }
 export const RateReview = {
     header: null

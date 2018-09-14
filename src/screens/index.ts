@@ -13,7 +13,7 @@ import AccountScreen from './account';
 import DealsScreen from './deals';
 import RateReviewScreen from './rate-review';
 import AddCardScreen from './add-card';
-import CheckoutScreen from './checkout/container/index';
+import CheckoutScreen from './checkout';
 import FavouriteScreen from './favourite';
 import OrdersScreen from './orders';
 import OrderSummaryScreen from './order-summary/container/index';

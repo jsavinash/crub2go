@@ -1,3 +1,3 @@
-export * from './loginCard'
-export * from './loginLogo'
-export * from './loginCardBottom'
+export * from './loginCard';
+export * from './loginLogo';
+export * from './loginCardBottom';
