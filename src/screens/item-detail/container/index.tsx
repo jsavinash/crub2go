@@ -36,7 +36,6 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
         this.itemDetails();
         this.initPrice();
     }
-
     initPrice = () => {
         const { item_original_price } = this.props.selectedItem;
         const originalPrice: string = item_original_price.toString();
@@ -86,6 +85,9 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
         }).catch((error) => {
             console.log("error......................", error);
         })
+    }
+    componentWillUnmount() {
+        this.props.seletedAttributeAction([]);
     }
     itemDetails = () => {
         const _self = this;
