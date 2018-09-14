@@ -2,18 +2,26 @@ import * as React from "react";
 import { View, StyleSheet } from "react-native";
 import SplashScreen from 'react-native-splash-screen';
 import { MainContainer } from '../components';
-import { RestaurantRestService } from '../../../services'
-import { IItem, ICustomer, IItemVariationParams, ITotalPrice } from '@models';
+import { RestaurantRestService, CartRestService } from '../../../services'
+import { IItem, ICustomer, IItemVariationParams, ITotalPrice, IRestaurants } from '@models';
 import { transformToFromData } from '@common_service';
 export interface PlaceDetailProps {
+    //Action
+    selectedItemDetailAction: (payload: any) => any,
+    totalPriceAction: (payload: any) => any,
+    seletedAttributeAction: (payload: any) => any,
+    //Store Variable
     customer: ICustomer,
     selectedItem: IItem,
-    selectedItemDetailAction: (payload: any) => any,
+    selectedRestaurant: IRestaurants,
     selectedItemDetail: any,
-    totalPriceAction: (payload: any) => any,
-    totalPrice: any,
+    selectedCategory: any,
+    totalPrice: ITotalPrice,
+    selectedMenu: any,
+    selectedAttribute: any
 }
 interface PlaceDetailPropsState {
+    //State Variable
     isItemPresent: boolean;
 }
 export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPropsState> {
@@ -31,13 +39,53 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
 
     initPrice = () => {
         const { item_original_price } = this.props.selectedItem;
+        const originalPrice: string = item_original_price.toString();
         let data: ITotalPrice = {
-            totalPrice: parseFloat(item_original_price),
+            totalPrice: parseFloat(originalPrice),
             quantity: 1,
-            realPrice: parseFloat(item_original_price),
+            realPrice: parseFloat(originalPrice),
             extraAmount: {}
         }
         this.props.totalPriceAction(data);
+    }
+    submit = () => {
+        const {
+            selectedRestaurant,
+            selectedCategory,
+            selectedItem,
+            selectedAttribute,
+            totalPrice } = this.props;
+        let construct: any = [];
+        selectedAttribute.forEach((attr: any) => {
+            let obj: any = {};
+            obj = Object.assign({}, attr.variation);
+            delete attr['variation'];
+            obj.attribute = [];
+            obj.attribute.push(attr);
+            construct.push(obj);
+        });
+        let cartToCartParams: any = {
+            restaurant_id: selectedRestaurant['restaurant_id'],
+            menu_id: selectedCategory['cat_menu_id'],
+            cat_id: selectedCategory['cat_id'],
+            item_id: selectedItem['item_id'],
+            item_quantity: totalPrice['quantity'].toString(),
+            item_price: totalPrice['realPrice'].toString(),
+            item_total_price: totalPrice['totalPrice'].toString(),
+            item_special_instruction: "No Instrucation",
+            item_variation: JSON.stringify(construct)
+        }
+        let formData = transformToFromData(cartToCartParams);
+        CartRestService.addToCart(formData, this.props.customer.user_access_token).then((success: any) => {
+            console.log("success......................", success);
+            if (success['data']['settings']['success'] == 1) {
+
+            } else if (success['data']['settings']['success'] == 0) {
+
+            }
+        }).catch((error) => {
+            console.log("error......................", error);
+        })
     }
     itemDetails = () => {
         const _self = this;
@@ -61,6 +109,10 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
         })
     }
 
+    triggerAddToCard = () => {
+        this.submit();
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -70,6 +122,9 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
                     isItemPresent={this.state.isItemPresent}
                     selectedItemDetail={this.props.selectedItemDetail}
                     totalPrice={this.props.totalPrice}
+                    triggerAddToCard={this.triggerAddToCard}
+                    seletedAttributeAction={this.props.seletedAttributeAction}
+                    selectedAttribute={this.props.selectedAttribute}
                 />
             </View>
         )

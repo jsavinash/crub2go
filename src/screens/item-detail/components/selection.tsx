@@ -4,10 +4,11 @@ import { Icon, CheckBox, } from 'react-native-elements';
 import { ITotalPrice } from '@models';
 
 export interface SelectionProps {
-    // instructions: string
-    selectedItemDetail: any,
+    seletedAttributeAction: (payload: any) => any,
     totalPriceAction: (payload: any) => any,
-    totalPrice: any
+    selectedItemDetail: any,
+    totalPrice: any,
+    selectedAttribute: any
 }
 export interface SelectionState {
     selection: any,
@@ -48,11 +49,11 @@ export class Selection extends React.Component<SelectionProps, SelectionState> {
                 (Choose Up to 1)
        </Text>
     }
-    checkClick = (item: any) => {
-        let { quantity, totalPrice, realPrice, extraAmount } = this.props.totalPrice;
+    checkClick = (item: any, src: any) => {
+        let cpySrc = Object.assign({}, src);
+        let { quantity, realPrice, extraAmount } = this.props.totalPrice;
         let extraPrice = extraAmount;
         let totalBaseAmount = realPrice;
-
         let keyss = `${item.attribute_variation_id}${item.attribute_id}`;
         let { selection } = this.state;
         let updateState = true;
@@ -71,16 +72,22 @@ export class Selection extends React.Component<SelectionProps, SelectionState> {
                 }
             })
         }
-
-
         if (updateState) {
+            let { selectedAttribute } = this.props;
+            let modifiedAttribute = selectedAttribute;
             let total: any;
             if (modifiedSelection[`${keyss}`]) {
+                if (modifiedAttribute.length > 0) {
+                    modifiedAttribute = modifiedAttribute.filter(function (attr: any) {
+                        return !(attr.attribute_id == item.attribute_id);
+                    });
+                }
+                this.props.seletedAttributeAction(modifiedAttribute);
                 modifiedSelection[`${keyss}`] = false;
                 delete extraPrice[`${item.attribute_name}`];
-                    for (let key in extraPrice) {
-                        totalBaseAmount = totalBaseAmount + extraPrice[key];
-                    }
+                for (let key in extraPrice) {
+                    totalBaseAmount = totalBaseAmount + extraPrice[key];
+                }
                 total = (quantity * totalBaseAmount);
                 let price: ITotalPrice = {
                     realPrice,
@@ -88,29 +95,25 @@ export class Selection extends React.Component<SelectionProps, SelectionState> {
                     totalPrice: total,
                     extraAmount: extraPrice
                 }
-                console.log("price..........................1", price);
                 this.props.totalPriceAction(price);
             }
             else {
+                delete cpySrc['attribute'];
+                item.variation = cpySrc;
+                modifiedAttribute.push(item);
+                this.props.seletedAttributeAction(modifiedAttribute);
                 modifiedSelection[`${keyss}`] = true;
                 extraPrice[`${item.attribute_name}`] = parseFloat(item.attribute_price);
-              console.log('extraPrice................', extraPrice);
-              console.log('totalBaseAmount................', totalBaseAmount);
-                    for (let key in extraPrice) {
-                        console.log('ghggddf', extraPrice[key]);
-                        totalBaseAmount = totalBaseAmount + extraPrice[key];
-                    }
+                for (let key in extraPrice) {
+                    totalBaseAmount = totalBaseAmount + extraPrice[key];
+                }
                 total = (quantity * totalBaseAmount);
-                console.log('total................', total);
-
                 let price: ITotalPrice = {
                     realPrice,
                     quantity,
                     totalPrice: total,
                     extraAmount: extraPrice
                 }
-                console.log("price..........................2", price);
-
                 this.props.totalPriceAction(price);
             }
             this.setState({ selection: modifiedSelection });
@@ -137,7 +140,7 @@ export class Selection extends React.Component<SelectionProps, SelectionState> {
                                                 containerStyle={styles.checkBx}
                                                 checked={this.state.selection[`${attr.attribute_variation_id}${attr.attribute_id}`]}
                                                 textStyle={styles.checktxt}
-                                                onPress={() => { this.checkClick(attr) }}
+                                                onPress={() => { this.checkClick(attr, item) }}
 
                                             />
                                         </View>

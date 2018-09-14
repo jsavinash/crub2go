@@ -156,6 +156,46 @@ interface TotalPrice {
   extraAmount?: any
 }
 
+
+
+
+// [
+//     {
+//       "attribute": [
+//         {
+//           "attribute_id": "1",
+//           "attribute_description": "Hard",
+//           "attribute_price": "3.00",
+//           "attribute_variation_id": "1",
+//           "attribute_item_id": "1"
+//         },
+//         {
+//           "attribute_id": "2",
+//           "attribute_description": "Soft",
+//           "attribute_price": "15.00",
+//           "attribute_variation_id": "1",
+//           "attribute_item_id": "1"
+//         }
+//       ],
+//       "variation_id": "1",
+//       "variation_description": "Choice of Crust",
+//       "variation_min_selection": "1",
+//       "variation_max_selection": "1",
+//       "variation_name": "Crust",
+//       "variation_item_id": "7"
+//     }
+//   ]
+
+interface Attribute {
+  attribute_description?: any,
+  attribute_id?: any,
+  attribute_item_id?: any,
+  attribute_name?: any,
+  attribute_price?: any,
+  attribute_selected?: any,
+  attribute_variation_id?: any,
+  variation: any
+}
 export {
   Customer as ICustomer,
   Login as ILogin,
@@ -177,5 +217,6 @@ export {
   MenuParams as IMenuParams,
   ItemListResponse as IItemListResponse,
   Item as IItem,
-  TotalPrice as ITotalPrice
+  TotalPrice as ITotalPrice,
+  Attribute as IAttribute
 }

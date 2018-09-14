@@ -4,14 +4,20 @@ import { ItemCard, Content, AddToCart } from './index';
 import { IItem } from '@models';
 
 export interface MainBoxProps {
+    //Action
+    totalPriceAction: (payload: any) => any,
+    triggerAddToCard: () => any,
+    seletedAttributeAction: (payload: any) => any,
+    //Store Variable
     selectedItem: IItem,
     isItemPresent: any,
     selectedItemDetail: any,
-    totalPriceAction: (payload: any) => any,
-    totalPrice: any
+    totalPrice: any,
+    selectedAttribute: any
 }
 
 interface MainBoxState {
+    //State Variable
 
 }
 export class MainContainer extends React.Component<MainBoxProps, MainBoxState> {
@@ -31,10 +37,11 @@ export class MainContainer extends React.Component<MainBoxProps, MainBoxState> {
                     selectedItemDetail={this.props.selectedItemDetail}
                     totalPriceAction={this.props.totalPriceAction}
                     totalPrice={this.props.totalPrice}
-
-
+                    seletedAttributeAction={this.props.seletedAttributeAction}
+                    selectedAttribute={this.props.selectedAttribute}
                 />
                 <AddToCart
+                    triggerAddToCard={this.props.triggerAddToCard}
                     price={this.props.totalPrice}
                 />
             </View>

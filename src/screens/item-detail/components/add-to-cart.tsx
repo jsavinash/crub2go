@@ -3,7 +3,9 @@ import { StyleSheet, View, Text, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 
 export interface AddToCartProps {
-    price: any
+    triggerAddToCard: () => any,
+
+    price: any,
 }
 
 interface AddToCartState {
@@ -18,7 +20,9 @@ export class AddToCart extends React.Component<AddToCartProps, AddToCartState> {
             <View style={styles.container}>
                 <View style={styles.content}>
                     <Button
-                        onPress={() => { }}
+                        onPress={() => {
+                            this.props.triggerAddToCard();
+                        }}
                         title="ADD TO CART"
                         buttonStyle={styles.containerInBtnStyle}
                         containerViewStyle={styles.containerInBtnCnt} />

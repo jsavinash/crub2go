@@ -6,7 +6,8 @@ import {
     IMenuList,
     IItem,
     IItemListResponse,
-    ITotalPrice
+    ITotalPrice,
+    IAttribute
 } from '@models';
 import {
     LIST_RESTAURANTS,
@@ -19,7 +20,8 @@ import {
     SELECTED_MENU,
     SELECTED_ITEM,
     SELECTED_ITEM_DETAILS,
-    TOTAL_PRICE
+    TOTAL_PRICE,
+    SELECTED_ATTRIBUTE
 } from '../constants/actionTypes'
 
 export const restaurantsAction = {
@@ -34,6 +36,7 @@ export const restaurantsAction = {
     selectedItem: createStandardAction(SELECTED_ITEM)<IItem>(),
     selectedItemDetail: createStandardAction(SELECTED_ITEM_DETAILS)<IItemListResponse[]>(),
     totalPrice: createStandardAction(TOTAL_PRICE)<ITotalPrice>(),
+    selectedAttribute: createStandardAction(SELECTED_ATTRIBUTE)<IAttribute[]>(),
 }
 
 export type RestaurantsActions = ActionType<typeof restaurantsAction>
@@ -49,5 +52,6 @@ export type RestaurantsState = Readonly<{
     selectedMenu: IMenuList[],
     selectedItem: IItem,
     selectedItemDetail: IItemListResponse[],
-    totalPrice: ITotalPrice
+    totalPrice: ITotalPrice,
+    selectedAttribute: IAttribute[]
 }>

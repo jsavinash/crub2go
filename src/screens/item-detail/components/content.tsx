@@ -7,7 +7,9 @@ export interface ContentProps {
     isItemPresent: any,
     selectedItemDetail: any,
     totalPriceAction: (payload: any) => any,
-    totalPrice: any
+    seletedAttributeAction: (payload: any) => any,
+    totalPrice: any,
+    selectedAttribute: any
 
 
 }
@@ -21,9 +23,11 @@ export class Content extends React.Component<ContentProps, ContentState> {
     isSelection = (): any => {
         if (this.props.isItemPresent)
             return <Selection
+                seletedAttributeAction={this.props.seletedAttributeAction}
                 selectedItemDetail={this.props.selectedItemDetail}
                 totalPrice={this.props.totalPrice}
                 totalPriceAction={this.props.totalPriceAction}
+                selectedAttribute={this.props.selectedAttribute}
             />
     }
     render() {
