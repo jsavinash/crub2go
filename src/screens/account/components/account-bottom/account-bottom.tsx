@@ -1,13 +1,24 @@
 import * as React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
-import { styles } from './account-bottom-style'
+import { styles } from './account-bottom-style';
+import { addNavigationHelpers, NavigationState } from 'react-navigation';
+import { Dispatch } from 'redux'
+import { createReduxBoundAddListener } from 'react-navigation-redux-helpers'
 import { settings, supports } from '../account-constant';
 import { removeAsync } from '@common_service';
 import { NavigationActions } from 'react-navigation';
-
-export const AccountBottom: React.StatelessComponent<{}> = () => {
+export interface AccountBottomProps {
+    nav: NavigationState
+    dispatch: Dispatch
+}
+export const AccountBottom: React.StatelessComponent<AccountBottomProps> = (props) => {
     let settingOpt: any[] = [];
     let supportOpt: any[] = [];
+    const navigation = addNavigationHelpers({
+        dispatch: props.dispatch,
+        state: props.nav,
+        addListener: createReduxBoundAddListener('root'),
+    });
     const initBlock = () => {
         settings.forEach((setting: any, idx: number) => {
             if (idx == (settings.length - 1)) {
@@ -33,16 +44,16 @@ export const AccountBottom: React.StatelessComponent<{}> = () => {
     const navigateTo = (path: string): any => {
         switch (path) {
             case "aboutus":
-                NavigationActions.navigate({ routeName: 'Page', params: { type: "aboutus" } })
+                navigation.navigate(`Page`, { type: "aboutus" });
                 break;
             case "howitworks":
-                NavigationActions.navigate({ routeName: 'Page', params: { type: "how_it_works" } })
+                navigation.navigate(`Page`, { type: "how_it_works" });
                 break;
             case "termsofservices":
-                NavigationActions.navigate({ routeName: 'Page', params: { type: "termsconditions" } })
+                navigation.navigate(`Page`, { type: "termsconditions" });
                 break;
             case "privacypolicy":
-                NavigationActions.navigate({ routeName: 'Page', params: { type: "privacypolicy" } })
+                navigation.navigate(`Page`, { type: "privacypolicy" });
                 break;
             case "contactUs":
                 contactUs()
@@ -54,7 +65,7 @@ export const AccountBottom: React.StatelessComponent<{}> = () => {
                 logout()
                 break;
             default:
-                NavigationActions.navigate({ routeName: `${path}` })
+                navigation.navigate(`${path}`);
         }
     }
     const contactUs = () => {
@@ -66,7 +77,7 @@ export const AccountBottom: React.StatelessComponent<{}> = () => {
     const logout = () => {
         removeAsync('user_access_token');
         removeAsync('user_stripe_id');
-        NavigationActions.navigate({ routeName: `Login` })
+        navigation.navigate(`Login`);
     }
 
     return (

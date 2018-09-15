@@ -38,7 +38,22 @@ export const AccountTop: React.StatelessComponent<AccountTopProps> = (props) => 
             <Text
                 style={styles.txt}>My Account</Text>
             <View style={styles.img1}>
-                {imageRender}
+                        <TouchableHighlight onPress={navigateTo}>
+                            {
+                                (props.customer && props.customer.user_profile) ?
+                                    <Image
+                                        source={require('../../../../assets/app-images/started_user.png')}
+                                        resizeMode="cover"
+                                        style={styles.img}>
+                                    </Image>
+                                    :
+                                    <Image
+                                        source={require('../../../../assets/app-images/started_user.png')}
+                                        resizeMode="cover"
+                                        style={styles.img}>
+                                    </Image>
+                            }
+                        </TouchableHighlight>
             </View>
             <Text style={styles.txt1}>{props['customer']['user_name']}</Text>
             <Text style={styles.txt2}>{props['customer']['user_mobile_number']}</Text>
