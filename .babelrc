@@ -22,7 +22,8 @@
           "@state_action": "./src/state_action",
           "@store": "./src/store",
           "@common_Component": "./src/components/common",
-          "@common_service": "./src/common/services"
+          "@common_service": "./src/common/services",
+          "@root_state": "./src/reducers/RootReducer"
         }
       }
     ],

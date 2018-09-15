@@ -1,13 +1,13 @@
 import * as React from "react"
-import { StatusBar, StyleSheet, View } from 'react-native';
+import { StatusBar, StyleSheet, View, Dimensions, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { REDUX_PERSIST as ReduxPersist } from '@config';
 import ReduxNavigation from './navigations/ReduxNavigation';
 import { reduxStartup } from '@state_action';
 import { withNetworkConnectivity } from 'react-native-offline';
+import BottomCheckout from './components/common/bottom-checkout'
 import FlashMessage from "react-native-flash-message";
 import Orientation from 'react-native-orientation';
-
 interface IProps {
     startup: () => void
 }
@@ -28,6 +28,7 @@ class RootContainer extends React.Component<IProps> {
                 <ReduxNavigation />
                 <FlashMessage ref="myLocalFlashMessage"
                     position={'top'} />   {/* <--- here as last component always with `ref` */}
+                <BottomCheckout/>
             </View>
         )
     }
@@ -38,7 +39,7 @@ const mapDispatchToProps = {
 }
 RootContainer = withNetworkConnectivity({
     withRedux: true // It won't inject isConnected as a prop in this case
-  })(RootContainer);
+})(RootContainer);
 
 export default connect<{}, IProps>(null, mapDispatchToProps)(RootContainer)
 

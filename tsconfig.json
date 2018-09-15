@@ -58,6 +58,9 @@
       ],
       "@common_service": [
         "src/common/services"
+      ],
+      "@root_state": [
+        "src/reducers/RootReducer"
       ]
     },
     "outDir": "build/dist",
@@ -68,6 +71,7 @@
       "es2015",
       "es2016"
     ],
+    "strictNullChecks": false,
     "moduleResolution": "node",
     "noEmitHelpers": true,
     "importHelpers": true,

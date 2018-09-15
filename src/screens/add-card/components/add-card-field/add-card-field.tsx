@@ -1,17 +1,9 @@
-import * as React from "react"
-import { View, StyleSheet, Image } from "react-native"
+import * as React from "react";
+import { View, Image } from "react-native";
+import { styles } from './add-card-field-style';
 import { TextField } from 'react-native-material-textfield';
-export interface Props {
 
-}
-interface State {
-
-}
-export class AddCardField extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-    }
-    render() {
+export const AddCardField: React.StatelessComponent<{}> = () => {
         return (
             <View style={styles.container}>
                 <View style={styles.txtField}>
@@ -24,14 +16,11 @@ export class AddCardField extends React.Component<Props, State> {
                             animationDuration={60}
                         />
                         <Image
-                            source={require('../../../assets/app-images/user_active.png')}
+                            source={require('../../../../assets/app-images/user_active.png')}
                             style={styles.image}
                         ></Image>
                     </View>
                 </View>
-
-
-
                 <View style={styles.txtField}>
                     <View style={styles.txtFieldIn}>
                         <TextField label='Card Number'
@@ -42,13 +31,12 @@ export class AddCardField extends React.Component<Props, State> {
                             animationDuration={60}
                         />
                         <Image
-                            source={require('../../../assets/app-images/card_deactive.png')}
+                            source={require('../../../../assets/app-images/card_deactive.png')}
                             style={styles.image}
                         ></Image>
                     </View>
                 </View>
                 <View style={{ flexDirection: 'row' }}>
-
                     <View style={styles.txtField1}>
                         <View style={styles.txtFieldIn1}>
                             <TextField label='Expiry Date'
@@ -59,7 +47,7 @@ export class AddCardField extends React.Component<Props, State> {
                                 animationDuration={60}
                             />
                             <Image
-                                source={require('../../../assets/app-images/calndr_icon_h.png')}
+                                source={require('../../../../assets/app-images/calndr_icon_h.png')}
                                 style={styles.image}
                             ></Image>
                         </View>
@@ -74,45 +62,14 @@ export class AddCardField extends React.Component<Props, State> {
                                 animationDuration={60}
                             />
                             <Image
-                                source={require('../../../assets/app-images/img_changepass.png')}
+                                source={require('../../../../assets/app-images/img_changepass.png')}
                                 style={styles.image}
                             ></Image>
                         </View>
                     </View>
-
                 </View>
-
-
             </View>
         )
-    }
+    
 }
 
-var styles = StyleSheet.create({
-    container: {
-        flex: 0.7,
-        margin: 14,
-    },
-    image: {
-        height: 35,
-        width: 40,
-        position: 'absolute',
-        right: 0,
-        marginTop: 25
-    },
-    txtField: {
-        flexDirection: 'row'
-    },
-    txtFieldIn: {
-        width: '100%'
-    },
-    txtField1: {
-        flexDirection: 'row',
-        marginLeft: '2%',
-        width: '50%'
-    },
-    txtFieldIn1: {
-        width: '100%'
-    }
-    
-});
