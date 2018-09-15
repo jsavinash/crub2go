@@ -2,6 +2,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 export const styles = StyleSheet.create({
+  
     container1: {
         width: '100%',
         backgroundColor: '#ACD472',
