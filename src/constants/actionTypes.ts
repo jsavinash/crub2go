@@ -46,3 +46,7 @@ export const PRIVACY_POLICY_PAGE = 'page/PRIVACYPOLICY';
 //Cards
 export const LIST_CARDS = 'card/LIST';
 
+//Cart
+export const VIEW_CART = 'cart/VIEW';
+export const VIEW_TOTAL = 'cart/Total';
+

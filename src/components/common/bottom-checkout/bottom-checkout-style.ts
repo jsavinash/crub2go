@@ -2,11 +2,17 @@ import { StyleSheet, Dimensions } from 'react-native';
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 export const styles = StyleSheet.create({
-    container: {
+    container1: {
         width: '100%',
         backgroundColor: '#ACD472',
         position: 'absolute',
         bottom: ((SCREEN_HEIGHT * 7.5) / 100)
+    },
+    container2: {
+        width: '100%',
+        backgroundColor: '#ACD472',
+        position: 'absolute',
+        bottom: 0
     },
     div1: {
         flexDirection: 'row',

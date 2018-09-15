@@ -1,13 +1,11 @@
 import { BottomCheckout } from './bottom-checkout';
 import { connect } from 'react-redux';
-//import { custAction } from '@state_action';
 import { RootState } from '@root_state';
-const mapDispatchToProps = {
-
-}
 const mapStateToProps = (state: RootState) => ({
-    customer: state['customer']['customer'],
+    cart: state['cart']['cart'],
+    cartTotal: state['cart']['cartTotal'],
+    nav: state['nav']
 })
-export default connect(mapStateToProps, mapDispatchToProps)(BottomCheckout)
+export default connect(mapStateToProps, null)(BottomCheckout)
 
 
