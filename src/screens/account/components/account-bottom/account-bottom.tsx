@@ -3,10 +3,9 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import { styles } from './account-bottom-style';
 import { addNavigationHelpers, NavigationState } from 'react-navigation';
 import { Dispatch } from 'redux'
-import { createReduxBoundAddListener } from 'react-navigation-redux-helpers'
+import { createReduxBoundAddListener } from 'react-navigation-redux-helpers';
 import { settings, supports } from '../account-constant';
 import { removeAsync } from '@common_service';
-import { NavigationActions } from 'react-navigation';
 export interface AccountBottomProps {
     nav: NavigationState
     dispatch: Dispatch
