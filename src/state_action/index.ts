@@ -9,3 +9,4 @@ export * from './static-pages';
 export * from './faq';
 export * from './card';
 export * from './cart';
+export * from './order';

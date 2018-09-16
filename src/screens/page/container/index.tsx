@@ -43,7 +43,6 @@ export class Page extends React.Component<PageProps, PageState> {
         if (this.props.howItWorksContent.content != "" && type == "how_it_works")
             return;
         PageRestService.page(transformToFromData({ page_code: type })).then((pageData: any) => {
-            console.log(pageData['data']['data'][0]);
             let contentTitle: string = pageData['data']['data'][0].page_title;
             let content: string = pageData['data']['data'][0].page_content;
             if (contentTitle == "About us")

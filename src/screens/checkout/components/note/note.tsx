@@ -1,10 +1,19 @@
 import * as React from "react";
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { View } from 'react-native';
+import * as _ from 'lodash';
+import { styles } from './note-style';
 import { TextField } from 'react-native-material-textfield';
-
 export interface NoteProps {
+    checkoutParamsAction: (checkout: any) => any,
+    checkoutParams: any
 }
 export const Note: React.StatelessComponent<NoteProps> = (props) => {
+    const textChange = (note: string) => {
+        const { checkoutParamsAction, checkoutParams } = props;
+        const cpyCheckoutParams = { ...checkoutParams };
+        cpyCheckoutParams['order_note'] = note;
+        checkoutParamsAction(cpyCheckoutParams)
+    }
     return (
         <View style={styles.container}>
             <View style={styles.txtField}>
@@ -16,6 +25,7 @@ export const Note: React.StatelessComponent<NoteProps> = (props) => {
                         lineWidth={1}
                         animationDuration={60}
                         secureTextEntry={false}
+                        onChangeText={(note: string) => textChange(note)}
                     />
                 </View>
             </View>
@@ -23,26 +33,3 @@ export const Note: React.StatelessComponent<NoteProps> = (props) => {
     )
 }
 
-var styles = StyleSheet.create({
-    container: {
-        backgroundColor: 'white',
-        width: '100%'
-    },
-    txtField: {
-        flexDirection: 'row',
-        marginLeft: '5%',
-        marginRight: '5%'
-    },
-    txtFieldIn: {
-        width: '100%'
-    },
-    containerInBtnStyle: {
-        backgroundColor: '#ACD472',
-        borderColor: 'transparent',
-        borderWidth: 1,
-        borderRadius: 30,
-    },
-    containerInBtnCnt: {
-        width: '100%',
-    }
-});

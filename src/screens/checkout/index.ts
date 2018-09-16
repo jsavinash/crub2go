@@ -7,6 +7,8 @@ const mapDispatchToProps = {
 }
 const mapStateToProps = (state: RootState) => ({
     customer: state['customer']['customer'],
+    cart: state['cart']['cart'],
+    cartTotal: state['cart']['cartTotal'],
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout)

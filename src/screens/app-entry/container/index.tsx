@@ -1,14 +1,15 @@
 import * as React from "react"
 import { StyleSheet, View, Text } from "react-native";
-import { CartRestService } from '../../../services';
+import { CartRestService, DealsRestService } from '../../../services';
 import { AsyncStorage } from "react-native";
-import { ICustomer, ICartResponse, ICartTotal } from '@models';
+// import { ICustomer, ICartResponse, ICartTotal } from '@models';
 export interface AppEntryProps {
-    customerCreate: (customer: ICustomer) => any,
-    cartAction: (cart: ICartResponse) => any,
-    cartTotalAction: (cartTotal: ICartTotal) => any,
+    customerCreate: (customer: any) => any,
+    cartAction: (cart: any) => any,
+    cartTotalAction: (cartTotal: any) => any,
+    listDealsAction:  (data: any) => any,
     navigation: any,
-    customer: ICustomer
+    customer: any
 }
 export class AppEntry extends React.Component<AppEntryProps, {}> {
     constructor(props: AppEntryProps) {
@@ -21,8 +22,10 @@ export class AppEntry extends React.Component<AppEntryProps, {}> {
             this.props.customerCreate(user);
             if (user != null) {
                 this.getCartDetails();
+                this.deals();
                 navigation.navigate('Home');
             } else {
+                this.deals();
                 navigation.navigate('Login');
             }
         }
@@ -31,7 +34,6 @@ export class AppEntry extends React.Component<AppEntryProps, {}> {
     getCartDetails = () => {
         const _self = this;
         const { customer } = this.props;
-        console.log("customer['user_access_token']", customer['user_access_token']);
         CartRestService.viewCart(customer['user_access_token']).then((cart: any) => {
             if (cart['data']['settings']['success'] == 1) {
                 _self.props.cartAction(cart['data']['data']['cart_item']);
@@ -40,6 +42,15 @@ export class AppEntry extends React.Component<AppEntryProps, {}> {
         }).catch((error) => {
 
         })
+    }
+
+    deals = () => {
+        DealsRestService.listDeals().then((dealsList: any) => {
+            console.log("dealsList", dealsList['data']['data']);
+            this.props.listDealsAction(dealsList['data']['data']);
+        }).catch((error) => {
+            console.log('error', error);
+        });
     }
 
     componentDidMount() {

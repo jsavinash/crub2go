@@ -1,42 +1,43 @@
 import * as React from "react";
-import { Text, View, StyleSheet, Dimensions } from "react-native";
-import { DealScroll } from '../components/deals';
-import { IDeals } from '@models';
-import { dealAction } from '@state_action';
-import Spinner from 'react-native-loading-spinner-overlay';
-import { DealsRestService } from '../../../services/';
+import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { DealCard } from '../components';
+// import { IDeals } from '@models';
+// import { dealAction } from '@state_action';
+// import Spinner from 'react-native-loading-spinner-overlay';
+// import { DealsRestService } from '../../../services/';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 export interface Props {
-    deals: IDeals[],
-    listDeals: (data: IDeals[]) => any
+    navigation: any,
+    deals: any,
 }
 interface State {
-    loader: boolean
+    restaurantName: string
 }
 export class Deals extends React.Component<Props, State> {
+    private restaurantName: string;
     constructor(props: Props) {
-        super(props)
+        super(props);
         this.state = {
-            loader: true
+            restaurantName: ''
         }
-        this.deals();
     }
-    deals = () => {
-        DealsRestService.listDeals().then((dealsList: any) => {
-            this.props.listDeals(dealsList.data.data);
-            this.setState({ loader: false });
-        }).catch((error) => {
-            this.setState({ loader: false });
-            console.log('error', error);
-        });
+    componentDidMount() {
+        this.getRouteParams()
+    }
+    getRouteParams = () => {
+        const { navigation } = this.props;
+        this.setState({ restaurantName: navigation.getParam('restaurant_name', '') })
     }
     render() {
         return (
             <View style={styles.container}>
-                <Spinner visible={this.state.loader} textStyle={{ color: '#FFF' }} />
-                <DealScroll
-                    deals={this.props.deals}
+                <View style={styles.headerContainer}>
+                    <Text style={styles.headerText}>Deals</Text>
+                </View>
+                <DealCard 
+                restaurantName={this.state.restaurantName}
+                navigation={this.props.navigation}
                 />
             </View>
         )
@@ -48,7 +49,22 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         position: 'absolute',
+        backgroundColor: 'white',
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
+    },
+    headerContainer: {
+        flex: 0.1,
+        borderColor: '#aaa',
+        borderWidth: 2,
+        alignContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'white'
+    },
+    headerText: {
+        fontSize: 20,
+        marginTop: '4%',
+        color: 'black',
+        fontWeight: '700'
     }
 })

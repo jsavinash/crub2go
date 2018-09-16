@@ -61,7 +61,6 @@ export class ChangePassword extends React.Component<ChangePasswordProps, ChangeP
         };
         this.setState({ loader: true });
         CustomerRestService.customerPasswordChange(transformToFromData(changePass)).then((forgotUser: any) => {
-         console.log('forgotUser', forgotUser);
             if (forgotUser.problem === "NETWORK_ERROR") {
                 showAlert(ErrTitle, ErrInternetCon, 'info');
                 this.setState({ loader: false });

@@ -1,11 +1,12 @@
 import { AppEntry } from './container';
 import { connect } from 'react-redux'
-import { custAction, cartAction } from '@state_action';
+import { custAction, cartAction, dealAction } from '@state_action';
 import { RootState } from '../../reducers/RootReducer';
 const mapDispatchToProps = {
     customerCreate: custAction['createCustomer'],
     cartAction: cartAction['viewCart'],
-    cartTotalAction: cartAction['cartTotal']
+    cartTotalAction: cartAction['cartTotal'],
+    listDealsAction: dealAction['listDeals']
 }
 const mapStateToProps = (state: RootState) => ({
     customer: state['customer']['customer']
