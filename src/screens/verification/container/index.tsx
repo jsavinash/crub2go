@@ -90,7 +90,6 @@ export class Verification extends React.Component<VerificationProps, Verificatio
             })
         } else {
             CustomerRestService.customerForgot(transformToFromData({ mobile_number: mobile })).then((forgotSuccess: any) => {
-                console.log('forgotSuccess', forgotSuccess);
                 if (forgotSuccess.problem === "NETWORK_ERROR") {
                     showAlert(ErrTitle, ErrInternetCon, 'info');
                     this.setState({ loader: false });
@@ -133,11 +132,9 @@ export class Verification extends React.Component<VerificationProps, Verificatio
                     name: registerCustomer.photo.fileName
                 });
             }
-            console.log('registerSuccess data', data);
             this.setState({ loader: true });
 
             CustomerRestService.customerRegister(data).then((registerSuccess: any) => {
-                console.log('registerSuccess', registerSuccess);
                 if (registerSuccess.problem === "NETWORK_ERROR") {
                     this.setState({ loader: false });
                     showAlert(ErrTitle, ErrInternetCon, 'info');

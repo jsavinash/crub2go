@@ -4,11 +4,10 @@ import { RootState } from '../../reducers/RootReducer';
 import { dealAction } from '@state_action';
 
 const mapDispatchToProps = {
-    listDeals: dealAction.listDeals,
-
+    listDealsAction: dealAction['listDeals'],
 }
 const mapStateToProps = (state: RootState) => ({
-    deals: state.deals
+    deals: state['deals']['deals']
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Deals)

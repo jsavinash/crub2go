@@ -95,11 +95,6 @@ export class RegisterCardField extends React.Component<RegisterCardFieldProps, R
                 this.passDataToCard(false);
                 return;
             }
-            console.log('pass', pass);
-            console.log('cnfPass', cnfPass);
-            console.log('cnfPass', (cnfPass == pass));
-            console.log('cnfPass', (cnfPass === pass));
-
             if (!(pass === cnfPass)) {
                 showAlert(ErrTitle, ErrPassMatch, 'danger');
                 this.passDataToCard(false);

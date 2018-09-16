@@ -1,14 +1,18 @@
 import * as React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { styles } from './pickup-style';
+import moment from 'moment';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-
+import { OrderRestService } from '../../../../services';
+import { transformToFromData } from '@common_service';
+import { ITimeCheckParams } from '@models';
 export interface PickUpProps {
+    token: any,
+    resturantId: any
 }
-
 export interface PickUpState {
     isDateTimePickerVisible: boolean
 }
-
 export class PickUp extends React.Component<PickUpProps, PickUpState> {
     constructor(props: PickUpProps) {
         super(props);
@@ -23,7 +27,18 @@ export class PickUp extends React.Component<PickUpProps, PickUpState> {
     _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
     _handleDatePicked = (date: any) => {
-        console.log('A date has been picked: ', date);
+        const { token, resturantId } = this.props;
+        let time12 = moment(date).format('hh:mm');
+        let time24 = moment(date).format('HH:mm');
+        let params: ITimeCheckParams = {
+            pickup_time: time24,
+            restaurant_id: resturantId
+        }
+        OrderRestService.checkPickUpTime(transformToFromData(params), token).then((time: any) => {
+            console.log("time", time);
+        }).catch((error) => {
+
+        })
         this._hideDateTimePicker();
     };
 
@@ -64,39 +79,3 @@ export class PickUp extends React.Component<PickUpProps, PickUpState> {
     }
 }
 
-var styles = StyleSheet.create({
-    container: {
-        backgroundColor: 'white',
-        width: '100%'
-    },
-    txtField: {
-        flexDirection: 'row',
-        marginBottom: '5%',
-        marginLeft: '5%',
-        marginRight: '5%'
-
-    },
-    txtFieldIn: {
-        flexDirection: 'column'
-    },
-    containerInBtnStyle: {
-        backgroundColor: '#ACD472',
-        borderColor: 'transparent',
-        borderWidth: 1,
-        borderRadius: 30,
-    },
-    containerInBtnCnt: {
-        width: '100%',
-    },
-    txt1: {
-        marginRight: '5%',
-        fontSize: 16,
-        color: 'black',
-        fontWeight: '400'
-    },
-    div1: {
-        borderBottomColor: '#aaa',
-        borderBottomWidth: 1,
-        marginTop: '1%'
-    }
-});

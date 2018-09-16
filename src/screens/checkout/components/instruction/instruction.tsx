@@ -1,5 +1,6 @@
 import * as React from "react";
-import { StyleSheet, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
+import { styles } from './instruction-styles';
 export interface InstructionProps {
     instructions: string
 }
@@ -11,16 +12,3 @@ export const Instruction: React.StatelessComponent<InstructionProps> = (props) =
     )
 }
 
-var styles = StyleSheet.create({
-    container: {
-        width: '100%',
-        backgroundColor: '#f3f3f3'
-    },
-    txt: {
-        marginTop: '4%',
-        marginBottom: '4%',
-        left: '4%',
-        fontSize: 16,
-        color: 'black'
-    }
-});

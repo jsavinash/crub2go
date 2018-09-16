@@ -71,7 +71,6 @@ export class ResetPassword extends React.Component<Props, State> {
         };
         this.setState({ loader: true });
         CustomerRestService.customerPassword(transformToFromData(forgot)).then((changePassSuccess: any) => {
-            console.log('changePassSuccess', changePassSuccess);
             if (changePassSuccess.problem === "NETWORK_ERROR") {
                 showAlert(ErrTitle, ErrInternetCon, 'info');
                 _self.setState({ loader: false });

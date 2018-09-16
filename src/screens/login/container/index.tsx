@@ -53,7 +53,6 @@ export class Login extends React.Component<Props, State> {
                 showAlert(ErrTitle, ErrInternetCon, 'info');
                 return;
             }
-            console.log('enter', success);
             if (success['data']['settings']['success'] == 1) {
                 let customerData: ICustomer = success['data']['data'][0];
                 storeAsync('user', JSON.stringify(customerData));

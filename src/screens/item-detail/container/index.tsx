@@ -10,6 +10,8 @@ export interface PlaceDetailProps {
     selectedItemDetailAction: (payload: any) => any,
     totalPriceAction: (payload: any) => any,
     seletedAttributeAction: (payload: any) => any,
+    cartAction: (cart: any) => any,
+    cartTotalAction: (cartTotal: any) => any,
     //Store Variable
     customer: ICustomer,
     selectedItem: IItem,
@@ -76,14 +78,26 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
         }
         let formData = transformToFromData(cartToCartParams);
         CartRestService.addToCart(formData, this.props.customer.user_access_token).then((success: any) => {
-            console.log("success......................", success);
             if (success['data']['settings']['success'] == 1) {
-
+                this.getCartDetails();
             } else if (success['data']['settings']['success'] == 0) {
 
             }
         }).catch((error) => {
             console.log("error......................", error);
+        })
+    }
+    getCartDetails = () => {
+        const _self = this;
+        const { customer } = this.props;
+        console.log("customer['user_access_token']", customer['user_access_token']);
+        CartRestService.viewCart(customer['user_access_token']).then((cart: any) => {
+            if (cart['data']['settings']['success'] == 1) {
+                _self.props.cartAction(cart['data']['data']['cart_item']);
+                _self.props.cartTotalAction(cart['data']['data']['cart_final_total']);
+            }
+        }).catch((error) => {
+
         })
     }
     componentWillUnmount() {
@@ -98,7 +112,6 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
         };
         let itemData: any[] = [];
         RestaurantRestService.listItemDetail(transformToFromData(params)).then((itemDetails: any) => {
-            console.log('itemDetails', itemDetails);
             if (itemDetails['data']['settings']['success'] == 1) {
                 itemData = itemDetails['data']['data'];
                 _self.props.selectedItemDetailAction(itemData);

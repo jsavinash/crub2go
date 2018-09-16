@@ -35,7 +35,6 @@ export class Payment extends React.Component<PaymentProps, PaymentState> {
                 this.props.listCards(success['data']['data'][0]['customer_cards']);
             } else if (success['data']['settings']['success'] == 0) {
             }
-            console.log("success", success);
         }).catch((error) => {
             console.log("error", error);
         })

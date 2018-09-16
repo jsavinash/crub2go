@@ -9,6 +9,7 @@ import { StaticPageReducer as page } from './static-pages';
 import { FAQReducer as faq } from './faq';
 import { CardsReducer as cards } from './card';
 import { CartReducer as cart } from './cart';
+import { OrderReducer as order } from './order';
 import { reducer as network } from 'react-native-offline';
 import { NavigationReducer as navReducer } from './navigation';
 /* ------------- Assemble The Reducers ------------- */
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
   restaurants,
   page,
   faq,
-  cart
+  cart,
+  order
 })
 export type RootState = StateType<typeof rootReducer>
 export default rootReducer

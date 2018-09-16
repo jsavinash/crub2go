@@ -48,5 +48,11 @@ export const LIST_CARDS = 'card/LIST';
 
 //Cart
 export const VIEW_CART = 'cart/VIEW';
-export const VIEW_TOTAL = 'cart/Total';
+export const VIEW_TOTAL = 'cart/TOTAL';
+
+//Checkout
+export const CHECKOUT_PARAMS = 'checkout/PARAMS';
+
+
+
 
