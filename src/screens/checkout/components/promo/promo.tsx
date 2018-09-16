@@ -21,7 +21,6 @@ export const Promo: React.StatelessComponent<PromoProps> = (props) => {
     });
     
     const navigateTo = (path: string) => {
-        console.log("props.restaurant_name,,,,,,,,,,,", props.restaurant_name)
         navigation.navigate(`${path}`, {restaurant_name: props.restaurant_name });
     }
     const apply = () => {

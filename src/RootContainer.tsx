@@ -5,7 +5,8 @@ import { REDUX_PERSIST as ReduxPersist } from '@config';
 import ReduxNavigation from './navigations/ReduxNavigation';
 import { reduxStartup } from '@state_action';
 import { withNetworkConnectivity } from 'react-native-offline';
-import BottomCheckout from './components/common/bottom-checkout'
+import BottomCheckout from './components/common/bottom-checkout';
+import CheckoutActionSheet from './components/common/checkout-actionsheet';
 import FlashMessage from "react-native-flash-message";
 import Orientation from 'react-native-orientation';
 interface IProps {
@@ -28,7 +29,7 @@ class RootContainer extends React.Component<IProps> {
                 <ReduxNavigation />
                 <FlashMessage ref="myLocalFlashMessage"
                     position={'top'} />   {/* <--- here as last component always with `ref` */}
-                <BottomCheckout/>
+                <CheckoutActionSheet />
             </View>
         )
     }

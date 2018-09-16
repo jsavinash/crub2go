@@ -8,7 +8,9 @@ import { transformToFromData } from '@common_service';
 import { ITimeCheckParams } from '@models';
 export interface PickUpProps {
     token: any,
-    resturantId: any
+    resturantId: any,
+    checkoutParamsAction: (checkout: any) => any,
+    checkoutParams: any
 }
 export interface PickUpState {
     isDateTimePickerVisible: boolean
@@ -27,17 +29,28 @@ export class PickUp extends React.Component<PickUpProps, PickUpState> {
     _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
     _handleDatePicked = (date: any) => {
-        const { token, resturantId } = this.props;
-        let time12 = moment(date).format('hh:mm');
+        const { token, resturantId, checkoutParamsAction, checkoutParams } = this.props;
+        let cpyCheckoutParams = { ...checkoutParams };
+        let time12 = moment(date).format('hh:mm A');
         let time24 = moment(date).format('HH:mm');
+        cpyCheckoutParams.pickup_time = time24;
+        cpyCheckoutParams.time12 = time12;
         let params: ITimeCheckParams = {
             pickup_time: time24,
             restaurant_id: resturantId
         }
         OrderRestService.checkPickUpTime(transformToFromData(params), token).then((time: any) => {
-            console.log("time", time);
-        }).catch((error) => {
+            if (time['data']['settings']['success'] == 1) {
 
+            }
+            else if (time['data']['settings']['success'] == 0) {
+                cpyCheckoutParams['isError'] = true;
+                if (time['data']['settings']['message'])
+                    cpyCheckoutParams['error'] = time['data']['settings']['message']
+            }
+            checkoutParamsAction(cpyCheckoutParams);
+        }).catch((error) => {
+            console.log("error", error)
         })
         this._hideDateTimePicker();
     };
@@ -60,7 +73,7 @@ export class PickUp extends React.Component<PickUpProps, PickUpState> {
                             <Text
                                 style={{
                                     marginTop: '10%'
-                                }}>HH:MM</Text>
+                                }}>{this.props.checkoutParams.time12 ? this.props.checkoutParams['time12'] : 'HH:MM'}</Text>
 
                             <View style={styles.div1}>
                             </View>

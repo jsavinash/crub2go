@@ -23,7 +23,10 @@ interface CheckoutParams {
     order_note?: string,
     card_id?: string,
     user_stripe_id?: string,
-    promo_code?: string
+    promo_code?: string,
+    time12?: string,
+    isError?: boolean,
+    error?: string 
 }
 interface TimeCheckParams {
     pickup_time: string,
