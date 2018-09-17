@@ -39,7 +39,7 @@ export class Account extends React.Component<AccountProps, AccountState> {
             )
         } else {
             return (
-                <View></View>
+                <View />
             )
         }
     }

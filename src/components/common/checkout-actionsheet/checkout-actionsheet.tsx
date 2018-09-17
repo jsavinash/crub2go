@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, Image, Dimensions, ScrollView, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, Image, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
 import { Dispatch } from 'redux';
 import { styles } from './checkout-actionsheet-style';
 import { ICartResponse, ICartTotal } from '@models';

@@ -56,7 +56,9 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
             selectedCategory,
             selectedItem,
             selectedAttribute,
-            totalPrice } = this.props;
+            totalPrice,
+            customer,
+            navigation } = this.props;
         let construct: any = [];
         selectedAttribute.forEach((attr: any) => {
             let obj: any = {};
@@ -78,16 +80,20 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
             item_variation: JSON.stringify(construct)
         }
         let formData = transformToFromData(cartToCartParams);
-        CartRestService.addToCart(formData, this.props.customer.user_access_token).then((success: any) => {
-            if (success['data']['settings']['success'] == 1) {
-                this.getCartDetails();
+        if (customer && customer['user_access_token']) {
+            CartRestService.addToCart(formData, customer['user_access_token']).then((success: any) => {
+                if (success['data']['settings']['success'] == 1) {
+                    this.getCartDetails();
 
-            } else if (success['data']['settings']['success'] == 0) {
+                } else if (success['data']['settings']['success'] == 0) {
 
-            }
-        }).catch((error) => {
-            console.log("error......................", error);
-        })
+                }
+            }).catch((error) => {
+                console.log("error......................", error);
+            })
+        } else {
+            navigation.navigate('Login', { screen: 'checkout' });
+        }
     }
     getCartDetails = () => {
         const _self = this;

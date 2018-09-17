@@ -1,5 +1,4 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import colors from '../../../themes/Colors';
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 export const styles = StyleSheet.create({
