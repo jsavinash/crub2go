@@ -1,12 +1,15 @@
 import { CityList } from './container';
 import { connect } from 'react-redux'
 import { RootState } from '../../reducers/RootReducer';
-import { citiesAction, restaurantsAction } from '@state_action';
-
+import { custAction, citiesAction } from '@state_action';
+const mapDispatchToProps = {
+    customerAction: custAction['createCustomer'],
+    cityAction: citiesAction['listCites']
+}
 const mapStateToProps = (state: RootState) => ({
-    cities: state['cities']['cities']
+    cities: state['cities']['cities'],
+    customer: state['customer']['customer']
 })
-
-export default connect(mapStateToProps)(CityList)
+export default connect(mapStateToProps, mapDispatchToProps)(CityList)
 
 

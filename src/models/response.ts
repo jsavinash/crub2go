@@ -29,7 +29,32 @@ interface CartTotal {
     restaurant_name?: string,
     restaurant_state_id?: string
 }
+interface OrderResponse {
+    order_id?: string,
+    order_pickup_time?: string,
+    order_status?: string,
+    restaurant_name?: string,
+    order_total_amount_paid?: string,
+    restaurant_id?: string,
+    order_rating?: string,
+    restaurant_image?: any,
+    order_total_discount?: string,
+    order_tax_amount?: string,
+    order_total_amount?: string,
+    restaurant_address?: string,
+    restaurant_mobile_number?: string,
+    restaurant_open?: string,
+    restaurant_rating?: string,
+    restaurant_review_count?: string,
+    restaurant_favourite?: string,
+    restaurant_latitude?: string,
+    restaurant_longitude?: string,
+    restaurant_city?: string,
+    restaurant_message?: string,
+    restaurant_city_slug?: string,
+}
 export {
     CartResponse as ICartResponse,
-    CartTotal as ICartTotal
+    CartTotal as ICartTotal,
+    OrderResponse as IOrderResponse
 }

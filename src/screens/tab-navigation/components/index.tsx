@@ -2,7 +2,7 @@ import * as React from "react"
 import { Image, StyleSheet } from 'react-native';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import PlaceListScreen from '../../place-list';
-import OrderScreen from '../../orders';
+import OrderScreen from '../../order';
 import DealsScreen from '../../deals';
 import AccountScreen from '../../account';
 
@@ -41,6 +41,7 @@ export default TabNavigator(
                 // icon component from react-native-vector-icons
                 return <Image style={styles.imageStyle} source={iconName} />;
             },
+
         }),
         tabBarComponent: TabBarBottom,
         tabBarPosition: 'bottom',

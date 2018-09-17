@@ -1,11 +1,9 @@
 import * as React from "react";
-import { View, StyleSheet, Text, Image, TouchableOpacity, Dimensions } from 'react-native'
-const SCREEN_WIDTH = Dimensions.get('window').width;
-import Icon from 'react-native-vector-icons/FontAwesome';
-
+import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
 export interface HeaderProps {
     navigation: any,
-    onSort: () => any
+    onSort: () => any,
+    customer: any
 }
 
 interface HeaderState {
@@ -31,7 +29,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                         ></Image>
                         <View style={styles.content}>
                             <Text style={styles.txt1}>Your Location</Text>
-                            <Text style={styles.txt2}>Ahmedabad</Text>
+                            <Text style={styles.txt2}>{this.props.customer['user_city']}</Text>
                         </View>
 
                         <View style={styles.arrowContent}>

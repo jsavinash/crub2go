@@ -8,7 +8,7 @@ export interface CardProps {
     restaurants: any,
     reactToEnd: () => any,
     selectedResturant: (resturant: string) => any,
-
+    customer: any
 }
 interface CardState {
 
@@ -40,15 +40,23 @@ export class Card extends React.Component<CardProps, CardState> {
                                     <Image
                                         source={{ uri: restaurant.restaurant_image }}
                                         style={styles.image} />
-                                    <TouchableHighlight
-                                        style={styles.tchImg}
-                                    // onPress={() => { this.favorite(restaurant) }}
-                                    >
-                                        <Image
-                                            source={require('../../../assets/app-images/like_btn_s_3_h.png')}
-                                            style={styles.tchImgDim}
-                                        />
-                                    </TouchableHighlight>
+
+                                    {
+                                        (this.props.customer && this.props.customer['user_access_token']) ?
+
+                                            <TouchableHighlight
+                                                style={styles.tchImg}
+                                            // onPress={() => { this.favorite(restaurant) }}
+                                            >
+                                                <Image
+                                                    source={require('../../../assets/app-images/like_btn_s_3_h.png')}
+                                                    style={styles.tchImgDim}
+                                                />
+                                            </TouchableHighlight>
+                                            :
+                                            <View>
+                                            </View>
+                                    }
                                     <View style={styles.content}>
                                         <View style={styles.scrollContainer}>
                                             <Text style={styles.content1left}>{restaurant.restaurant_name}</Text>

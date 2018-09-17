@@ -1,14 +1,23 @@
 import * as React from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Dimensions, TextInput } from "react-native";
 import { ICities, } from '@models';
-import { ListItem } from 'react-native-elements'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { CitiesRestService } from '../../../services';
+import { showAlert, logger, storeAsync } from '@common_service';
+import {
+    InternalServerError,
+    InternalServerErrorTitle
+} from '@constant';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 export interface Props {
     navigation: any,
-    cities: ICities[]
+    customerAction: (customer: any) => any,
+    cityAction: (cities: any) => any,
+    cities: ICities[],
+    customer: any,
+
 }
 interface State {
 
@@ -18,10 +27,38 @@ export class CityList extends React.Component<Props, State> {
         super(props)
     }
     componentDidMount() {
+        this.getCities();
+    }
 
+    getCities = () => {
+        let _self = this;
+        CitiesRestService.listCities().then((citiesData: any) => {
+            if (citiesData['data']['settings']['success'] == 1) {
+                _self.props.cityAction(citiesData['data']['data']);
+            } else if (citiesData['data']['settings']['success'] == 0) {
+                _self.props.cityAction([]);
+            }
+        }).catch((error) => {
+            logger('City', 'ERROR', error);
+            showAlert(InternalServerErrorTitle, InternalServerError, 'warning');
+        })
     }
     selectedCity = (city: ICities) => {
-        this.props.navigation.navigate('Home', { city });
+        const _self = this;
+        const { customer, customerAction } = this.props;
+        const cpyCustomer = { ...customer };
+        cpyCustomer['user_city'] = city['city_name'];
+        cpyCustomer['user_city_id'] = city['city_id'];
+        let cities: ICities = {
+            city_id: city['city_id'],
+            city_name: city['city_name']
+        }
+        storeAsync('city', JSON.stringify(cities));
+        customerAction(cpyCustomer)
+        if (cpyCustomer['user_access_token'])
+            _self.props.navigation.goBack();
+        else
+            _self.props.navigation.navigate('Home')
     }
     render() {
         return (

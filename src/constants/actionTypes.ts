@@ -57,3 +57,7 @@ export const CHECKOUT_PARAMS = 'checkout/PARAMS';
 
 //Navigation
 export const Navigator = 'Navigation/NAVIGATE';
+
+//Order
+export const LIST_ORDERS = 'order/LIST';
+export const SELECTED_ORDER = 'order/SELECTED'

@@ -8,11 +8,6 @@ import { RestaurantRestService, CitiesRestService, CustomerRestService } from '.
 import { transformToFromData } from '@common_service';
 import SplashScreen from 'react-native-splash-screen';
 import * as _ from 'lodash';
-import Geocoder from 'react-native-geocoder';
-import PTRView from 'react-native-pull-to-refresh';
-
-Geocoder.fallbackToGoogle('AIzaSyClIqoDD2VGA_FfWvFBrt_UacvjqNBLwao');
-
 
 export interface Props {
     listCites: (payload: any) => any,
@@ -40,28 +35,31 @@ export class PlaceList extends React.Component<Props, State> {
         };
     }
     componentDidMount() {
-        this.getCustomer();
-        this.getCities();
+        SplashScreen.hide();
         this.initRestaurants();
         this.getLocation();
-        SplashScreen.hide();
     }
-
+    openCity = () => {
+        this.props.navigation.navigate('CityList');
+    }
     getLocation = () => {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                console.log("wokeeey");
-                console.log(position);
-                this.updateUserLocation(position.coords.latitude, position.coords.longitude);
-                this.setState({
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude,
-                    error: null,
-                });
-            },
-            (error) => this.setState({ error: error.message }),
-            { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
-        );
+        const { customer } = this.props;
+        if (customer && customer['user_access_token']) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    console.log("wokeeey");
+                    console.log(position);
+                    this.updateUserLocation(position.coords.latitude, position.coords.longitude);
+                    this.setState({
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                        error: null,
+                    });
+                },
+                (error) => this.setState({ error: error.message }),
+                { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
+            );
+        }
     };
     updateUserLocation = (latitude: any, longitude: any) => {
         const { user_access_token } = this.props.customer;
@@ -86,7 +84,7 @@ export class PlaceList extends React.Component<Props, State> {
         const { customer } = this.props;
         const { latitude, longitude } = this.state;
         let params: IRestaurantsParams;
-        if (customer['user_access_token']) {
+        if (customer && customer['user_access_token']) {
             params = {
                 user_id: customer['user_id'],
                 city_id: customer['user_city_id'],
@@ -96,27 +94,34 @@ export class PlaceList extends React.Component<Props, State> {
                 num_records: 10
             };
         } else {
-            params = {
-                page_index: 1,
-                num_records: 10
-            };
+            if (customer && customer['user_city_id'])
+                params = {
+                    city_id: customer['user_city_id'],
+                    page_index: 1,
+                    num_records: 10
+                };
         }
         let reconstruct: any = [];
-        RestaurantRestService.listRestaurant(transformToFromData(params)).then((restaurantData: any) => {
-            if (restaurantData['data']['settings']['success'] == 1) {
+        if (customer && customer['user_city_id']){
+            RestaurantRestService.listRestaurant(transformToFromData(params)).then((restaurantData: any) => {
+                if (restaurantData['data']['settings']['success'] == 1) {
+                    restaurantData['data']['data'].forEach((restaurant: any, idx: number) => {
+                        restaurant.restaurant_image = restaurant.restaurant_image[0];
+                        reconstruct.push(restaurant);
+                    });
+                    _self.props.restaurantParamsAction(params);
+                    _self.props.listRestaurants(reconstruct);
+                } else if (restaurantData['data']['settings']['success'] == 0) {
 
-            } else if (restaurantData['data']['settings']['success'] == 0) {
-
-            }
-            restaurantData['data']['data'].forEach((restaurant: any, idx: number) => {
-                restaurant.restaurant_image = restaurant.restaurant_image[0];
-                reconstruct.push(restaurant);
-            });
-            _self.props.restaurantParamsAction(params);
-            _self.props.listRestaurants(reconstruct);
-        }).catch((error) => {
-            console.log("restaurantData error", error);
-        })
+                }
+            }).catch((error) => {
+                console.log("restaurantData error", error);
+            })
+          
+        } else{
+            const { navigation } = this.props;
+            navigation.navigate('City');
+        }
     }
     search = (keyword: any) => {
         const _self = this;
@@ -194,22 +199,13 @@ export class PlaceList extends React.Component<Props, State> {
             console.log("pullToRefresh error", error);
         })
     }
-    getCities = () => {
-        CitiesRestService.listCities().then((citiesData: any) => {
-            console.log(citiesData['data']['data']);
-            this.props.listCites(citiesData['data']['data']);
-        }).catch((error) => {
-            console.log('citiesData error', error);
-        })
-    }
+    
 
     scrollEnd = () => {
         console.log("Card scroll aned");
         this.pullToRefresh();
     }
-    getCustomer = () => {
-        console.log(this.props.customer.user_access_token);
-    };
+
 
     sort = (sort: string) => {
         if (sort == "Distance")
@@ -220,7 +216,7 @@ export class PlaceList extends React.Component<Props, State> {
     selected = (resturant: any) => {
         console.log("resturant", resturant);
 
-        
+
         const _self = this;
         _self.props.selectedRestaurantAction(resturant);
         _self.props.navigation.navigate('PlaceDetail');
@@ -232,6 +228,7 @@ export class PlaceList extends React.Component<Props, State> {
                     searchTerm={_.debounce(this.search, 500)}
                     reactToEnd={this.scrollEnd}
                     sortTo={this.sort}
+                    customer={this.props.customer}
                     selectedResturant={this.selected}
                     navigation={this.props.navigation}
                     restaurants={this.props.restaurants}

@@ -88,9 +88,14 @@ export class Login extends React.Component<Props, State> {
         }
         this.customerLogin(onLogin);
     };
-
-
-
+    private skip = () => {
+        const { customer, navigation } = this.props;
+        console.log("customer", customer);
+        if (customer && customer['user_city_id'])
+            navigation.navigate('Home');
+        else
+            navigation.navigate('City');
+    }
     render() {
         return (
             <KeyboardAvoidingView
@@ -104,7 +109,7 @@ export class Login extends React.Component<Props, State> {
                     <View style={styles.header}>
                         <View style={styles.headerIn}>
                             <TouchableOpacity style={styles.txtTouch} onPress={() => {
-                                this.navigateTo('Home');
+                                this.skip();
                             }}>
                                 <Text style={styles.skip}>Skip</Text>
                             </TouchableOpacity>

@@ -7,8 +7,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state: RootState) => ({
-    customer: state.customer,
-    connection: state.network.isConnected
+    customer: state['customer']['customer'],
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

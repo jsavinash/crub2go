@@ -6,6 +6,7 @@ import ActionSheet from 'react-native-actionsheet';
 
 export interface MainContainerProps {
     navigation: any,
+    customer: any,
     reactToEnd: () => any,
     searchTerm: (keyword: string) => any,
     sortTo: (param: string) => any,
@@ -36,10 +37,12 @@ export class MainContainer extends React.Component<MainContainerProps, MainConta
         return (
             <View style={styles.container}>
                 <Header
+                    customer={this.props.customer}
                     navigation={this.props.navigation}
                     onSort={this.openActionSheet} />
                 <SearchBar searchTerm={this.props.searchTerm} />
                 <Card
+                    customer={this.props.customer}
                     selectedResturant={this.props.selectedResturant}
                     navigation={this.props.navigation}
                     restaurants={this.props.restaurants}
