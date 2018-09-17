@@ -6,6 +6,7 @@ const mapStateToProps = (state: RootState) => ({
     cartTotal: state['cart']['cartTotal'],
     nav: state['nav']
 })
-export default connect(mapStateToProps, null)(BottomCheckout)
+
+export default connect(mapStateToProps)(BottomCheckout)
 
 

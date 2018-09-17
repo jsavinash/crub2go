@@ -8740,6 +8740,10 @@ react-native-modal@^6.2.0, react-native-modal@^6.4.0:
     prop-types "^15.6.1"
     react-native-animatable "^1.2.4"
 
+react-native-navigation-actions@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-navigation-actions/-/react-native-navigation-actions-1.0.4.tgz#774f06980f7e1ecfa0af89f05a2cf6ccf94c88eb"
+
 react-native-offline@^3.11.1:
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/react-native-offline/-/react-native-offline-3.12.0.tgz#44d7c3b393357f0b0111ad1e8370fe8a7114e169"

@@ -12,6 +12,7 @@ export interface PlaceDetailProps {
     seletedAttributeAction: (payload: any) => any,
     cartAction: (cart: any) => any,
     cartTotalAction: (cartTotal: any) => any,
+    navigation: any,
     //Store Variable
     customer: ICustomer,
     selectedItem: IItem,
@@ -80,6 +81,7 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
         CartRestService.addToCart(formData, this.props.customer.user_access_token).then((success: any) => {
             if (success['data']['settings']['success'] == 1) {
                 this.getCartDetails();
+
             } else if (success['data']['settings']['success'] == 0) {
 
             }
@@ -95,6 +97,7 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
             if (cart['data']['settings']['success'] == 1) {
                 _self.props.cartAction(cart['data']['data']['cart_item']);
                 _self.props.cartTotalAction(cart['data']['data']['cart_final_total']);
+                this.props.navigation.goBack();
             }
         }).catch((error) => {
 

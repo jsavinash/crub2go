@@ -36,6 +36,7 @@ export class AppEntry extends React.Component<AppEntryProps, {}> {
         const { customer } = this.props;
         CartRestService.viewCart(customer['user_access_token']).then((cart: any) => {
             if (cart['data']['settings']['success'] == 1) {
+                console.log("cart", cart);
                 _self.props.cartAction(cart['data']['data']['cart_item']);
                 _self.props.cartTotalAction(cart['data']['data']['cart_final_total']);
             }

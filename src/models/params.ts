@@ -26,7 +26,9 @@ interface CheckoutParams {
     promo_code?: string,
     time12?: string,
     isError?: boolean,
-    error?: string 
+    error?: string,
+    isCheckoutSheet?: boolean, 
+    isCheckoutSubmit?: boolean
 }
 interface TimeCheckParams {
     pickup_time: string,

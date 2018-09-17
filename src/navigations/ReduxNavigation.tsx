@@ -54,6 +54,6 @@ class ReduxNavigation extends React.Component<IProps> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-    nav: state.nav,
+    nav: state['nav'],
 })
 export default connect(mapStateToProps)(ReduxNavigation)

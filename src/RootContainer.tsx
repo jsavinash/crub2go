@@ -29,6 +29,7 @@ class RootContainer extends React.Component<IProps> {
                 <ReduxNavigation />
                 <FlashMessage ref="myLocalFlashMessage"
                     position={'top'} />   {/* <--- here as last component always with `ref` */}
+                <BottomCheckout />
                 <CheckoutActionSheet />
             </View>
         )

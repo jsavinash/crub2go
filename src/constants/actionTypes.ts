@@ -55,4 +55,5 @@ export const CHECKOUT_PARAMS = 'checkout/PARAMS';
 
 
 
-
+//Navigation
+export const Navigator = 'Navigation/NAVIGATE';
