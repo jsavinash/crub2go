@@ -2,19 +2,23 @@ import * as React from "react";
 import { Text, StyleSheet, View, Dimensions, Image, TouchableHighlight } from 'react-native';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
+import ImageOverlay from "react-native-image-overlay";
+
 export interface PlaceCardProps {
     navigation: any,
     resturant: any
 }
 export const PlaceCard: React.StatelessComponent<PlaceCardProps> = (props) => {
-    const navigateTo = () => {
-    }
     return (
         < View style={styles.card} >
             <View>
-                <Image
-                    source={{ uri: props.resturant.restaurant_image }}
-                    style={styles.cardImg} />
+                {(props.resturant['restaurant_open'] == 1) ?
+                    <Image
+                        source={{ uri: props.resturant.restaurant_image }}
+                        style={styles.cardImg} /> :
+                    <ImageOverlay source={{ uri: props.resturant['restaurant_image'] }}
+                        containerStyle={styles.cardImg} />
+                }
                 <TouchableHighlight
                     style={styles.fav}
                 // onPress={() => { this.favorite(restaurant) }}
@@ -29,7 +33,7 @@ export const PlaceCard: React.StatelessComponent<PlaceCardProps> = (props) => {
                         props.navigation.navigate('Location', { resturant: props.resturant });
                     }}>
                     <Image
-                        source={require('../../../assets/app-images/img_info_h.png')}
+                        source={require('../../../assets/app-images//home/hb/Documents/github/react-native-development/src/assets/app-images/img_info_white.png')}
                         style={styles.infoImg} />
                 </TouchableHighlight>
                 <View style={styles.cardContent}>

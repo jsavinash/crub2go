@@ -1,7 +1,7 @@
 import * as React from "react";
 import FAB from 'react-native-fab';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import call from 'react-native-phone-call'
+import call from 'react-native-phone-call';
 
 export interface callProps {
     selectedOrderDetail: any

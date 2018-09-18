@@ -4,10 +4,11 @@ import { MainContainer } from '../components';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 import { ICities, IRestaurants, ICustomer, IRestaurantsParams, ILocationParams } from '@models';
-import { RestaurantRestService, CitiesRestService, CustomerRestService } from '../../../services';
+import { RestaurantRestService, CustomerRestService } from '../../../services';
 import { transformToFromData } from '@common_service';
 import SplashScreen from 'react-native-splash-screen';
 import * as _ from 'lodash';
+import moment from 'moment';
 
 export interface Props {
     listCites: (payload: any) => any,
@@ -47,8 +48,6 @@ export class PlaceList extends React.Component<Props, State> {
         if (customer && customer['user_access_token']) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    console.log("wokeeey");
-                    console.log(position);
                     this.updateUserLocation(position.coords.latitude, position.coords.longitude);
                     this.setState({
                         latitude: position.coords.latitude,
@@ -63,13 +62,11 @@ export class PlaceList extends React.Component<Props, State> {
     };
     updateUserLocation = (latitude: any, longitude: any) => {
         const { user_access_token } = this.props.customer;
-        console.log("user_access_token", user_access_token);
         let location: ILocationParams = {
             user_latitude: latitude,
             user_longitude: longitude
         }
         CustomerRestService.customerUpdateLocation(transformToFromData(location), user_access_token).then((locationUpdate: any) => {
-            console.log("locationUpdate", locationUpdate);
             if (locationUpdate['data']['settings']['success'] == 1) {
 
             } else if (locationUpdate['data']['settings']['success'] == 0) {
@@ -102,7 +99,7 @@ export class PlaceList extends React.Component<Props, State> {
                 };
         }
         let reconstruct: any = [];
-        if (customer && customer['user_city_id']){
+        if (customer && customer['user_city_id']) {
             RestaurantRestService.listRestaurant(transformToFromData(params)).then((restaurantData: any) => {
                 if (restaurantData['data']['settings']['success'] == 1) {
                     restaurantData['data']['data'].forEach((restaurant: any, idx: number) => {
@@ -117,8 +114,8 @@ export class PlaceList extends React.Component<Props, State> {
             }).catch((error) => {
                 console.log("restaurantData error", error);
             })
-          
-        } else{
+
+        } else {
             const { navigation } = this.props;
             navigation.navigate('City');
         }
@@ -199,7 +196,7 @@ export class PlaceList extends React.Component<Props, State> {
             console.log("pullToRefresh error", error);
         })
     }
-    
+
 
     scrollEnd = () => {
         console.log("Card scroll aned");

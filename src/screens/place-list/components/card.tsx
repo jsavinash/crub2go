@@ -2,6 +2,7 @@ import * as React from "react";
 import { View, StyleSheet, Text, Image, TouchableHighlight, TouchableOpacity, ScrollView, Dimensions } from 'react-native'
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
+import ImageOverlay from "react-native-image-overlay";
 
 export interface CardProps {
     navigation: any,
@@ -37,10 +38,25 @@ export class Card extends React.Component<CardProps, CardState> {
                         return (
                             <TouchableOpacity onPress={() => { this.props.selectedResturant(restaurant) }} key={idx}>
                                 <View style={styles.card}>
-                                    <Image
-                                        source={{ uri: restaurant.restaurant_image }}
-                                        style={styles.image} />
-
+                                    {(restaurant['restaurant_open'] == 1) ?
+                                        <Image
+                                            source={{ uri: restaurant.restaurant_image }}
+                                            style={styles.image} /> :
+                                        <View>
+                                            <ImageOverlay source={{ uri: restaurant['restaurant_image'] }}
+                                                containerStyle={styles.image} />
+                                            <View style={{
+                                                position: 'absolute',
+                                                alignSelf: 'center',
+                                                marginTop: '30%'
+                                            }}>
+                                                <Text style={{
+                                                    color: 'white',
+                                                    fontSize: 18
+                                                }}>{restaurant['restaurant_message']}</Text>
+                                            </View>
+                                        </View>
+                                    }
                                     {
                                         (this.props.customer && this.props.customer['user_access_token']) ?
 

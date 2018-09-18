@@ -66,8 +66,11 @@ export class PlaceDetail extends React.Component<PlaceDetailProps, PlaceDetailPr
     }
     private itemSelect = (item: any) => {
         const _self = this;
-        _self.props.selectedItemAction(item);
-        _self.props.navigation.navigate('ItemDetail');
+        const { selectedResturant } = this.props;
+        if (selectedResturant['restaurant_open'] === '1') {
+            _self.props.selectedItemAction(item);
+            _self.props.navigation.navigate('ItemDetail');
+        }
     }
     render() {
         return (

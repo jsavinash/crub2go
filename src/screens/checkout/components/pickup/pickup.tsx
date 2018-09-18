@@ -6,7 +6,6 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import { OrderRestService } from '../../../../services';
 import { transformToFromData } from '@common_service';
 import { ITimeCheckParams } from '@models';
-import { Dispatch } from 'redux';
 export interface PickUpProps {
     token: any,
     resturantId: any,
