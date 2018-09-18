@@ -32,8 +32,8 @@
       "@themes": [
         "src/themes/index"
       ],
-      "@rest_service": [
-        "src/service/index"
+      "@rest_service": [ 
+        "src/services/index"
       ],
       "@sages": [
         "src/sages/index"

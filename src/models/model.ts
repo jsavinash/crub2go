@@ -1,6 +1,7 @@
 interface Login {
   user_name?: string,
-  user_password?: string
+  user_password?: string,
+  isLoading?: boolean
 }
 interface Deals {
   restaurant_name?: string,
@@ -23,11 +24,13 @@ interface Register {
   mobile_number?: string,
   user_email?: string,
   user_password?: string,
+  user_cnf_password?: string,
   device_token?: string,
   device_type?: string
   '@@err'?: boolean,
   otp?: string,
-  photo?: any
+  photo?: any,
+  isLoading?: boolean
 }
 interface ChangePass {
   old_password: string,

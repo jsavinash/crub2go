@@ -23,6 +23,54 @@ export interface ButtonProps {
 }
 export const Button: React.StatelessComponent<ButtonProps> = (props) => {
 
+
+
+    // componentWillReceiveProps(nextProps: any) {
+    //     const { name, mobile, email, pass, cnfPass } = this.state;
+    //     if (nextProps.isFieldDataFetch) {
+    //         if (!name) {
+    //             showAlert(ErrTitle, ErrNameMsg, 'danger');
+    //             this.passDataToCard(false);
+    //             return;
+    //         }
+    //         console.log('mobile', mobile);
+    //         if (!mobile) {
+    //             showAlert(ErrTitle, ErrMobileMsg, 'danger');
+    //             this.passDataToCard(false);
+    //             return;
+    //         } else if (!(/^[0-9]{10,13}$/.test(mobile))) {
+    //             showAlert(ErrTitle, ErrMobileValidMsg, 'danger');
+    //             this.passDataToCard(false);
+    //             return;
+    //         }
+    //         if (!email) {
+    //             showAlert(ErrTitle, ErrEmailMsg, 'danger');
+    //             this.passDataToCard(false);
+    //             return;
+    //         } else if (!(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(email))) {
+    //             showAlert(ErrTitle, ErrEmailValidMsg, 'danger');
+    //             this.passDataToCard(false);
+    //             return;
+    //         }
+    //         if (!pass) {
+    //             showAlert(ErrTitle, ErrPasswordMsg, 'danger');
+    //             this.passDataToCard(false);
+    //             return;
+    //         }
+    //         if (!cnfPass) {
+    //             showAlert(ErrTitle, ErrCnfPasswordMsg, 'danger');
+    //             this.passDataToCard(false);
+    //             return;
+    //         }
+    //         if (!(pass === cnfPass)) {
+    //             showAlert(ErrTitle, ErrPassMatch, 'danger');
+    //             this.passDataToCard(false);
+    //             return;
+    //         }
+    //         this.passDataToCard(true);
+    //     }
+    // }
+     
     const submit = () => {
         const { user_name, user_password } = props.loginParams;
         if (!user_name) {

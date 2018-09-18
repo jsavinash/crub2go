@@ -1,12 +1,12 @@
 import { LoginCardField } from "./login-card-field";
 import { connect } from "react-redux";
-import { loginAction } from '@state_action';
+import { collectAction } from '@state_action';
 import { RootState } from "@root_state";
 const mapDispatchToProps = {
-    loginParamsAction: loginAction['loginParamsAction']
+    loginParamsAction: collectAction['loginParamsAction']
 };
 const mapStateToProps = (state: RootState) => ({
-    loginParams: state['login']['loginParams']
+    loginParams: state['collect']['loginParams']
 })
 export default connect(mapStateToProps, mapDispatchToProps)(LoginCardField)
 
