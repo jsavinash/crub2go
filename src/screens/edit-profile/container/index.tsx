@@ -42,13 +42,11 @@ export class EditProfile extends React.Component<RegisterProps, RegisterState> {
         this.props.navigation.navigate(`${screen}`);
     };
     onSubmit = (user: any) => {
-        console.log("user....................", user);
         let _self = this;
         const { photo } = this.state;
         let edit: IEditProfile = {
-            user_name: user['mobile'],
+            user_name: user['username'],
         };
-
         let data: any = transformToFromData(edit);
         if (_self.state.photo && _self.state.photo.uri) {
             data.append('user_profile', {
@@ -58,7 +56,7 @@ export class EditProfile extends React.Component<RegisterProps, RegisterState> {
             });
         }
         _self.setState({ loader: true });
-        CustomerRestService.customerProfileEdit(data).then((editProfile: any) => {
+        CustomerRestService.customerProfileEdit(data, this.props.customer['user_access_token']).then((editProfile: any) => {
             console.log('editProfile', editProfile);
             if (editProfile.problem === "NETWORK_ERROR") {
                 _self.setState({ loader: false });
@@ -67,10 +65,10 @@ export class EditProfile extends React.Component<RegisterProps, RegisterState> {
             }
             let customerData: ICustomer = editProfile['data']['data'][0];
             if (editProfile['data']['settings']['success'] == 1) {
-                this.props.navigation.navigate('Account');
                 _self.setState({ loader: false });
                 _self.props.customerCreate(customerData);
                 showAlert(ErrTitle, editProfile['data']['settings']['message'], 'success');
+                this.props.navigation.goBack();
             }
             else if (editProfile['data']['settings']['success'] == 0) {
                 _self.setState({ loader: false });
