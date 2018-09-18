@@ -30,13 +30,15 @@ export class AccountBottom extends React.Component<AccountBottomProps, State> {
         }
         this.initBlock();
     }
+    
     private handleDialog = (option: string) => {
-        console.log("option", option);
+        const _self = this;
         switch (option) {
             case 'Yes':
                 this.logout();
                 break;
             case 'No':
+                _self.setState({ dialogVisible: false });
                 break;
             default:
                 console.log("No Action Selected");
@@ -46,16 +48,7 @@ export class AccountBottom extends React.Component<AccountBottomProps, State> {
     showDialog = () => {
         this.setState({ dialogVisible: true });
     };
-
-    handleCancel = () => {
-        this.setState({ dialogVisible: false });
-    };
-
-    handleDelete = () => {
-        // The user has pressed the "Delete" button, so here you can do your own logic.
-        // ...Your logic
-        this.setState({ dialogVisible: false });
-    };
+    
     private initBlock = () => {
         settings.forEach((setting: any, idx: number) => {
             if (idx == (settings.length - 1)) {
