@@ -10,3 +10,4 @@ export * from './faq';
 export * from './card';
 export * from './cart';
 export * from './order';
+export * from './login';

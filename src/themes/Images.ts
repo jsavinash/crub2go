@@ -1,13 +1,12 @@
-const images = {
-    splashSreenBG: require('../assets/app-images/splash.png'),
-    BG_IMAGE: require('../assets/ref-images/bg_screen1.jpg'),
-    hotal1: require('../assets/hotels/Brand.jpeg'),
-    hotal2: require('../assets/hotels/corinthia-hotel-tripoli-lobby.jpg'),
-    hotal3: require('../assets/hotels/corinthia.jpg'),
-    hotal4: require('../assets/hotels/hotel-contessa.jpg'),
-    hotal5: require('../assets/hotels/JDW_9897.jpg'),
-    hotal6: require('../assets/hotels/xo-hotels-park-west-standard-double-twin-room-v17925543-753x500.jpg.pagespeed.ce.lEzQSd3cI8.jpg'),
+const Images = {
+    BG_IMAGE: require('../assets/app-images/bg.png'),
+    LOGIN_LOGO : require('../assets/app-images/login_logo.png'),
+    USER_ACTIVE : require('../assets/app-images/user_active.png'),
+    USER_INACTIVE : require('../assets/app-images/user_deactive.png'),
+    EYE_ACTIVE : require('../assets/app-images/activated_eye.png'),
+    EYE_INACTIVE : require('../assets/app-images/deactivated_eye.png'),
+
 }
 
 
-export default images
+export default Images

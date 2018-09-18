@@ -1,50 +1,52 @@
-import * as React from "react"
-import { View, StyleSheet, Image } from "react-native"
-import { TextField } from 'react-native-material-textfield';
-import { showAlert, logger } from '@common_service';
+import * as React from "react";
+import { View, Image } from "react-native";
+import { TextField } from "react-native-material-textfield";
 import { Images } from "@themes";
-import {
-    ErrTitle,
-    ErrMobileOrEmailMsg,
-    ErrPasswordMsg
-} from '@constant';
+import { styles } from "./login-card-field-style";
+import { ILogin } from "@models";
 
-export interface Props {
-    textFieldFocus: (text: string) => string,
-    isFieldDataFetch: boolean,
-    passData: (obj: any, isPassed: boolean) => any
+export interface LoginCardFieldProps {
+    loginParamsAction: (login: ILogin) => any,
+    loginParams: ILogin
 }
 
-interface State {
-    userId: string,
-    password: string,
+interface LoginCardFieldState {
     isUserId: boolean,
     isPassword: boolean
 }
 
-export class LoginCardField extends React.Component<Props, State> {
-    constructor(props: Props) {
+export class LoginCardField extends React.Component<LoginCardFieldProps, LoginCardFieldState> {
+    constructor(props: LoginCardFieldProps) {
         super(props);
         this.state = {
             isUserId: false,
             isPassword: false,
-            userId: '',
-            password: ''
         };
     }
-    
+    private onUserIdChange = (userId: string) => {
+        const { loginParams, loginParamsAction } = this.props;
+        const cpyLoginParams = { ...loginParams };
+        cpyLoginParams['user_name'] = userId;
+        loginParamsAction(cpyLoginParams)
+    }
+    private onPasswordChange = (password: string) => {
+        const { loginParams, loginParamsAction } = this.props;
+        const cpyLoginParams = { ...loginParams };
+        cpyLoginParams['user_password'] = password;
+        loginParamsAction(cpyLoginParams)
+    }
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.txtField}>
                     <View style={styles.txtFieldIn}>
-                        <TextField label='Enter Mobile'
+                        <TextField label='Mobile / Email Address'
                             baseColor='#aaa'
                             textColor='black'
                             tintColor="#ACD472"
                             lineWidth={2}
                             animationDuration={60}
-                            onChangeText={(userId: string) => this.setState({ userId })}
+                            onChangeText={(userId: string) => this.onUserIdChange(userId)}
                             onFocus={() => {
                                 this.setState({ isUserId: true });
                             }}
@@ -72,7 +74,7 @@ export class LoginCardField extends React.Component<Props, State> {
                             lineWidth={2}
                             animationDuration={60}
                             secureTextEntry={true}
-                            onChangeText={(password: string) => this.setState({ password })}
+                            onChangeText={(password: string) => this.onPasswordChange(password)}
                             onFocus={() => {
                                 this.setState({ isPassword: true });
                             }}
@@ -96,29 +98,3 @@ export class LoginCardField extends React.Component<Props, State> {
     }
 }
 
-var styles = StyleSheet.create({
-    container: {
-        flex: 0.8,
-        margin: 14,
-    },
-    image: {
-        height: 35,
-        width: 38,
-        position: 'absolute',
-        right: 0,
-        marginTop: 28,
-    },
-    imageEye: {
-        height: 35,
-        width: 40,
-        position: 'absolute',
-        right: 0,
-        marginTop: 25
-    },
-    txtField: {
-        flexDirection: 'row'
-    },
-    txtFieldIn: {
-        width: '100%'
-    }
-});
