@@ -8,7 +8,8 @@ const mapDispatchToProps = {
 }
 const mapStateToProps = (state: RootState) => ({
     orders: state['order']['orders'],
-    customer: state['customer']['customer']
+    customer: state['customer']['customer'],
+    nav: state['nav']
 })
 export default connect(mapStateToProps, mapDispatchToProps)(OrderCard)
 

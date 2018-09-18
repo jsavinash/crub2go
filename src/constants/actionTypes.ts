@@ -60,4 +60,6 @@ export const Navigator = 'Navigation/NAVIGATE';
 
 //Order
 export const LIST_ORDERS = 'order/LIST';
-export const SELECTED_ORDER = 'order/SELECTED'
+export const SELECTED_ORDER = 'order/SELECTED';
+export const SELECTED_ORDER_ITEM = 'order/ORDERITEM';
+export const SELECTED_ORDER_DETAILS = 'order/ORDERDETAILS';

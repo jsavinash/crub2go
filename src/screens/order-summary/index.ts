@@ -1,5 +1,5 @@
-import Order from './container';
-export default Order;
+import OrderSummary from './container';
+export default OrderSummary;
 
 
 

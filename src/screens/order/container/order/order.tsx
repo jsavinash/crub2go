@@ -33,7 +33,7 @@ export class Order extends React.Component<OrderProps, OrderState> {
                     <View style={styles.headerContainer}>
                         <Text style={styles.headerText}>My Orders</Text>
                     </View>
-                    <OrderCard />
+                    <OrderCard navigation={this.props.navigation} />
                 </View>
             )
         } else {

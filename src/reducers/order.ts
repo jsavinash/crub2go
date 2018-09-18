@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { getType } from 'typesafe-actions'
 import { OrderActions, orderAction, OrderState } from '../state_action'
-import { ICheckoutParams, IOrderResponse } from '@models';
+import { ICheckoutParams, IOrderResponse, ICartTotal, ICartResponse } from '@models';
 export const OrderReducer = combineReducers<OrderState, OrderActions>({
     checkoutParams: (state: ICheckoutParams = {}, action) => {
         switch (action.type) {
@@ -27,8 +27,21 @@ export const OrderReducer = combineReducers<OrderState, OrderActions>({
                 return state
         }
     },
+    selectedOrderItem: (state: ICartResponse[] = [], action) => {
+        switch (action.type) {
+            case getType(orderAction.selectedOrderItem):
+                return action['payload'];
+            default:
+                return state
+        }
+    },
+    selectedOrderDetail: (state: ICartTotal = {}, action) => {
+        switch (action.type) {
+            case getType(orderAction.selectedOrderDetail):
+                return action['payload'];
+            default:
+                return state
+        }
+    }
 })
-
-
-
 

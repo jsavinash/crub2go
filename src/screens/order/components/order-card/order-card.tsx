@@ -10,8 +10,10 @@ export interface OrderCardProps {
     orders?: any,
     orderListAction: (checkout: any) => any,
     selectedOrderAction: (checkout: any) => any,
-    customer: any
+    customer: any,
+    navigation: any
 }
+
 export class OrderCard extends React.Component<OrderCardProps, {}> {
     constructor(props: OrderCardProps) {
         super(props);
@@ -23,7 +25,8 @@ export class OrderCard extends React.Component<OrderCardProps, {}> {
 
     private onselect = (order: any) => {
         const _self = this;
-        _self.props.selectedOrderAction(order)
+        _self.props.selectedOrderAction(order),
+        this.props.navigation.navigate('OrderSummary');
     }
 
     private orders = () => {
