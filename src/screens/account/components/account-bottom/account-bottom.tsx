@@ -6,133 +6,181 @@ import { Dispatch } from 'redux'
 import { createReduxBoundAddListener } from 'react-navigation-redux-helpers';
 import { settings, supports } from '../account-constant';
 import { removeAsync } from '@common_service';
+import Dialog from "react-native-dialog";
+
 export interface AccountBottomProps {
     nav: NavigationState
     dispatch: Dispatch
 }
-export const AccountBottom: React.StatelessComponent<AccountBottomProps> = (props) => {
-    let settingOpt: any[] = [];
-    let supportOpt: any[] = [];
-    const navigation = addNavigationHelpers({
-        dispatch: props.dispatch,
-        state: props.nav,
+export interface State {
+    dialogVisible: boolean
+}
+export class AccountBottom extends React.Component<AccountBottomProps, State> {
+    private settingOpt: any[] = [];
+    private supportOpt: any[] = [];
+    private navigation = addNavigationHelpers({
+        dispatch: this.props.dispatch,
+        state: this.props.nav,
         addListener: createReduxBoundAddListener('root'),
     });
-    const initBlock = () => {
+    constructor(props: AccountBottomProps) {
+        super(props);
+        this.state = {
+            dialogVisible: false
+        }
+        this.initBlock();
+    }
+    private handleDialog = (option: string) => {
+        console.log("option", option);
+        switch (option) {
+            case 'Yes':
+                this.logout();
+                break;
+            case 'No':
+                break;
+            default:
+                console.log("No Action Selected");
+        }
+    }
+
+    showDialog = () => {
+        this.setState({ dialogVisible: true });
+    };
+
+    handleCancel = () => {
+        this.setState({ dialogVisible: false });
+    };
+
+    handleDelete = () => {
+        // The user has pressed the "Delete" button, so here you can do your own logic.
+        // ...Your logic
+        this.setState({ dialogVisible: false });
+    };
+    private initBlock = () => {
         settings.forEach((setting: any, idx: number) => {
             if (idx == (settings.length - 1)) {
                 setting.className = styles.sallowView1;
-                settingOpt.push(setting);
+                this.settingOpt.push(setting);
             } else {
                 setting.border = styles.border;
                 setting.className = styles.sallowView;
-                settingOpt.push(setting);
+                this.settingOpt.push(setting);
             }
         });
         supports.forEach((support: any, idx: number) => {
             if (idx == (supports.length - 1)) {
                 support.className = styles.shadow1;
-                supportOpt.push(support);
+                this.supportOpt.push(support);
             } else {
                 support.className = styles.shadow;
-                supportOpt.push(support);
+                this.supportOpt.push(support);
             }
         });
     }
-    initBlock();
-    const navigateTo = (path: string): any => {
+    private navigateTo = (path: string): any => {
+        const _self = this;
         switch (path) {
             case "aboutus":
-                navigation.navigate(`Page`, { type: "aboutus" });
+                _self.navigation.navigate(`Page`, { type: "aboutus" });
                 break;
             case "howitworks":
-                navigation.navigate(`Page`, { type: "how_it_works" });
+                _self.navigation.navigate(`Page`, { type: "how_it_works" });
                 break;
             case "termsofservices":
-                navigation.navigate(`Page`, { type: "termsconditions" });
+                _self.navigation.navigate(`Page`, { type: "termsconditions" });
                 break;
             case "privacypolicy":
-                navigation.navigate(`Page`, { type: "privacypolicy" });
+                _self.navigation.navigate(`Page`, { type: "privacypolicy" });
                 break;
             case "contactUs":
-                contactUs()
+                _self.contactUs()
                 break;
             case "tellFriends":
-                tellFriends()
+                _self.tellFriends()
                 break;
             case "logout":
-                logout()
+                _self.showDialog()
                 break;
             default:
-                navigation.navigate(`${path}`);
+                _self.navigation.navigate(`${path}`);
         }
     }
-    const contactUs = () => {
+    private contactUs = () => {
     }
-    const tellFriends = () => {
+    private tellFriends = () => {
 
 
     }
-    const logout = () => {
-        removeAsync('user_access_token');
-        removeAsync('user_stripe_id');
-        navigation.navigate(`Login`);
+    private logout = () => {
+        const _self = this;
+        removeAsync('user');
+        this.setState({ dialogVisible: false });
+        _self.navigation.navigate(`Login`);
     }
-
-    return (
-        <View style={styles.container}>
-            <View style={styles.sallow}>
-                <Text style={styles.sallowTxt}>Account Settings</Text>
-            </View>
-            {
-                settingOpt.map((setting: any, idx: number) => {
-                    return (
-                        <View style={setting.className} key={idx}>
-                            <View style={styles.sallowFlex}>
-                                <Image
-                                    source={setting.image}
-                                    style={styles.image}
-                                ></Image>
-                                <TouchableOpacity
-                                    style={styles.touchTxt}
-                                    onPress={() => { navigateTo(`${setting.path}`) }}>
-                                    <Text style={styles.txt}>{setting.title}</Text>
-                                </TouchableOpacity>
+    render() {
+        return (
+            <View style={styles.container} >
+                <View style={styles.sallow}>
+                    <Text style={styles.sallowTxt}>Account Settings</Text>
+                </View>
+                {
+                    this.settingOpt.map((setting: any, idx: number) => {
+                        return (
+                            <View style={setting.className} key={idx}>
+                                <View style={styles.sallowFlex}>
+                                    <Image
+                                        source={setting.image}
+                                        style={styles.image}
+                                    ></Image>
+                                    <TouchableOpacity
+                                        style={styles.touchTxt}
+                                        onPress={() => { this.navigateTo(`${setting.path}`) }}>
+                                        <Text style={styles.txt}>{setting.title}</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={setting.border}></View>
                             </View>
-                            <View style={setting.border}></View>
-                        </View>
-                    )
-                })
-            }
-            <View style={styles.sallow1}>
-                <Text style={styles.sallowTxt}>Support</Text>
-            </View>
-            {
-                supportOpt.map((support: any, idx: number) => {
-                    return (
-                        <View style={support.className} key={idx}>
-                            <View style={styles.sallowFlex}>
-                                <Image
-                                    source={support.image}
-                                    style={styles.image}
-                                ></Image>
+                        )
+                    })
+                }
+                <View style={styles.sallow1}>
+                    <Text style={styles.sallowTxt}>Support</Text>
+                </View>
+                {
+                    this.supportOpt.map((support: any, idx: number) => {
+                        return (
+                            <View style={support.className} key={idx}>
+                                <View style={styles.sallowFlex}>
+                                    <Image
+                                        source={support.image}
+                                        style={styles.image}
+                                    ></Image>
 
-                                <TouchableOpacity style={styles.touchTxt}
-                                    onPress={() => { navigateTo(`${support.path}`) }}>
-                                    <Text
-                                        style={styles.txt}
-                                    >{support.title}</Text>
-                                </TouchableOpacity>
+                                    <TouchableOpacity style={styles.touchTxt}
+                                        onPress={() => { this.navigateTo(`${support.path}`) }}>
+                                        <Text
+                                            style={styles.txt}
+                                        >{support.title}</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
-                        </View>
-                    )
-                })
-            }
-            <View style={styles.txtView}>
-                <Text style={styles.txtView1}> Version 1.0</Text>
-                <Text style={styles.txtView2}>Designed & Developed by Hidden Brains</Text>
-            </View>
-        </View>
-    )
+                        )
+                    })
+                }
+                <View style={styles.txtView}>
+                    <Text style={styles.txtView1}> Version 1.0</Text>
+                    <Text style={styles.txtView2}>Designed & Developed by Hidden Brains</Text>
+                </View>
+                <Dialog.Container visible={this.state.dialogVisible}>
+                    <Dialog.Title>curb2go</Dialog.Title>
+                    <Dialog.Description>
+                        Are you sure you want to logout ?
+               </Dialog.Description>
+                    <Dialog.Button label="Yes" onPress={() => { this.handleDialog('Yes') }} />
+                    <Dialog.Button label="No" onPress={() => { this.handleDialog('No') }} />
+                </Dialog.Container>
+            </View >
+        )
 
+    }
 }

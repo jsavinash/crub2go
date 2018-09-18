@@ -82,6 +82,7 @@ export class PlaceDetail extends React.Component<PlaceDetailProps, PlaceDetailPr
                     categories={this.props.categories}
                     menuList={this.props.selectedMenu}
                     navigation={this.props.navigation}
+                    customer={this.props.customer}
                 />
             </View>
         )

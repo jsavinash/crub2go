@@ -68,7 +68,12 @@ export const Orders = {
     header: null
 }
 export const OrderSummary = {
-    header: null
+    title: 'Order Summary',
+    headerStyle: { backgroundColor: 'white' },
+    headerTitleStyle: {
+        color: '#4E4E4E',
+        marginLeft: ((SCREEN_WIDTH * 15) / 100)
+    }
 }
 export const Payment = {
     title: 'Payment Method',

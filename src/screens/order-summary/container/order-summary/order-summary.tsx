@@ -25,9 +25,7 @@ export class OrderSummary extends React.Component<OrderSummaryProps, OrderSummar
                 <ScrollView style={{
                     flexDirection: 'column',
                 }}>
-                    <View style={styles.headerContainer}>
-                        <Text style={styles.headerText}>Order Summary</Text>
-                    </View>
+                    
                     <OrderSummaryCard />
                     <Instruction instructions={'Your Order'} />
                     <YourCart />

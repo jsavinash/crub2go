@@ -6,6 +6,7 @@ export interface MainBoxProps {
     categories: any,
     menuList: any,
     navigation: any,
+    customer: any,
     onMenuSelect: (data: any) => any,
     onItemSelect: (data: any) => any,
 }
@@ -24,7 +25,8 @@ export class MainContainer extends React.Component<MainBoxProps, MainBoxState> {
             <View style={styles.container}>
                 <PlaceCard
                     navigation={this.props.navigation}
-                    resturant={this.props.resturant} />
+                    resturant={this.props.resturant}
+                    customer={this.props.customer} />
                 <Menu />
                 <ScrollText
                     categorySelect={this.props.onMenuSelect}

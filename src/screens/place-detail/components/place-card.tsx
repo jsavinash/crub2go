@@ -6,7 +6,8 @@ import ImageOverlay from "react-native-image-overlay";
 
 export interface PlaceCardProps {
     navigation: any,
-    resturant: any
+    resturant: any,
+    customer: any
 }
 export const PlaceCard: React.StatelessComponent<PlaceCardProps> = (props) => {
     return (
@@ -19,21 +20,30 @@ export const PlaceCard: React.StatelessComponent<PlaceCardProps> = (props) => {
                     <ImageOverlay source={{ uri: props.resturant['restaurant_image'] }}
                         containerStyle={styles.cardImg} />
                 }
-                <TouchableHighlight
-                    style={styles.fav}
-                // onPress={() => { this.favorite(restaurant) }}
-                >
-                    <Image
-                        source={require('../../../assets/app-images/like_btn_s_3_h.png')}
-                        style={styles.favImg}
-                    />
-                </TouchableHighlight>
+                {props.customer['user_access_token'] ?
+                    <TouchableHighlight
+                        style={styles.fav}
+                    // onPress={() => { this.favorite(restaurant) }}
+                    >
+                        <Image
+                            source={(props.resturant['restaurant_favourite'] == '1') ?
+                                require('../../../assets/app-images/like_btn_s_3_h.png')
+                                :
+                                require('../../../assets/app-images/like_btn_s_3.png')
+                            }
+                            style={styles.favImg}
+                        />
+                    </TouchableHighlight>
+
+                    : <View />
+                }
+
                 <TouchableHighlight
                     style={styles.info} onPress={() => {
                         props.navigation.navigate('Location', { resturant: props.resturant });
                     }}>
                     <Image
-                        source={require('../../../assets/app-images//home/hb/Documents/github/react-native-development/src/assets/app-images/img_info_white.png')}
+                        source={require('../../../assets/app-images/img_info_white.png')}
                         style={styles.infoImg} />
                 </TouchableHighlight>
                 <View style={styles.cardContent}>

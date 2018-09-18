@@ -100,11 +100,12 @@ export class PlaceList extends React.Component<Props, State> {
         }
         let reconstruct: any = [];
         if (customer && customer['user_city_id']) {
-            RestaurantRestService.listRestaurant(transformToFromData(params)).then((restaurantData: any) => {
+            RestaurantRestService.listRestaurant(transformToFromData(params), customer['user_access_token'] ? customer['user_access_token'] : '').then((restaurantData: any) => {
                 if (restaurantData['data']['settings']['success'] == 1) {
                     restaurantData['data']['data'].forEach((restaurant: any, idx: number) => {
                         restaurant.restaurant_image = restaurant.restaurant_image[0];
                         reconstruct.push(restaurant);
+                        console.log("restaurant", restaurant);
                     });
                     _self.props.restaurantParamsAction(params);
                     _self.props.listRestaurants(reconstruct);
@@ -196,14 +197,10 @@ export class PlaceList extends React.Component<Props, State> {
             console.log("pullToRefresh error", error);
         })
     }
-
-
     scrollEnd = () => {
         console.log("Card scroll aned");
         this.pullToRefresh();
     }
-
-
     sort = (sort: string) => {
         if (sort == "Distance")
             this.prepareParams('Distance');
@@ -211,9 +208,6 @@ export class PlaceList extends React.Component<Props, State> {
             this.prepareParams('Rating');
     }
     selected = (resturant: any) => {
-        console.log("resturant", resturant);
-
-
         const _self = this;
         _self.props.selectedRestaurantAction(resturant);
         _self.props.navigation.navigate('PlaceDetail');
