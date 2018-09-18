@@ -2,7 +2,6 @@ import * as React from "react"
 import { View, StyleSheet, Image } from "react-native"
 import { TextField } from 'react-native-material-textfield';
 import { showAlert, logger } from '@common_service';
-import { Images } from "@themes";
 import {
     ErrTitle,
     ErrMobileOrEmailMsg,
@@ -16,23 +15,45 @@ export interface Props {
 }
 
 interface State {
-    userId: string,
+    email: string,
     password: string,
-    isUserId: boolean,
-    isPassword: boolean
+    isEmail: boolean,
+    isPass: boolean
 }
 
 export class LoginCardField extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            isUserId: false,
-            isPassword: false,
-            userId: '',
+            isEmail: false,
+            isPass: false,
+            email: '',
             password: ''
         };
     }
-    
+
+    componentWillReceiveProps(nextProps: any) {
+        if (nextProps.isFieldDataFetch) {
+            const { email, password } = this.state;
+            let isPassed: boolean = true;
+            if (!email) {
+                isPassed = false;
+                showAlert(ErrTitle, ErrMobileOrEmailMsg, 'danger');
+            }
+            if (!password) {
+                isPassed = false;
+                showAlert(ErrTitle, ErrPasswordMsg, 'danger');
+            }
+            this.props.passData({
+                username: this.state.email,
+                password: this.state.password
+            }, isPassed);
+        }
+    }
+    textFields = (textField: string) => {
+        this.props.textFieldFocus(textField);
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -44,20 +65,21 @@ export class LoginCardField extends React.Component<Props, State> {
                             tintColor="#ACD472"
                             lineWidth={2}
                             animationDuration={60}
-                            onChangeText={(userId: string) => this.setState({ userId })}
+                            onChangeText={(email: string) => this.setState({ email })}
                             onFocus={() => {
-                                this.setState({ isUserId: true });
+                                this.textFields('Mobile');
+                                this.setState({ isEmail: true });
                             }}
                             onBlur={() => {
-                                this.setState({ isUserId: false });
+                                this.textFields('None');
+                                this.setState({ isEmail: false });
                             }}
                         />
                         <Image
                             source={
-                                this.state['isUserId'] ?
-                                    Images.USER_ACTIVE
-                                    :
-                                    Images.USER_INACTIVE
+                                this.state.isEmail ?
+                                    require('../../../assets/app-images/user_active.png') :
+                                    require('../../../assets/app-images/user_deactive.png')
                             }
                             style={styles.image}
                         ></Image>
@@ -74,18 +96,19 @@ export class LoginCardField extends React.Component<Props, State> {
                             secureTextEntry={true}
                             onChangeText={(password: string) => this.setState({ password })}
                             onFocus={() => {
-                                this.setState({ isPassword: true });
+                                this.textFields('Password');
+                                this.setState({ isPass: true });
                             }}
                             onBlur={() => {
-                                this.setState({ isPassword: false });
+                                this.textFields('None');
+                                this.setState({ isPass: false });
                             }}
                         />
                         <Image
                             source={
-                                this.state['isPassword'] ?
-                                    Images.EYE_ACTIVE
-                                    :
-                                    Images.EYE_INACTIVE
+                                this.state.isPass ?
+                                    require('../../../assets/app-images/activated_eye.png') :
+                                    require('../../../assets/app-images/deactivated_eye.png')
                             }
                             style={styles.imageEye}
                         ></Image>
