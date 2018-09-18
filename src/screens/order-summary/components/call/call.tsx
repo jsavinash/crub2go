@@ -7,13 +7,11 @@ export interface callProps {
     selectedOrderDetail: any
 }
 export const Call: React.StatelessComponent<callProps> = (props) => {
-
     const makeACall = () => {
         const { selectedOrderDetail } = props;
-        console.log('selectedOrderDetail call', selectedOrderDetail);
         const args = {
-            number: selectedOrderDetail['restaurant_mobile_number'], // String value with the number to call
-            prompt: true // Optional boolean property. Determines if the user should be prompt prior to the call 
+            number: selectedOrderDetail['restaurant_mobile_number'],
+            prompt: true
         }
         call(args).catch(console.error)
     }
