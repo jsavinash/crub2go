@@ -2,12 +2,12 @@ import * as React from "react"
 import { View, Image } from "react-native";
 import { styles } from './register-card-field-style';
 import { TextField } from 'react-native-material-textfield';
-import { IRegister } from "@models";
+import { IRegisterState } from "@models";
 import { Images } from '@themes';
 
 export interface RegisterCardFieldProps {
-    registerParamsAction: (register: IRegister) => any,
-    registerParams: IRegister
+    registerParamsAction: (register: IRegisterState) => any,
+    registerParams: IRegisterState
 }
 interface RegisterCardFieldState {
     isName: boolean,
@@ -44,7 +44,7 @@ export class RegisterCardField extends React.Component<RegisterCardFieldProps, R
     private onEmailChange = (email: string) => {
         const { registerParams, registerParamsAction } = this.props;
         const cpyRegisterParams = { ...registerParams };
-        cpyRegisterParams['user_password'] = email;
+        cpyRegisterParams['user_email'] = email;
         registerParamsAction(cpyRegisterParams)
     }
     private onPasswordChange = (password: string) => {

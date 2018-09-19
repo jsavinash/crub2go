@@ -1,3 +1,19 @@
+interface LoginParams {
+    user_name?: string,
+    user_password?: string
+}
+
+interface RegisterParams {
+    user_profile?: any,
+    user_name?: string,
+    mobile_number?: string,
+    user_email?: string,
+    user_password?: string,
+    device_token?: string,
+    device_type?: string
+    '@@err'?: boolean,
+}
+
 interface ItemVariationParams {
     item_id: any
 }
@@ -27,7 +43,7 @@ interface CheckoutParams {
     time12?: string,
     isError?: boolean,
     error?: string,
-    isCheckoutSheet?: boolean, 
+    isCheckoutSheet?: boolean,
     isCheckoutSubmit?: boolean
 }
 interface TimeCheckParams {
@@ -35,6 +51,8 @@ interface TimeCheckParams {
     restaurant_id: string
 }
 export {
+    LoginParams as ILoginParams,
+    RegisterParams as IRegisterParams,
     ItemVariationParams as IItemVariationParams,
     AddToCardParams as IAddToCardParams,
     CheckoutParams as ICheckoutParams,

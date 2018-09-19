@@ -1,13 +1,12 @@
 import * as React from "react";
-import { View, Image, TouchableOpacity, Dimensions } from "react-native";
+import { View, Image, TouchableOpacity } from "react-native";
 import { styles } from './upload-style';
 import PhotoUpload from 'react-native-photo-upload';
 import { Images } from "@themes";
-const SCREEN_HEIGHT = Dimensions.get('window').height;
-
+import { IRegister } from "@models";
 export interface HeaderProps {
-
-    navigation: any
+    registerParamsAction: (register: IRegister) => any,
+    registerParams: IRegister
 }
 export interface HeaderState {
     isCamera: boolean
@@ -25,6 +24,14 @@ export class Upload extends React.Component<HeaderProps, HeaderState> {
             this.setState({ isCamera: true });
         }, 1);
     }
+
+    private onImageChange = (image: any) => {
+        const { registerParams, registerParamsAction } = this.props;
+        const cpyRegisterParams = { ...registerParams };
+        cpyRegisterParams['user_profile'] = image;
+        registerParamsAction(cpyRegisterParams)
+    }
+
     render() {
         return (
             <View style={styles.container} >
@@ -32,7 +39,7 @@ export class Upload extends React.Component<HeaderProps, HeaderState> {
                     <PhotoUpload
                         onResponse={(image: any) => {
                             if (image) {
-                                // this.setState({ photo: image });
+                                this.onImageChange(image);
                             }
                         }}>
                         <Image

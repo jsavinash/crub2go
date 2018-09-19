@@ -4,10 +4,12 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 export const styles = StyleSheet.create({
     container: {
-        marginTop: '8%',
-        flexDirection: 'row',
+        marginTop: '4%',
     },
     div1: {
+        flexDirection: 'row'
+    },
+    div2: {
         marginLeft: '4%'
     },
     img: {

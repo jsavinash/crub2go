@@ -3,11 +3,11 @@ import { View, Image } from "react-native";
 import { TextField } from "react-native-material-textfield";
 import { Images } from "@themes";
 import { styles } from "./login-card-field-style";
-import { ILogin } from "@models";
+import { ILoginState } from "@models";
 
 export interface LoginCardFieldProps {
-    loginParamsAction: (login: ILogin) => any,
-    loginParams: ILogin
+    loginParamsAction: (login: ILoginState) => any,
+    loginParams: ILoginState
 }
 
 interface LoginCardFieldState {

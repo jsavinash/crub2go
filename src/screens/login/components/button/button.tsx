@@ -2,7 +2,7 @@ import * as React from "react";
 import { TouchableOpacity } from "react-native";
 import { styles } from './button-style';
 import { Icon } from 'react-native-elements';
-import { ILogin, ICustomer } from '@models';
+import { ILoginState, ICustomer } from '@models';
 import { showAlert, logger } from '@common_service';
 import { CustomerRestService } from '../../../../services';
 import { transformToFromData, storeAsync } from "@common_service";
@@ -16,10 +16,10 @@ import {
     InternalServerError
 } from '@constant';
 export interface ButtonProps {
-    loginParams: ILogin,
+    loginParams: ILoginState,
     navigation: any,
     createCustomerAction: (customer: ICustomer) => any,
-    loginParamsAction: (login: ILogin) => any
+    loginParamsAction: (login: ILoginState) => any
 }
 export const Button: React.StatelessComponent<ButtonProps> = (props) => {
 
@@ -36,12 +36,12 @@ export const Button: React.StatelessComponent<ButtonProps> = (props) => {
         customerLogin(props['loginParams']);
     }
 
-    const customerLogin = (customer: ILogin) => {
+    const customerLogin = (login: ILoginState) => {
         const { createCustomerAction, navigation, loginParams, loginParamsAction } = props;
         const cpyLoginParams = { ...loginParams };
         cpyLoginParams['isLoading'] = true;
         loginParamsAction(cpyLoginParams);
-        CustomerRestService.customerLogin(transformToFromData(customer)).then((success: any) => {
+        CustomerRestService.customerLogin(transformToFromData(login)).then((success: any) => {
             const cpyLoginParams = { ...loginParams };
             cpyLoginParams['isLoading'] = false;
             loginParamsAction(cpyLoginParams);

@@ -12,6 +12,7 @@ const Images = {
     MOBILE_INACTIVE: require('../assets/app-images/mobile_deactive.png'),
     EMAIL_ACTIVE: require('../assets/app-images/email_active.png'),
     EMAIL_DEACTIVE: require('../assets/app-images/email_deactive.png'),
+    LEFT_WHITE_BACK_ARROW: require('../assets/app-images/back_btn_s_1a.png'),
 }
 
 

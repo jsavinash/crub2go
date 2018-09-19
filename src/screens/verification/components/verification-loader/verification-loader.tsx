@@ -1,23 +1,23 @@
 import * as React from "react";
-import { ILoginState } from '@models';
+import { IRegister } from '@models';
 import Spinner from 'react-native-loading-spinner-overlay';
 
-export interface LoginLoaderProps {
-    loginParams: ILoginState,
+export interface VerificationLoaderProps {
+    registerParams: IRegister,
 }
-export interface LoginLoaderState {
+export interface VerificationLoaderState {
     loader: boolean
 }
-export class LoginLoader extends React.Component<LoginLoaderProps, LoginLoaderState> {
-    constructor(props: LoginLoaderProps) {
+export class VerificationLoader extends React.Component<VerificationLoaderProps, VerificationLoaderState> {
+    constructor(props: VerificationLoaderProps) {
         super(props);
         this.state = {
             loader: false
         };
     }
 
-    componentWillReceiveProps(nextProps: LoginLoaderProps) {
-        const { isLoading } = nextProps.loginParams;
+    componentWillReceiveProps(nextProps: VerificationLoaderProps) {
+        const { isLoading } = nextProps['registerParams'];
         if (isLoading && isLoading == true)
             this.setState({ loader: true });
         else

@@ -1,0 +1,25 @@
+const LoginStateDefault = {
+    user_name: "",
+    user_password: "",
+    isLoading: false
+}
+
+const RegisterStateDefault = {
+    user_profile: {},
+    user_name: "",
+    mobile_number: "",
+    user_email: "",
+    user_password: "",
+    user_cnf_password: "",
+    device_token: "",
+    device_type: "",
+    '@@err': false,
+    otp: "",
+    photo: "",
+    isLoading: false
+}
+
+export {
+    LoginStateDefault,
+    RegisterStateDefault
+}

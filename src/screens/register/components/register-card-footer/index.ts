@@ -1,4 +1,4 @@
-import { Upload } from './upload';
+import { RegisterCardFooter } from "./register-card-footer";
 import { connect } from "react-redux";
 import { collectAction } from '@state_action';
 import { RootState } from "@root_state";
@@ -8,8 +8,6 @@ const mapDispatchToProps = {
 const mapStateToProps = (state: RootState) => ({
     registerParams: state['collect']['registerParams']
 })
-export default connect(mapStateToProps, mapDispatchToProps)(Upload)
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterCardFooter)
 
 
