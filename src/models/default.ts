@@ -19,8 +19,15 @@ const RegisterStateDefault = {
     isLoading: false,
     reset_key: ""
 }
+const ChangePasswordDefault = {
+    old_password: "",
+    cnf_password: "",
+    new_password: "",
+    isLoading: false
+}
 
 export {
     LoginStateDefault,
-    RegisterStateDefault
+    RegisterStateDefault,
+    ChangePasswordDefault
 }

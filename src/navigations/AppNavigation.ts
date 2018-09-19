@@ -60,7 +60,7 @@ import styles from './styles/NavigationStyles'
 
 
 const initialRoute = (): string => {
-  return 'Register';
+  return 'ChangePassword';
 }
 
 const stackRouterConfig: any = {

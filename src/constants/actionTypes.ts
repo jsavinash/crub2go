@@ -67,4 +67,5 @@ export const SELECTED_ORDER_DETAILS = 'order/ORDERDETAILS';
 //Params Action
 export const LOGIN = 'login/Params';
 export const REGISTER = 'register/Params';
+export const ChangePassword = 'changepassword/Params';
 
