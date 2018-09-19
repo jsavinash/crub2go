@@ -25,9 +25,16 @@ const ChangePasswordDefault = {
     new_password: "",
     isLoading: false
 }
-
+const ResetPasswordDefault = {
+    new_password: '',
+    cnf_password: '',
+    mobile_number: '',
+    reset_key: '',
+    isLoading: false,
+}
 export {
     LoginStateDefault,
     RegisterStateDefault,
-    ChangePasswordDefault
+    ChangePasswordDefault,
+    ResetPasswordDefault
 }

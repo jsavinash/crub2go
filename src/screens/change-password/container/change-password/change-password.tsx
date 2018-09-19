@@ -34,7 +34,7 @@ export class ChangePassword extends React.Component<ChangePasswordProps, {}> {
                 <ImageBackground
                     source={Images.BG_IMAGE}
                     style={styles.bgImage}>
-                    <Header />
+                    <Header navigation={navigation} />
                     <Logo />
                     <Title />
                     <ChangePasswordCard />

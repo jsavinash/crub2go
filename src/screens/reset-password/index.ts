@@ -1,2 +1,2 @@
-import { ResetPassword } from './container';
+import ResetPassword from './container/';
 export default ResetPassword;

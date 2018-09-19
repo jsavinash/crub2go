@@ -24,8 +24,18 @@ interface ChangePasswordState {
     new_password: string,
     isLoading: boolean
 }
+
+interface ResetPasswordState {
+    new_password: string,
+    cnf_password: string,
+    mobile_number: string,
+    reset_key: string,
+    isLoading: boolean
+}
+
 export {
     LoginState as ILoginState,
     RegisterState as IRegisterState,
-    ChangePasswordState as IChangePasswordState
+    ChangePasswordState as IChangePasswordState,
+    ResetPasswordState as IResetPasswordState
 }
