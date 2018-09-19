@@ -28,6 +28,7 @@ export class Upload extends React.Component<HeaderProps, HeaderState> {
     private onImageChange = (image: any) => {
         const { registerParams, registerParamsAction } = this.props;
         const cpyRegisterParams = { ...registerParams };
+        console.log("image 1", image);
         cpyRegisterParams['user_profile'] = image;
         registerParamsAction(cpyRegisterParams)
     }

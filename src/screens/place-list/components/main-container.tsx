@@ -11,6 +11,7 @@ export interface MainContainerProps {
     searchTerm: (keyword: string) => any,
     sortTo: (param: string) => any,
     selectedResturant: (resturant: string) => any,
+    init: () => any,
     restaurants: IRestaurants[]
 }
 
@@ -46,6 +47,7 @@ export class MainContainer extends React.Component<MainContainerProps, MainConta
                     selectedResturant={this.props.selectedResturant}
                     navigation={this.props.navigation}
                     restaurants={this.props.restaurants}
+                    init={this.props.init}
                     reactToEnd={this.props.reactToEnd} />
                 <ActionSheet
                     title={'Sort By'}

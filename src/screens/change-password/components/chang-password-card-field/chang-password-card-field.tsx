@@ -39,7 +39,7 @@ export class ChangePasswordCardField extends React.Component<ChangePasswordCardF
     private onCnfPasswordChange = (confPassword: string) => {
         const { changePasswordParams, changePasswordParamsAction } = this.props;
         const cpyChangePasswordParams = { ...changePasswordParams };
-        cpyChangePasswordParams['old_password'] = confPassword;
+        cpyChangePasswordParams['cnf_password'] = confPassword;
         changePasswordParamsAction(cpyChangePasswordParams)
     }
     render() {

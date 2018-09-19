@@ -218,6 +218,7 @@ export class PlaceList extends React.Component<Props, State> {
                 <MainContainer
                     searchTerm={_.debounce(this.search, 500)}
                     reactToEnd={this.scrollEnd}
+                    init={this.initRestaurants}
                     sortTo={this.sort}
                     customer={this.props.customer}
                     selectedResturant={this.selected}

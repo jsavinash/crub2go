@@ -14,20 +14,23 @@ interface OrderState {
 export class Order extends React.Component<OrderProps, OrderState> {
     constructor(props: OrderProps) {
         super(props);
-        if (!this.props.customer['user_access_token'])
-            this.props.navigation.dispatch(NavigationActions.reset(
-                {
-                    index: 0,
-                    actions: [
-                        NavigationActions.navigate({ routeName: 'Login' })
-                    ]
-                }));
+        // if (!this.props.customer['user_access_token'])
+        //     this.props.navigation.dispatch(NavigationActions.reset(
+        //         {
+        //             index: 0,
+        //             actions: [
+        //                 NavigationActions.navigate({ routeName: 'Login' })
+        //             ]
+        //         }));
+
+
+
     }
     componentDidMount() {
 
     }
     render() {
-        if (this.props.customer['user_access_token']) {
+        // if (this.props.customer['user_access_token']) {
             return (
                 <View style={styles.container}>
                     <View style={styles.headerContainer}>
@@ -36,10 +39,10 @@ export class Order extends React.Component<OrderProps, OrderState> {
                     <OrderCard navigation={this.props.navigation} />
                 </View>
             )
-        } else {
-            return (
-                <View />
-            )
-        }
+        // } else {
+        //     return (
+        //         <View />
+        //     )
+        // }
     }
 }

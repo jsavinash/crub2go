@@ -8,7 +8,8 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state: RootState) => ({
-    favRestaurants: state['restaurants']['favRestaurants']
+    favRestaurants: state['restaurants']['favRestaurants'],
+    token: state['customer']['customer']['user_access_token']
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Favourite)

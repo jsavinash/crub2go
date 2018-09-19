@@ -11,7 +11,8 @@ import SplashScreen from 'react-native-splash-screen';
 export interface Props {
     listFavRestaurant: (payload: any) => any,
     favRestaurants: IRestaurants[],
-    navigation: any
+    navigation: any,
+    token: string
 }
 interface State {
 
@@ -30,8 +31,9 @@ export class Favourite extends React.Component<Props, State> {
             page_index: 1,
             num_records: 10
         };
+        const { token } = this.props;
         let reconstruct: any = [];
-        RestaurantRestService.listFavoriteRestaurant({}).then((restaurantData: any) => {
+        RestaurantRestService.listFavoriteRestaurant({}, token).then((restaurantData: any) => {
             console.log("restaurantData..........", restaurantData);
             restaurantData['data']['data'].forEach((restaurant: any, idx: number) => {
                 restaurant.restaurant_image = restaurant.restaurant_image[0];

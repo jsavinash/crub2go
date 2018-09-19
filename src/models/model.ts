@@ -50,7 +50,7 @@ interface Customer {
   user_mobile_number?: string,
   user_email?: string,
   user_id?: string,
-  user_profile?: string,
+  user_profile?: any,
   user_access_token?: string,
   user_city?: string,
   user_city_id?: string,

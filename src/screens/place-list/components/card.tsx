@@ -3,10 +3,13 @@ import { View, StyleSheet, Text, Image, TouchableHighlight, TouchableOpacity, Sc
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 import ImageOverlay from "react-native-image-overlay";
-
+import { RestaurantRestService } from '../../../services';
+import { ICustomer } from "@models";
+import { transformToFromData } from '@common_service';
 export interface CardProps {
     navigation: any,
     restaurants: any,
+    init: () => any,
     reactToEnd: () => any,
     selectedResturant: (resturant: string) => any,
     customer: any
@@ -21,7 +24,19 @@ export class Card extends React.Component<CardProps, CardState> {
     public navigateTo = () => {
         this.props.navigation.navigate('City');
     }
+    private favorite = (restaurant: any) => {
+        const { customer }  = this.props;
+        let data = {
+            user_id: customer['user_id'],
+            restaurant_id:restaurant['restaurant_id']
+        }
+        RestaurantRestService.markFavoriteRestaurant(transformToFromData(data), customer['user_access_token']).then((fav: any) => {
+console.log("fav", fav);
+this.props.init();
+        }).catch((error: any) => {
 
+        })
+    }
     render() {
         return (
             <ScrollView
@@ -62,7 +77,7 @@ export class Card extends React.Component<CardProps, CardState> {
 
                                             <TouchableHighlight
                                                 style={styles.tchImg}
-                                            // onPress={() => { this.favorite(restaurant) }}
+                                                onPress={() => { this.favorite(restaurant) }}
                                             >
                                                 <Image
                                                     source={(restaurant['restaurant_favourite'] == '1') ?
