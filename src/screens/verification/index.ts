@@ -1,4 +1,4 @@
-import { Verification } from './container';
+import { Verification } from './container/verification/verification';
 import { connect } from 'react-redux'
 import { custAction } from '@state_action';
 import { RootState } from '../../reducers/RootReducer';

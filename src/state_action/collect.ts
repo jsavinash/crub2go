@@ -1,15 +1,15 @@
 import { ActionType, createStandardAction } from 'typesafe-actions';
 import { LOGIN, REGISTER } from '../constants/actionTypes';
-import { ILoginParams, IRegisterParams } from '@models';
+import { ILoginState, IRegisterState } from '@models';
 
 export const collectAction = {
-    loginParamsAction: createStandardAction(LOGIN)<ILoginParams>(),
-    registerParamsAction: createStandardAction(REGISTER)<IRegisterParams>(),
+    loginParamsAction: createStandardAction(LOGIN)<ILoginState>(),
+    registerParamsAction: createStandardAction(REGISTER)<IRegisterState>(),
 }
 
 export type CollectActions = ActionType<typeof collectAction>
 
 export type CollectState = Readonly<{
-    loginParams: ILoginParams,
-    registerParams: IRegisterParams,
+    loginParams: ILoginState,
+    registerParams: IRegisterState,
 }>

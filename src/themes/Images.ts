@@ -13,6 +13,8 @@ const Images = {
     EMAIL_ACTIVE: require('../assets/app-images/email_active.png'),
     EMAIL_DEACTIVE: require('../assets/app-images/email_deactive.png'),
     LEFT_WHITE_BACK_ARROW: require('../assets/app-images/back_btn_s_1a.png'),
+    FORGOT: require('../assets/app-images/forgot.png'),
+    VERIFICATION: require('../assets/app-images/verification.png'),
 }
 
 

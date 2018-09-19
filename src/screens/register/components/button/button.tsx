@@ -27,23 +27,6 @@ export interface ButtonProps {
     registerParamsAction: (register: IRegisterState) => any
 }
 export const Button: React.StatelessComponent<ButtonProps> = (props) => {
-
-
-    // interface Register {
-    //     user_profile?: any,
-    //     user_name?: string,
-    //     mobile_number?: string,
-    //     user_email?: string,
-    //     user_password?: string,
-    //     user_cnf_password?: string,
-    //     device_token?: string,
-    //     device_type?: string
-    //     '@@err'?: boolean,
-    //     otp?: string,
-    //     photo?: any,
-    //     isLoading?: boolean
-    //   }
-
     const submit = () => {
         const { user_name, mobile_number, user_email, user_password, user_cnf_password } = props['registerParams'];
         if (!props['registerParams']['@@err']) {
@@ -94,28 +77,40 @@ export const Button: React.StatelessComponent<ButtonProps> = (props) => {
         cpyRegisterParams['isLoading'] = true;
         registerParamsAction(cpyRegisterParams);
         CustomerRestService.customerVerification(transformToFromData(verification)).then((verifyUser: any) => {
-            // setTimeout(() => {
-            //     const cpyRegisterParams = { ...registerParams };
-            //     cpyRegisterParams['isLoading'] = false;
-            //     registerParamsAction(cpyRegisterParams);
-            // }, 100);
+
+
+
+            registerParamsAction(cpyRegisterParams);
             if (verifyUser.problem === "NETWORK_ERROR") {
                 showAlert(ErrTitle, ErrInternetCon, 'info');
+                setTimeout(() => {
+                    const cpyRegisterParams = { ...registerParams };
+                    cpyRegisterParams['isLoading'] = false;
+                    registerParamsAction(cpyRegisterParams);
+                }, 100);
                 return;
             }
             if (verifyUser['data']['settings']['success'] == 1) {
-                cpyRegisterParams['otp'] = verifyUser['data']['data']['otp'];
-                registerParamsAction(cpyRegisterParams);
+                setTimeout(() => {
+                    const cpyRegisterParams = { ...registerParams };
+                    cpyRegisterParams['otp'] = verifyUser['data']['data']['otp'];
+                    cpyRegisterParams['isLoading'] = false;
+                    registerParamsAction(cpyRegisterParams);
+                }, 100);
                 navigation.navigate('Verification');
+                showAlert('crub2go', 'OTP verification code is sent to mobile number you entered', 'success');
             } else if (verifyUser['data']['settings']['success'] == 0) {
                 showAlert(ErrTitle, verifyUser['data']['settings']['message'], 'danger');
+                setTimeout(() => {
+                    const cpyRegisterParams = { ...registerParams };
+                    cpyRegisterParams['isLoading'] = false;
+                    registerParamsAction(cpyRegisterParams);
+                }, 100);
             }
         }).catch((error) => {
-            // setTimeout(() => {
-            //     const cpyRegisterParams = { ...registerParams };
-            //     cpyRegisterParams['isLoading'] = false;
-            //     registerParamsAction(cpyRegisterParams);
-            // }, 100);
+            const cpyRegisterParams = { ...registerParams };
+            cpyRegisterParams['isLoading'] = false;
+            registerParamsAction(cpyRegisterParams);
             logger('Register', 'ERROR', error);
             showAlert(InternalServerErrorTitle, InternalServerError, 'warning');
         });

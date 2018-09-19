@@ -1,15 +1,13 @@
 import * as React from "react"
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native"
+import { View, Text } from "react-native"
 import CodeInput from 'react-native-confirmation-code-input';
-
-export interface Props {
+import { styles } from './verification-card-field-style';
+export interface VerificationCardFieldProps {
     otp: string
 }
-interface State {
 
-}
-export class VerificationCardField extends React.Component<Props, State> {
-    constructor(props: Props) {
+export class VerificationCardField extends React.Component<VerificationCardFieldProps, {}> {
+    constructor(props: VerificationCardFieldProps) {
         super(props);
     }
     onSubmit = (code: any) => {
@@ -24,8 +22,8 @@ export class VerificationCardField extends React.Component<Props, State> {
     }
 
     componentWillReceiveProps(nextProps: any) {
-        if (nextProps.otp) {
-            this.initCode(nextProps.otp);
+        if (nextProps['otp']) {
+            this.initCode(nextProps['otp']);
         }
     }
 
@@ -56,30 +54,3 @@ export class VerificationCardField extends React.Component<Props, State> {
     }
 }
 
-var styles = StyleSheet.create({
-    container: {
-        flex: 0.7,
-        margin: 14,
-    },
-    image: {
-        height: 35,
-        width: 40,
-        position: 'absolute',
-        right: 0,
-        marginTop: 25
-    },
-    txtField: {
-        marginTop: '15%',
-
-        flexDirection: 'row'
-    },
-    txtFieldIn: {
-        width: '100%'
-    },
-    codeTxt: {
-        color: '#31B404',
-        fontSize: 18,
-        fontWeight: '800',
-        textAlign: 'center'
-    },
-});

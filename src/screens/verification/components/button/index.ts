@@ -1,9 +1,10 @@
 import { Button } from './button';
 import { connect } from "react-redux";
-import { collectAction } from "@state_action";
+import { collectAction, custAction } from "@state_action";
 import { RootState } from "@root_state";
 const mapDispatchToProps = {
-    registerParamsAction: collectAction['registerParamsAction']
+    registerParamsAction: collectAction['registerParamsAction'],
+    createCustomerAction: custAction['createCustomer']
 }
 const mapStateToProps = (state: RootState) => ({
     registerParams: state['collect']['registerParams']

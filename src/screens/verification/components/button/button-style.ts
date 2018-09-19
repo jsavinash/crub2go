@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
         height: ((SCREEN_HEIGHT * 18) / 100),
         backgroundColor: '#ACD472',
         borderRadius: 100,
-        bottom: '5%',
+        bottom: '21%',
         marginLeft: '72%'
     }
 });

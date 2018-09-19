@@ -16,7 +16,8 @@ const RegisterStateDefault = {
     '@@err': false,
     otp: "",
     photo: "",
-    isLoading: false
+    isLoading: false,
+    reset_key: ""
 }
 
 export {
