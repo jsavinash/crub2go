@@ -11,16 +11,31 @@ import {
     Footer
 } from '../../components';
 import { Images } from '@themes';
+import { IRegisterState } from "@models";
 import { styles } from './verification-style';
 export interface VerificationProps {
     navigation: any
+    registerParamsAction: (reset: IRegisterState) => any,
+    registerParams: IRegisterState
 }
 export class Verification extends React.Component<VerificationProps, {}> {
     constructor(props: VerificationProps) {
         super(props);
     }
     componentDidMount() {
-        SplashScreen.hide();
+        this.getRouteParams();
+    }
+    getRouteParams = () => {
+        const { navigation, registerParamsAction, registerParams } = this.props;
+        const cpyRegisterParams = { ...registerParams };
+        const otp = navigation.getParam('otp', '');
+        const mobile = navigation.getParam('mobile', '');
+        const reset_key = navigation.getParam('reset_key', '');
+        cpyRegisterParams['reset_key'] = reset_key;
+        cpyRegisterParams['mobile_number'] = mobile;
+        cpyRegisterParams['otp'] = otp;
+        cpyRegisterParams['screen'] = "Forgot";
+        registerParamsAction(cpyRegisterParams);
     }
     render() {
         const { navigation } = this.props;

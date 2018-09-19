@@ -17,7 +17,8 @@ const RegisterStateDefault = {
     otp: "",
     photo: "",
     isLoading: false,
-    reset_key: ""
+    reset_key: "",
+    screen: ""
 }
 const ChangePasswordDefault = {
     old_password: "",

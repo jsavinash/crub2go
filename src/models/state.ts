@@ -16,7 +16,8 @@ interface RegisterState {
     otp: string,
     photo: any,
     isLoading: boolean,
-    reset_key: string
+    reset_key: string,
+    screen: string
 }
 interface ChangePasswordState {
     old_password: string,
