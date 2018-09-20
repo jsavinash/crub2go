@@ -1,38 +1,45 @@
 import * as React from "react";
-import { ScrollView, View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
+import { ScrollView, View, Dimensions, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
 import { ICustomerCard } from '@models';
 import { CardRestService } from '../../../services';
 import { transformToFromData } from "@common_service";
 import SplashScreen from 'react-native-splash-screen';
 import FAB from 'react-native-fab';
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { OrderRestService } from '../../../services';
+import { ICustomer } from "@models";
 export interface PaymentProps {
     cards: any,
     listCards: (data: any[]) => any,
-    customer: any,
+    customer: ICustomer,
     navigation: any,
     checkoutParamsAction: (checkout: any) => any,
     checkoutParams: any,
-    total: any
+    total: any,
+    nav: any
 }
 interface PaymentState {
-
+    selectedCard: any
 }
 
 export class Payment extends React.Component<PaymentProps, PaymentState> {
     constructor(props: PaymentProps) {
         super(props)
+
     }
     componentDidMount() {
         SplashScreen.hide();
         this.getCard();
+        this.initState();
 
     }
     getCard = () => {
-        let token = this.props.customer['user_access_token'];
+        const { customer } = this.props;
+        let token = customer['user_access_token'];
+        let stripId = customer['user_stripe_id']
         let cardParams: ICustomerCard = {
-            user_stripe_id: "cus_DWXvlTTqnUG6SW"
+            user_stripe_id: stripId
         };
         CardRestService.listCard(transformToFromData(cardParams), token).then((success: any) => {
             if (success['data']['settings']['success'] == 1) {
@@ -43,37 +50,30 @@ export class Payment extends React.Component<PaymentProps, PaymentState> {
             console.log("error", error);
         })
     }
+    private initState = () => {
+        let select: any = {};
+        this.props.cards.map((crd: any) => {
+            select[`${crd['id']}`] = false
+        });
+        this.setState({ selectedCard: select });
+    }
+
     private onCardSelect = (card: any) => {
-        console.log('card', card);
-        const { total, customer, checkoutParams } = this.props;
+        const { selectedCard } = this.state;
+        let select: any = {...selectedCard};
+        select[`${card['id']}`] = !select[`${card['id']}`];
+        if (this.props.nav && this.props.nav['routes'] && (this.props.nav['routes'][this.props.nav['routes'].length - 2]['routeName'] == "Checkout") && (this.props.nav['routes'].length > 1)){
+            this.setState({ selectedCard: select });
+        }
+        const { total, customer, checkoutParams, checkoutParamsAction } = this.props;
         let cpyCheckoutParams = { ...checkoutParams };
         let stripId = customer['user_stripe_id'];
-        let token = customer['user_access_token'];
         let grandTotal = total['cart_grand_total'];
         let cardId = card['id'];
         cpyCheckoutParams['cart_grand_total'] = grandTotal;
         cpyCheckoutParams['user_stripe_id'] = stripId;
         cpyCheckoutParams['card_id'] = cardId;
-        delete cpyCheckoutParams['promo_code'];
-        delete cpyCheckoutParams['isCheckoutSheet'];
-        delete cpyCheckoutParams['isCheckoutSubmit'];
-        delete cpyCheckoutParams['time12'];
-        delete cpyCheckoutParams['isError'];
-        delete cpyCheckoutParams['error'];
-        OrderRestService.placeOrder(transformToFromData(cpyCheckoutParams), token).then((success: any) => {
-            console.log("success['data']", success);
-            if (success['data']['settings']['success'] == 1) {
-                this.props.navigation.navigate('PaymentSuccess', { data: success['data']['data'] });
-            } else if (success['data']['settings']['success'] == 0) {
-
-            }
-        }).catch((error) => {
-
-        })
-
-
-
-        // }
+        checkoutParamsAction(cpyCheckoutParams);
     }
 
     render() {
@@ -114,6 +114,23 @@ export class Payment extends React.Component<PaymentProps, PaymentState> {
                                         {CardName}
                                         <Text style={styles.txt}>{card.brand}</Text>
                                         <Text style={styles.txt2}>**** **** **** {card.last4}</Text>
+                                        {this.state['selectedCard'][card['id']] ?
+                                            < Image
+                                                source={require('../../../assets/app-images/img_tickbig.png')}
+                                                style={
+                                                    {
+                                                        position: 'absolute',
+                                                        height: ((SCREEN_HEIGHT * 13) / 100),
+                                                        width: ((SCREEN_HEIGHT * 22) / 100),
+                                                        alignSelf: 'center',
+                                                        marginTop: "14%"
+                                                    }
+                                                }
+                                            >
+                                            </Image>
+                                            :
+                                            <View />
+                                        }
                                     </View>
                                 </TouchableOpacity>
                             )

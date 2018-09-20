@@ -40,8 +40,8 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
         this.initPrice();
     }
     initPrice = () => {
-        const { item_original_price } = this.props.selectedItem;
-        const originalPrice: string = item_original_price.toString();
+        const { item_discounted_price } = this.props.selectedItem;
+        const originalPrice: string = item_discounted_price.toString();
         let data: ITotalPrice = {
             totalPrice: parseFloat(originalPrice),
             quantity: 1,
@@ -84,7 +84,6 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
             CartRestService.addToCart(formData, customer['user_access_token']).then((success: any) => {
                 if (success['data']['settings']['success'] == 1) {
                     this.getCartDetails();
-
                 } else if (success['data']['settings']['success'] == 0) {
 
                 }
@@ -98,8 +97,8 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
     getCartDetails = () => {
         const _self = this;
         const { customer } = this.props;
-        console.log("customer['user_access_token']", customer['user_access_token']);
         CartRestService.viewCart(customer['user_access_token']).then((cart: any) => {
+            console.log("cart update.........................", cart);
             if (cart['data']['settings']['success'] == 1) {
                 _self.props.cartAction(cart['data']['data']['cart_item']);
                 _self.props.cartTotalAction(cart['data']['data']['cart_final_total']);

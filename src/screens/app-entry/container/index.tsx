@@ -33,11 +33,15 @@ export class AppEntry extends React.Component<AppEntryProps, {}> {
             const city = JSON.parse(retrievedUser[1][1]);
             console.log("retrievedUser", retrievedUser);
             let userWithCity: any = {};
+
+
             if (city) {
                 userWithCity['user_city'] = city['city_name'];
                 userWithCity['user_city_id'] = city['city_id'];
-                user['user_city'] = city['city_name'];
-                user['user_city_id'] = city['city_id'];
+                if (user) {
+                    user['user_city'] = city['city_name'];
+                    user['user_city_id'] = city['city_id'];
+                }
             }
             if (!user)
                 _self.props.customerCreate(userWithCity);

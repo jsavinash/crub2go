@@ -35,7 +35,7 @@ export class Content extends React.Component<ContentProps, ContentState> {
             <View style={{ flex: 1, backgroundColor: 'white' }}>
                 <Price
                     totalPriceAction={this.props.totalPriceAction}
-                    value={this.props.selectedItem.item_original_price}
+                    value={this.props.selectedItem.item_discounted_price}
                     totalPrice={this.props.totalPrice}
                 />
                 {this.isSelection()}

@@ -20,11 +20,8 @@ export class OrderSummaryCard extends React.Component<OrderCardProps, {}> {
     }
     componentDidMount() {
         this.orderDetail();
-        this.orders();
     }
-    private orders = () => {
-        console.log(this.props.selectedOrder);
-    }
+   
     private orderDetail = () => {
         const { token, selectedOrder, selectedOrderDetailAction, selectedOrderItemAction } = this.props;
         OrderRestService.orderDetails(transformToFromData({ order_id: selectedOrder['order_id'] }), token).then((orderDetailData: any) => {

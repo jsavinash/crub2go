@@ -39,7 +39,6 @@ export class OrderCard extends React.Component<OrderCardProps, {}> {
             num_records: 10,
             page_index: 1
         }), customer['user_access_token']).then((orderData: any) => {
-            console.log("orderData['data']['data']", orderData['data']['data']);
             if (orderData['data']['settings']['success'] == 1) {
                 construct
                 orderData['data']['data'].forEach((order: any) => {
@@ -55,7 +54,7 @@ export class OrderCard extends React.Component<OrderCardProps, {}> {
         })
     }
     render() {
-        if (this.props.orders.lenght > 0) {
+        if (this.props.orders.length > 0) {
             return (
                 <ScrollView
                     onScroll={(e: any) => {

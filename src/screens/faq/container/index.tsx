@@ -32,11 +32,8 @@ export class FAQ extends React.Component<Props, State> {
     getFAQ = () => {
         let modifiedData: any = [];
         FAQRestService.listFAQ().then((success: any) => {
-            console.log("FAQRestService", success);
             if (success['data']['settings']['success'] == 1) {
-                console.log("success['data']['data']", success['data']['data']);
                 success['data']['data'].forEach((question: any) => {
-                    console.log("question", question);
                     modifiedData.push({
                         title: question['fm_question'],
                         content: question['fm_answer']

@@ -34,7 +34,6 @@ export class Favourite extends React.Component<Props, State> {
         const { token } = this.props;
         let reconstruct: any = [];
         RestaurantRestService.listFavoriteRestaurant({}, token).then((restaurantData: any) => {
-            console.log("restaurantData..........", restaurantData);
             restaurantData['data']['data'].forEach((restaurant: any, idx: number) => {
                 restaurant.restaurant_image = restaurant.restaurant_image[0];
                 reconstruct.push(restaurant);

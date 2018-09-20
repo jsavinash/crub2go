@@ -11,7 +11,8 @@ const mapStateToProps = (state: RootState) => ({
     cards: state['cards']['cards'],
     total: state['cart']['cartTotal'],
     customer: state['customer']['customer'],
-    checkoutParams: state['order']['checkoutParams']
+    checkoutParams: state['order']['checkoutParams'],
+    nav: state['nav']
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Payment)

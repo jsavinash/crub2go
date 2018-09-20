@@ -27,10 +27,8 @@ export const Button: React.StatelessComponent<ButtonProps> = (props) => {
             createCustomerAction,
             registerParamsAction,
             navigation } = props;
-            console.log("registerParams 1", registerParams);
 
         if (!(registerParams['screen'] === "Forgot")) {
-            console.log("registerParams");
             const register: IRegister = {
                 user_name: registerParams['user_name'],
                 user_password: registerParams['user_password'],
@@ -51,7 +49,6 @@ export const Button: React.StatelessComponent<ButtonProps> = (props) => {
             const cpyRegisterParams = { ...registerParams };
             cpyRegisterParams['isLoading'] = true;
             registerParamsAction(cpyRegisterParams);
-            console.log("data", data);
             CustomerRestService.customerRegister(data).then((registerSuccess: any) => {
                 const cpyRegisterParams = { ...registerParams };
                 cpyRegisterParams['isLoading'] = false;
@@ -62,7 +59,6 @@ export const Button: React.StatelessComponent<ButtonProps> = (props) => {
                 }
                 if (registerSuccess['data']['settings']['success'] == 1) {
                     let customerData: ICustomer = registerSuccess['data']['data'][0];
-                    console.log("customerData", customerData);
                     storeAsync('user', JSON.stringify(customerData));
                     createCustomerAction(customerData);
                     navigation.navigate('Home');

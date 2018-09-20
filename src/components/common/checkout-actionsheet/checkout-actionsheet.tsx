@@ -45,6 +45,7 @@ export class CheckoutActionSheet extends React.Component<CheckoutActionSheetProp
     }
     toggleVehicleType = (type: string) => {
         const { checkoutParams, checkoutParamsAction } = this.props;
+      
         const cpyCheckoutParams = { ...checkoutParams };
         cpyCheckoutParams['vehicle_type'] = 'car';
         switch (type) {
@@ -182,6 +183,7 @@ export class CheckoutActionSheet extends React.Component<CheckoutActionSheetProp
         checkoutParamsAction(cpyCheckoutParams);
     }
     private onPayment = () => {
+    
         const { checkoutParams, checkoutParamsAction } = this.props;
         const cpyCheckoutParams = { ...checkoutParams };
         if (!cpyCheckoutParams['vehicle_color'])
@@ -189,7 +191,6 @@ export class CheckoutActionSheet extends React.Component<CheckoutActionSheetProp
         if (!cpyCheckoutParams['vehicle_type'])
             cpyCheckoutParams['vehicle_type'] = 'car';
         cpyCheckoutParams['isCheckoutSubmit'] = true;
-        console.log("cpyCheckoutParams", cpyCheckoutParams);
         checkoutParamsAction(cpyCheckoutParams);
         setTimeout(() => {
             this.move();
@@ -202,7 +203,8 @@ export class CheckoutActionSheet extends React.Component<CheckoutActionSheetProp
         checkoutParamsAction(cpyCheckoutParams);
     }
     render() {
-        if (this.props.checkoutParams && this.props.checkoutParams.isCheckoutSheet) {
+        console.log("this.props.checkoutParams", this.props.checkoutParams);
+        if (this.props.checkoutParams && (this.props.checkoutParams.isCheckoutSheet == true)) {
             return (
                 <View style={styles.container}>
                     <View style={styles.containerIn}>

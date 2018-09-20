@@ -54,7 +54,6 @@ export const Footer: React.StatelessComponent<FooterProps> = (props) => {
             cpyRegisterParams['isLoading'] = true;
             registerParamsAction(cpyRegisterParams);
             CustomerRestService.customerForgot(transformToFromData({ mobile_number: registerParams['mobile_number'] })).then((forgotSuccess: any) => {
-              console.log("forgotSuccess", forgotSuccess);
                 const cpyRegisterParams = { ...registerParams };
                 cpyRegisterParams['isLoading'] = false;
                 registerParamsAction(cpyRegisterParams);

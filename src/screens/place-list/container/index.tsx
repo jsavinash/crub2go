@@ -105,7 +105,6 @@ export class PlaceList extends React.Component<Props, State> {
                     restaurantData['data']['data'].forEach((restaurant: any, idx: number) => {
                         restaurant.restaurant_image = restaurant.restaurant_image[0];
                         reconstruct.push(restaurant);
-                        console.log("restaurant", restaurant);
                     });
                     _self.props.restaurantParamsAction(params);
                     _self.props.listRestaurants(reconstruct);
@@ -155,7 +154,6 @@ export class PlaceList extends React.Component<Props, State> {
         if (sort == 'Rating')
             params.keyword = 'restaurant_rating';
         let reconstruct: any = [];
-        console.log("params", params);
         RestaurantRestService.listRestaurant(transformToFromData(params)).then((restaurantData: any) => {
             if (restaurantData['data']['settings']['success'] == 1) {
                 if (restaurantData['data']['data'].length > 0)

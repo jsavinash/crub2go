@@ -51,6 +51,9 @@ export const Button: React.StatelessComponent<ButtonProps> = (props) => {
             }
             if (success['data']['settings']['success'] == 1) {
                 let customerData: ICustomer = success['data']['data'][0];
+               
+                console.log("JSON.stringify(customerData)", JSON.stringify(customerData));
+
                 storeAsync('user', JSON.stringify(customerData));
                 createCustomerAction(customerData);
                 navigation.navigate('Home');

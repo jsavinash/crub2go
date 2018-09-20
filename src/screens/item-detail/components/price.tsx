@@ -41,8 +41,6 @@ export class Price extends React.Component<PriceProps, PriceState> {
         let { quantity, realPrice, extraAmount } = this.props.totalPrice;
         let changeQuantity = quantity - 1;
         let totalBaseAmount = realPrice;
-
-        console.log("extraAmount", extraAmount);
         for (let key in extraAmount) {
             totalBaseAmount = totalBaseAmount + extraAmount[key];
         }
