@@ -150,11 +150,12 @@ export class PlaceList extends React.Component<Props, State> {
         let params: IRestaurantsParams = restaurantParamsValue;
         params.page_index = 1;
         if (sort == 'Distance')
-            params.keyword = 'restaurant_distance';
+            params.filter = 2;
         if (sort == 'Rating')
-            params.keyword = 'restaurant_rating';
+            params.filter = 1;
         let reconstruct: any = [];
-        RestaurantRestService.listRestaurant(transformToFromData(params)).then((restaurantData: any) => {
+        RestaurantRestService.listRestaurant(transformToFromData(params), this.props.customer['user_access_token']).then((restaurantData: any) => {
+            console.log("restaurantData", restaurantData);
             if (restaurantData['data']['settings']['success'] == 1) {
                 if (restaurantData['data']['data'].length > 0)
                     restaurantData['data']['data'].forEach((restaurant: any, idx: number) => {
