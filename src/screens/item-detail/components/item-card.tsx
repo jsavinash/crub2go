@@ -2,6 +2,7 @@ import * as React from "react";
 import { Text, StyleSheet, View, Dimensions, Image, TouchableHighlight } from 'react-native';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
+import { Images } from "@themes";
 export interface ItemCardProps {
     image: any,
     title: any
@@ -16,7 +17,7 @@ export const ItemCard: React.StatelessComponent<ItemCardProps> = (props) => {
                 <TouchableHighlight
                     style={styles.back}>
                     <Image
-                        source={require('../../../assets/app-images/heart-outline.png')}
+                        source={Images.LEFT_WHITE_BACK_ARROW}
                         style={styles.backImg} />
                 </TouchableHighlight>
                 <View style={styles.txtContent}>
