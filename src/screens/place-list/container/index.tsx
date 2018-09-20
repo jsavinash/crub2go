@@ -8,7 +8,6 @@ import { RestaurantRestService, CustomerRestService } from '../../../services';
 import { transformToFromData } from '@common_service';
 import SplashScreen from 'react-native-splash-screen';
 import * as _ from 'lodash';
-import moment from 'moment';
 
 export interface Props {
     listCites: (payload: any) => any,
