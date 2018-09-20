@@ -53,8 +53,13 @@ interface OrderResponse {
     restaurant_message?: string,
     restaurant_city_slug?: string,
 }
+interface FAQResponse {
+    title: string,
+    content: string
+}
 export {
     CartResponse as ICartResponse,
     CartTotal as ICartTotal,
-    OrderResponse as IOrderResponse
+    OrderResponse as IOrderResponse,
+    FAQResponse as IFAQResponse
 }

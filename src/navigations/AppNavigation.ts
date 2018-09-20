@@ -52,7 +52,8 @@ import {
   Payment,
   PaymentSuccess,
   City,
-  Policy
+  Policy,
+  FAQ
 } from '../components/nav-config';
 
 import styles from './styles/NavigationStyles'
@@ -77,7 +78,7 @@ const PrimaryNavigation = StackNavigator(
     FAQ: {
       screen: FAQScreen,
       path: 'faq',
-      navigationOptions: () => (Home),
+      navigationOptions: () => (FAQ),
     },
     EditProfile: {
       screen: EditProfile,

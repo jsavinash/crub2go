@@ -65,7 +65,10 @@ export const SELECTED_ORDER_ITEM = 'order/ORDERITEM';
 export const SELECTED_ORDER_DETAILS = 'order/ORDERDETAILS';
 
 //Params Action
-export const LOGIN = 'login/Params';
-export const REGISTER = 'register/Params';
-export const CHANGE_PASSWORD = 'changePassword/Params';
-export const RESET_PASSWORD = 'resetPassword/Params';
+export const LOGIN = 'login/PARAMS';
+export const REGISTER = 'register/PARAMS';
+export const CHANGE_PASSWORD = 'changePassword/PARAMS';
+export const RESET_PASSWORD = 'resetPassword/PARAMS';
+
+//FAQ
+export const LIST_FAQ = 'faq/LIST';

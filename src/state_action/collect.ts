@@ -15,5 +15,5 @@ export type CollectState = Readonly<{
     loginParams: ILoginState,
     registerParams: IRegisterState,
     changePasswordParams: IChangePasswordState,
-    resetParams:IResetPasswordState
+    resetParams: IResetPasswordState
 }>

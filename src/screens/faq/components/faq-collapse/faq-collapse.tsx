@@ -1,37 +1,42 @@
 import * as React from "react"
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import SplashScreen from 'react-native-splash-screen';
+import { Text, View, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Accordion from 'react-native-collapsible/Accordion';
-
-import { FAQRestService } from '../../../services';
+import { styles } from './faq-collapse-style';
+import { FAQRestService } from '../../../../services';
+import { IFAQResponse } from '@models';
+import { showAlert } from '@common_service';
+import {
+    ErrTitle,
+    ErrInternetCon
+} from '@constant';
 export interface Props {
-    customerCreate: (payload: any) => any,
-    navigation: any,
-    customer: any,
-    connection: boolean
+    listFaqAction: (faq: IFAQResponse) => any,
+    faq: any
 }
 interface State {
     activeSection: boolean,
     collapsed: boolean,
-    content?: any
 }
-export class FAQ extends React.Component<Props, State> {
+export class FaqCollapse extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
             activeSection: false,
-            collapsed: true,
-            content: []
+            collapsed: true
         }
     }
     componentDidMount() {
-        SplashScreen.hide();
         this.getFAQ();
     }
     getFAQ = () => {
+        const { listFaqAction } = this.props;
         let modifiedData: any = [];
         FAQRestService.listFAQ().then((success: any) => {
+            if (success.problem === "NETWORK_ERROR") {
+                showAlert(ErrTitle, ErrInternetCon, 'info');
+                return;
+            }
             if (success['data']['settings']['success'] == 1) {
                 success['data']['data'].forEach((question: any) => {
                     modifiedData.push({
@@ -39,14 +44,8 @@ export class FAQ extends React.Component<Props, State> {
                         content: question['fm_answer']
                     });
                 });
-
-                this.setState({ content: modifiedData });
-            } else if (success['data']['settings'] == 0) {
-
+                listFaqAction(modifiedData);
             }
-        }).catch((error) => {
-            console.log("FAQRestService error", error);
-
         })
     }
 
@@ -70,7 +69,6 @@ export class FAQ extends React.Component<Props, State> {
         );
     };
 
-
     renderContent(section: any, _: any, isActive: any) {
         return (
             <Animatable.View
@@ -86,14 +84,12 @@ export class FAQ extends React.Component<Props, State> {
     }
 
     render() {
+        const { faq } = this.props;
         return (
             <View style={{ flex: 1, backgroundColor: 'white' }}>
-                <View style={styles.headerContainer}>
-                    <Text style={styles.headerText1}>FAQ's</Text>
-                </View>
                 <Accordion
                     activeSection={this.state.activeSection}
-                    sections={this.state.content}
+                    sections={faq}
                     touchableComponent={TouchableOpacity}
                     renderHeader={this.renderHeader}
                     renderContent={this.renderContent}
@@ -105,70 +101,3 @@ export class FAQ extends React.Component<Props, State> {
     }
 }
 
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        backgroundColor: '#F5FCFF',
-    },
-    title: {
-        textAlign: 'center',
-        fontSize: 22,
-        fontWeight: '300',
-        marginBottom: 20,
-    },
-    header: {
-        marginTop: 1,
-        backgroundColor: '#F5FCFF',
-        padding: 10,
-        borderWidth: 1,
-
-    },
-    headerText: {
-        textAlign: 'left',
-        fontSize: 16,
-        fontWeight: '500',
-    },
-    content: {
-        padding: 20,
-        backgroundColor: '#fff',
-    },
-    active: {
-        backgroundColor: 'rgba(255,255,255,1)',
-    },
-    inactive: {
-        backgroundColor: 'rgba(245,252,255,1)',
-    },
-    selectors: {
-        marginBottom: 10,
-        flexDirection: 'row',
-        justifyContent: 'center',
-    },
-    selector: {
-        backgroundColor: '#F5FCFF',
-        padding: 10,
-    },
-    activeSelector: {
-        fontWeight: 'bold',
-    },
-    selectTitle: {
-        fontSize: 14,
-        fontWeight: '500',
-        padding: 10,
-    },
-    headerContainer: {
-        flex: 0.1,
-        borderColor: '#aaa',
-        borderWidth: 2,
-        alignContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white'
-    },
-    headerText1: {
-        fontSize: 20,
-        marginTop: '4%',
-        color: 'black',
-        fontWeight: '700'
-    },
-});

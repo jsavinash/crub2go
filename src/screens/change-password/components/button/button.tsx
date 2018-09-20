@@ -2,10 +2,10 @@ import * as React from "react";
 import { TouchableOpacity } from "react-native";
 import { styles } from './button-style';
 import { Icon } from 'react-native-elements';
-import { ILoginState, ICustomer, IChangePasswordState, IChangePass } from '@models';
+import { ICustomer, IChangePasswordState, IChangePass } from '@models';
 import { showAlert, logger } from '@common_service';
 import { CustomerRestService } from '../../../../services';
-import { transformToFromData, storeAsync } from "@common_service";
+import { transformToFromData } from "@common_service";
 import {
     ErrTitle,
     ErrOldPass,

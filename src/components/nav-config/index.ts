@@ -94,3 +94,11 @@ export const Policy = {
     header: null
 }
 
+export const FAQ = {
+    title: 'FAQ`s',
+    headerStyle: { backgroundColor: 'white' },
+    headerTitleStyle: {
+        color: '#4E4E4E',
+        marginLeft: ((SCREEN_WIDTH * 28) / 100)
+    }
+}
