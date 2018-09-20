@@ -82,8 +82,10 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
         let formData = transformToFromData(cartToCartParams);
         if (customer && customer['user_access_token']) {
             CartRestService.addToCart(formData, customer['user_access_token']).then((success: any) => {
+             console.log("success['data'] 12345", success['data']);
                 if (success['data']['settings']['success'] == 1) {
-                    this.getCartDetails();
+                        this.getCartDetails();
+
                 } else if (success['data']['settings']['success'] == 0) {
 
                 }
@@ -100,8 +102,10 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
         CartRestService.viewCart(customer['user_access_token']).then((cart: any) => {
             console.log("cart update.........................", cart);
             if (cart['data']['settings']['success'] == 1) {
+                setTimeout(() => {
                 _self.props.cartAction(cart['data']['data']['cart_item']);
                 _self.props.cartTotalAction(cart['data']['data']['cart_final_total']);
+                }, 400);
                 this.props.navigation.goBack();
             }
         }).catch((error) => {

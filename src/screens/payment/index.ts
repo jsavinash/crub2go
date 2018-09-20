@@ -4,7 +4,8 @@ import { cardAction, orderAction } from '@state_action';
 import { RootState } from '../../reducers/RootReducer';
 const mapDispatchToProps = {
     listCards: cardAction['listCards'],
-    checkoutParamsAction : orderAction['checkoutParams'],
+    checkoutParamsAction: orderAction['checkoutParams'],
+
 }
 
 const mapStateToProps = (state: RootState) => ({
@@ -14,6 +15,8 @@ const mapStateToProps = (state: RootState) => ({
     checkoutParams: state['order']['checkoutParams'],
     nav: state['nav']
 })
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Payment)
 

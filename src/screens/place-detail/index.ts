@@ -16,7 +16,12 @@ const mapStateToProps = (state: RootState) => ({
     categories: state['restaurants']['categories'],
     menuList: state['restaurants']['menuList'],
     selectedCategory: state['restaurants']['selectedCategory'],
-    selectedMenu: state['restaurants']['selectedMenu']
+    selectedMenu: state['restaurants']['selectedMenu'],
+   //debug
+    cart: state['cart']['cart'],
+    cartTotal: state['cart']['cartTotal']
+
+
 })
 export default connect(mapStateToProps, mapDispatchToProps)(PlaceDetail)
 

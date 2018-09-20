@@ -26,12 +26,16 @@ interface PaymentState {
 export class Payment extends React.Component<PaymentProps, PaymentState> {
     constructor(props: PaymentProps) {
         super(props)
+        this.state = {
+            selectedCard: {}
+        }
 
     }
     componentDidMount() {
         SplashScreen.hide();
         this.getCard();
         this.initState();
+        this.move();
 
     }
     getCard = () => {
@@ -57,12 +61,17 @@ export class Payment extends React.Component<PaymentProps, PaymentState> {
         });
         this.setState({ selectedCard: select });
     }
-
+    private move = () => {
+        const { checkoutParams, checkoutParamsAction } = this.props;
+        const cpyCheckoutParams = { ...checkoutParams };
+        cpyCheckoutParams['isCheckoutSheet'] = false;
+        checkoutParamsAction(cpyCheckoutParams);
+    }
     private onCardSelect = (card: any) => {
         const { selectedCard } = this.state;
-        let select: any = {...selectedCard};
+        let select: any = { ...selectedCard };
         select[`${card['id']}`] = !select[`${card['id']}`];
-        if (this.props.nav && this.props.nav['routes'] && (this.props.nav['routes'][this.props.nav['routes'].length - 2]['routeName'] == "Checkout") && (this.props.nav['routes'].length > 1)){
+        if (this.props.nav && this.props.nav['routes'] && (this.props.nav['routes'][this.props.nav['routes'].length - 2]['routeName'] == "Checkout") && (this.props.nav['routes'].length > 1)) {
             this.setState({ selectedCard: select });
         }
         const { total, customer, checkoutParams, checkoutParamsAction } = this.props;
