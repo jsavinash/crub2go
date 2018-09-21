@@ -4,6 +4,7 @@ import { ICities, } from '@models';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { CitiesRestService } from '../../../services';
 import { showAlert, logger, storeAsync } from '@common_service';
+import { NavigationActions } from "react-navigation";
 import {
     InternalServerError,
     InternalServerErrorTitle
@@ -55,8 +56,19 @@ export class CityList extends React.Component<Props, State> {
         }
         storeAsync('city', JSON.stringify(cities));
         customerAction(cpyCustomer)
-        if (cpyCustomer['user_access_token'])
-            _self.props.navigation.goBack();
+        if (cpyCustomer['user_access_token']) {
+            _self.props.navigation.dispatch(NavigationActions.reset(
+                {
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({
+                            routeName: 'Home', params: {
+                                screen: "City"
+                            }
+                        })
+                    ]
+                }));
+        }
         else
             _self.props.navigation.navigate('Home')
     }

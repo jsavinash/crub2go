@@ -38,6 +38,7 @@
     "react-native-awesome-card-io": "^0.7.0",
     "react-native-collapse-view": "^1.0.0",
     "react-native-collapsible": "^0.13.0",
+    "react-native-compress-image": "^2.0.1",
     "react-native-config": "^0.11.5",
     "react-native-confirmation-code-input": "^1.0.4",
     "react-native-connection-info": "^1.1.0",

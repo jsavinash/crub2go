@@ -3,6 +3,7 @@ package com.reactnativedevelopment;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.emekalites.react.compress.image.ImageCompressPackage;
 import com.devfd.RNGeocoder.RNGeocoderPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.gettipsi.stripe.StripeReactPackage;
@@ -33,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
+            new ImageCompressPackage(),
             new RNGeocoderPackage(),
             new MapsPackage(),
             new StripeReactPackage(), 

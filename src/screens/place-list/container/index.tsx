@@ -38,6 +38,13 @@ export class PlaceList extends React.Component<Props, State> {
         SplashScreen.hide();
         this.initRestaurants();
         this.getLocation();
+        this.getRouteParams();
+    }
+    getRouteParams = () => {
+        const { navigation } = this.props;
+        const screen = navigation.getParam('screen', '');
+        if (screen == "City")
+            this.initRestaurants();
     }
     openCity = () => {
         this.props.navigation.navigate('CityList');

@@ -8561,6 +8561,10 @@ react-native-collapsible@^0.13.0:
   dependencies:
     prop-types "^15.6.2"
 
+react-native-compress-image@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-compress-image/-/react-native-compress-image-2.0.1.tgz#f14d701be7f6fcf6973a34dd5ef51436d63fb469"
+
 react-native-config@^0.11.5:
   version "0.11.5"
   resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.11.5.tgz#516cb7b6ec437c7739236ca075971db3aabdcb95"

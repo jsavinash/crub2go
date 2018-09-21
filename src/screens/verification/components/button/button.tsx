@@ -41,11 +41,10 @@ export const Button: React.StatelessComponent<ButtonProps> = (props) => {
             if (registerParams['user_profile'] && registerParams['user_profile'].uri) {
                 data.append('user_profile', {
                     uri: registerParams['user_profile']['uri'],
-                    type: registerParams['user_profile']['type'],
-                    name: registerParams['user_profile']['fileName']
+                    type: "image/jpeg",
+                    name: registerParams['user_profile']['name']
                 });
             }
-
             const cpyRegisterParams = { ...registerParams };
             cpyRegisterParams['isLoading'] = true;
             registerParamsAction(cpyRegisterParams);
