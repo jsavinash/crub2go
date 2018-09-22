@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, TouchableOpacity, Text } from "react-native";
+import { View, TouchableOpacity, Text, Image } from "react-native";
 import { styles } from './cities-style';
 import { ICustomer, ICities } from '@models';
 import { storeAsync } from '@common_service';
@@ -42,13 +42,31 @@ export const Cities: React.StatelessComponent<CitiesProps> = (props) => {
         <View>
             {
                 props.cities.map((city, idx) => {
-                    console.log("city", city);
                     return (
-                        <TouchableOpacity onPress={() => {
-                            selectedCity(city)
-                        }} key={idx}>
-                            <Text style={styles.txt}>{city.city_name}</Text>
-                        </TouchableOpacity>
+                        <View style={styles.container}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    selectedCity(city)
+                                }}
+                                key={idx}
+                            >
+                                <View style={styles.div1}>
+                                    <View>
+                                        <Text style={styles.txt}>{city.city_name}</Text>
+                                    </View>
+                                    {city.city_id == props.customer['user_city_id'] ?
+                                        <View>
+                                            <Image
+                                                source={require('../../../../assets/app-images/back_btn_s_1a_h.png')}
+                                                style={styles.img}>
+                                            </Image>
+                                        </View>
+                                        :
+                                        <View />
+                                    }
+                                </View>
+                            </TouchableOpacity>
+                        </View>
                     );
                 })
             }

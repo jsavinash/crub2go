@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
         fontWeight: '500',
         color: 'black',
         marginLeft: '4%',
-        marginTop: '2%'
+        marginTop: '2%',
+        marginBottom: '2%'
     }
 });

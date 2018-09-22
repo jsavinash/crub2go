@@ -46,7 +46,7 @@ export class CityList extends React.Component<CityListProps, {}> {
             <ScrollView style={{
                 backgroundColor: 'white'
             }}>
-                <Search />
+                <Search  navigation={navigation}/>
                 <Title />
                 <Cities navigation={navigation} />
             </ScrollView>
