@@ -15,8 +15,9 @@ const Images = {
     LEFT_WHITE_BACK_ARROW: require('../assets/app-images/back_btn_s_1a.png'),
     FORGOT: require('../assets/app-images/forgot.png'),
     VERIFICATION: require('../assets/app-images/verification.png'),
-    RESET: require('../assets/app-images/reset.png')
-
+    RESET: require('../assets/app-images/reset.png'),
+    LIGHT_RIGHT_SWIPE: require('../assets/app-images/light_right_swipe.png'),
+    DARK_RIGHT_SWIPE: require('../assets/app-images/dark_right_swipe.png')
     
 }
 

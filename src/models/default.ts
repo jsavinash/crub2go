@@ -63,11 +63,16 @@ const ResetPasswordDefault = {
     reset_key: '',
     isLoading: false,
 }
+const ForgotPasswordDefault = {
+    mobile_number: '',
+    isLoading: false
+}
 export {
     LoginStateDefault,
     RegisterStateDefault,
     ChangePasswordDefault,
     ResetPasswordDefault,
     IResponseDefault,
-    CartTotalDefault
+    CartTotalDefault,
+    ForgotPasswordDefault
 }

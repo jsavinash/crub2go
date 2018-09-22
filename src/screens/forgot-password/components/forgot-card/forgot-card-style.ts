@@ -6,11 +6,10 @@ export const styles = StyleSheet.create({
     container: {
         alignSelf: 'center',
         borderColor: 'black',
-        borderRadius: 22,
+        borderRadius: 20,
         width: ((SCREEN_WIDTH * 90) / 100),
-        height: ((SCREEN_HEIGHT * 38) / 100),
+        height: ((SCREEN_HEIGHT * 32) / 100),
         backgroundColor: 'white',
-        marginBottom: ((SCREEN_HEIGHT * 25) / 100)
+        marginBottom: ((SCREEN_HEIGHT * 34) / 100)
     }
 });
-

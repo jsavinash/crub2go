@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TouchableOpacity } from "react-native";
+import { Image, Dimensions, TouchableWithoutFeedback, View } from "react-native";
 import { styles } from './button-style';
 import { Icon } from 'react-native-elements';
 import { IRegisterState, ICustomer, IRegister } from '@models';
@@ -12,21 +12,33 @@ import {
     InternalServerErrorTitle,
     InternalServerError
 } from '@constant';
+import { Images } from '@themes';
+
 export interface ButtonProps {
     registerParams: IRegisterState,
     navigation: any,
     registerParamsAction: (register: IRegisterState) => any,
     createCustomerAction: (customer: ICustomer) => any
 }
-export const Button: React.StatelessComponent<ButtonProps> = (props) => {
-    const submit = () => {
-        onRegister();
+export interface State {
+    onImage: boolean
+}
+export class Button extends React.Component<ButtonProps, State> {
+    constructor(props: ButtonProps) {
+        super(props);
+        this.state = {
+            onImage: true
+        }
     }
-    const onRegister = () => {
+    
+    private submit = () => {
+        this.onRegister();
+    }
+    private onRegister = () => {
         const { registerParams,
             createCustomerAction,
             registerParamsAction,
-            navigation } = props;
+            navigation } = this.props;
 
         if (!(registerParams['screen'] === "Forgot")) {
             const register: IRegister = {
@@ -72,17 +84,31 @@ export const Button: React.StatelessComponent<ButtonProps> = (props) => {
                 showAlert(InternalServerErrorTitle, InternalServerError, 'warning');
             })
         } else {
-            props.navigation.navigate('ResetPassword', { reset_key: registerParams['reset_key'], mobile_number: registerParams['mobile_number'] });
+            this.props.navigation.navigate('ResetPassword', { reset_key: registerParams['reset_key'], mobile_number: registerParams['mobile_number'] });
         }
     }
+    render() {
 
-    return (
-        <TouchableOpacity
-            style={styles.btnTch}
-            onPress={() => {
-                submit();
-            }}>
-            <Icon name={"chevron-right"} size={70} color="white" />
-        </TouchableOpacity>
-    )
+        return (
+            <View style={styles.container}>
+                <TouchableWithoutFeedback
+                    onPressIn={() => {
+                        const { onImage } = this.state;
+                        this.setState({ onImage: !onImage });
+                    }}
+                    onPressOut={() => {
+                        const { onImage } = this.state;
+                        this.setState({ onImage: !onImage });
+                    }}
+                    onPress={() => {
+                        this.submit();
+                    }}>
+                    <Image
+                        source={this.state.onImage ? Images.LIGHT_RIGHT_SWIPE : Images.DARK_RIGHT_SWIPE}
+                        style={styles.image}>
+                    </Image>
+                </TouchableWithoutFeedback >
+            </View>
+        )
+    }
 }

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, Image, Dimensions, TouchableWithoutFeedback, View } from "react-native";
 import { styles } from './button-style';
 import { Icon } from 'react-native-elements';
 import { ILoginState, ICustomer } from '@models';
@@ -15,16 +15,29 @@ import {
     InternalServerErrorTitle,
     InternalServerError
 } from '@constant';
+import { Images } from '@themes';
+const SCREEN_HEIGHT = Dimensions.get('window').width;
+
 export interface ButtonProps {
     loginParams: ILoginState,
     navigation: any,
     createCustomerAction: (customer: ICustomer) => any,
     loginParamsAction: (login: ILoginState) => any
 }
-export const Button: React.StatelessComponent<ButtonProps> = (props) => {
+export interface State {
+    onImage: boolean
+}
+export class Button extends React.Component<ButtonProps, State> {
 
-    const submit = () => {
-        const { user_name, user_password } = props.loginParams;
+    constructor(props: ButtonProps) {
+        super(props);
+        this.state = {
+            onImage: true
+        }
+
+    }
+    private submit = () => {
+        const { user_name, user_password } = this.props['loginParams'];
         if (!user_name) {
             showAlert(ErrTitle, ErrMobileOrEmailMsg, 'danger');
             return;
@@ -33,11 +46,11 @@ export const Button: React.StatelessComponent<ButtonProps> = (props) => {
             showAlert(ErrTitle, ErrPasswordMsg, 'danger');
             return;
         }
-        customerLogin(props['loginParams']);
+        this.customerLogin(this.props['loginParams']);
     }
 
-    const customerLogin = (login: ILoginState) => {
-        const { createCustomerAction, navigation, loginParams, loginParamsAction } = props;
+    private customerLogin = (login: ILoginState) => {
+        const { createCustomerAction, navigation, loginParams, loginParamsAction } = this.props;
         const cpyLoginParams = { ...loginParams };
         cpyLoginParams['isLoading'] = true;
         loginParamsAction(cpyLoginParams);
@@ -51,7 +64,7 @@ export const Button: React.StatelessComponent<ButtonProps> = (props) => {
             }
             if (success['data']['settings']['success'] == 1) {
                 let customerData: ICustomer = success['data']['data'][0];
-               
+
                 console.log("JSON.stringify(customerData)", JSON.stringify(customerData));
 
                 storeAsync('user', JSON.stringify(customerData));
@@ -68,14 +81,27 @@ export const Button: React.StatelessComponent<ButtonProps> = (props) => {
             showAlert(InternalServerErrorTitle, InternalServerError, 'warning');
         });
     }
-
-    return (
-        <TouchableOpacity
-            style={styles.btnTch}
-            onPress={() => {
-                submit();
-            }}>
-            <Icon name={"chevron-right"} size={70} color="white" />
-        </TouchableOpacity>
-    )
+    render() {
+        return (
+            <View style={styles.container}>
+                <TouchableWithoutFeedback
+                    onPressIn={() => {
+                        const { onImage } = this.state;
+                        this.setState({ onImage: !onImage });
+                    }}
+                    onPressOut={() => {
+                        const { onImage } = this.state;
+                        this.setState({ onImage: !onImage });
+                    }}
+                    onPress={() => {
+                        this.submit();
+                    }}>
+                    <Image
+                        source={this.state.onImage ? Images.LIGHT_RIGHT_SWIPE : Images.DARK_RIGHT_SWIPE}
+                        style={styles.image}>
+                    </Image>
+                </TouchableWithoutFeedback >
+            </View>
+        )
+    }
 }

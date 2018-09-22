@@ -1,2 +1,2 @@
-import { ForgotPassword } from './container';
+import ForgotPassword from './container';
 export default ForgotPassword;

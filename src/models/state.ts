@@ -34,9 +34,14 @@ interface ResetPasswordState {
     isLoading: boolean
 }
 
+interface ForgotPasswordState {
+    mobile_number: string,
+    isLoading: boolean
+}
 export {
     LoginState as ILoginState,
     RegisterState as IRegisterState,
     ChangePasswordState as IChangePasswordState,
-    ResetPasswordState as IResetPasswordState
+    ResetPasswordState as IResetPasswordState,
+    ForgotPasswordState as IForgotPasswordState
 }

@@ -1,6 +1,7 @@
 import * as React from "react";
-import { TouchableOpacity } from "react-native";
+import { View, TouchableWithoutFeedback, Image } from "react-native";
 import { styles } from './button-style';
+import { Images } from "@themes";
 import { Icon } from 'react-native-elements';
 import { IRegisterState, IVerification } from '@models';
 import { showAlert, logger } from '@common_service';
@@ -26,10 +27,20 @@ export interface ButtonProps {
     navigation: any,
     registerParamsAction: (register: IRegisterState) => any
 }
-export const Button: React.StatelessComponent<ButtonProps> = (props) => {
-    const submit = () => {
-        const { user_name, mobile_number, user_email, user_password, user_cnf_password } = props['registerParams'];
-        if (!props['registerParams']['@@err']) {
+export interface State {
+    onImage: boolean
+}
+export class Button extends React.Component<ButtonProps, State> {
+    constructor(props: ButtonProps) {
+        super(props);
+        this.state = {
+            onImage: true
+        }
+
+    }
+    private submit = () => {
+        const { user_name, mobile_number, user_email, user_password, user_cnf_password } = this.props['registerParams'];
+        if (!this.props['registerParams']['@@err']) {
             showAlert(ErrTitle, ErrPolicyMsg, 'danger');
             return;
         }
@@ -63,12 +74,12 @@ export const Button: React.StatelessComponent<ButtonProps> = (props) => {
             showAlert(ErrTitle, ErrPassMatch, 'danger');
             return;
         }
-        onVerification();
+        this.onVerification();
     }
 
-    const onVerification = () => {
-        const { mobile_number, user_email } = props['registerParams'];
-        const { registerParams, registerParamsAction, navigation } = props;
+    private onVerification = () => {
+        const { mobile_number, user_email } = this.props['registerParams'];
+        const { registerParams, registerParamsAction, navigation } = this.props;
         let verification: IVerification = {
             mobile_number,
             user_email
@@ -116,13 +127,28 @@ export const Button: React.StatelessComponent<ButtonProps> = (props) => {
         });
     }
 
-    return (
-        <TouchableOpacity
-            style={styles.btnTch}
-            onPress={() => {
-                submit();
-            }}>
-            <Icon name={"chevron-right"} size={70} color="white" />
-        </TouchableOpacity>
-    )
+    render() {
+        return (
+
+            <View style={styles.container} >
+                <TouchableWithoutFeedback
+                    onPressIn={() => {
+                        const { onImage } = this.state;
+                        this.setState({ onImage: !onImage });
+                    }}
+                    onPressOut={() => {
+                        const { onImage } = this.state;
+                        this.setState({ onImage: !onImage });
+                    }}
+                    onPress={() => {
+                        this.submit();
+                    }}>
+                    <Image
+                        source={this.state.onImage ? Images.LIGHT_RIGHT_SWIPE : Images.DARK_RIGHT_SWIPE}
+                        style={styles.image}>
+                    </Image>
+                </TouchableWithoutFeedback >
+            </View>
+        )
+    }
 }

@@ -1,12 +1,14 @@
 import { StyleSheet, Dimensions } from "react-native";
 const SCREEN_HEIGHT = Dimensions.get('window').width;
 export const styles = StyleSheet.create({
-    btnTch: {
-        width: ((SCREEN_HEIGHT * 18) / 100),
-        height: ((SCREEN_HEIGHT * 18) / 100),
-        backgroundColor: '#ACD472',
+    container: {
+        position: 'absolute',
+        bottom: '13%',
+        right: '4%'
+    },
+    image: {
+        width: ((SCREEN_HEIGHT * 32) / 100),
+        height: ((SCREEN_HEIGHT * 32) / 100),
         borderRadius: 100,
-        bottom: '21%',
-        marginLeft: '72%'
     }
 });

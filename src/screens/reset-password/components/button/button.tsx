@@ -1,11 +1,13 @@
 import * as React from "react";
-import { TouchableOpacity } from "react-native";
+import { Image, TouchableWithoutFeedback, View } from "react-native";
 import { styles } from './button-style';
 import { Icon } from 'react-native-elements';
 import { IResetPasswordState, IForgot } from '@models';
 import { showAlert, logger } from '@common_service';
 import { CustomerRestService } from '../../../../services';
 import { transformToFromData, storeAsync } from "@common_service";
+import { Images } from '@themes';
+
 import {
     ErrTitle,
     ErrPasswordMsg,
@@ -20,9 +22,19 @@ export interface ButtonProps {
     navigation: any,
     resetParamsAction: (resetPassword: IResetPasswordState) => any
 }
-export const Button: React.StatelessComponent<ButtonProps> = (props) => {
-    const submit = () => {
-        const { new_password, cnf_password } = props['resetParams'];
+export interface State {
+    onImage: boolean
+}
+export class Button extends React.Component<ButtonProps, State> {
+    constructor(props: ButtonProps) {
+        super(props);
+        this.state = {
+            onImage: true
+        }
+
+    }
+    private submit = () => {
+        const { new_password, cnf_password } = this.props['resetParams'];
 
         if (!new_password) {
             showAlert(ErrTitle, ErrPasswordMsg, 'danger');
@@ -36,11 +48,11 @@ export const Button: React.StatelessComponent<ButtonProps> = (props) => {
             showAlert(ErrTitle, ErrPassMatch, 'danger');
             return;
         }
-        onPasswordReset(new_password);
+        this.onPasswordReset(new_password);
     }
-    const onPasswordReset = (password: string) => {
-        const { navigation } = props;
-        const { reset_key, mobile_number } = props['resetParams'];
+    private onPasswordReset = (password: string) => {
+        const { navigation } = this.props;
+        const { reset_key, mobile_number } = this.props['resetParams'];
         let forgot: IForgot = {
             new_password: password,
             mobile_number,
@@ -61,14 +73,27 @@ export const Button: React.StatelessComponent<ButtonProps> = (props) => {
             showAlert(InternalServerErrorTitle, InternalServerError, 'warning');
         });
     }
-
-    return (
-        <TouchableOpacity
-            style={styles.btnTch}
-            onPress={() => {
-                submit();
-            }}>
-            <Icon name={"chevron-right"} size={70} color="white" />
-        </TouchableOpacity>
-    )
+    render() {
+        return (
+            <View style={styles.container} >
+                <TouchableWithoutFeedback
+                    onPressIn={() => {
+                        const { onImage } = this.state;
+                        this.setState({ onImage: !onImage });
+                    }}
+                    onPressOut={() => {
+                        const { onImage } = this.state;
+                        this.setState({ onImage: !onImage });
+                    }}
+                    onPress={() => {
+                        this.submit();
+                    }}>
+                    <Image
+                        source={this.state.onImage ? Images.LIGHT_RIGHT_SWIPE : Images.DARK_RIGHT_SWIPE}
+                        style={styles.image}>
+                    </Image>
+                </TouchableWithoutFeedback >
+            </View>
+        )
+    }
 }
