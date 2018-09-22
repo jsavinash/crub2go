@@ -61,7 +61,7 @@ import styles from './styles/NavigationStyles'
 
 
 const initialRoute = (): string => {
-  return 'ForgotPassword';
+  return 'City';
 }
 
 const stackRouterConfig: any = {
