@@ -52,12 +52,13 @@ export const Cities: React.StatelessComponent<CitiesProps> = (props) => {
                             >
                                 <View style={styles.div1}>
                                     <View>
-                                        <Text style={styles.txt}>{city.city_name}</Text>
+                                        <Text style={(city.city_id == props.customer['user_city_id']) ? styles.txt1 : styles.txt}>{city.city_name}</Text>
                                     </View>
                                     {city.city_id == props.customer['user_city_id'] ?
-                                        <View>
+                                        <View style={styles.div2}>
                                             <Image
-                                                source={require('../../../../assets/app-images/back_btn_s_1a_h.png')}
+                                                source={require('../../../../assets/app-images/right_btn_s_3b_h.png')}
+                                                resizeMode={'contain'}
                                                 style={styles.img}>
                                             </Image>
                                         </View>

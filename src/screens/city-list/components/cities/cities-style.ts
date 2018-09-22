@@ -13,8 +13,17 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         marginLeft: '4%'
     },
+    txt1: {
+        fontSize: 20,
+        marginLeft: '4%',
+        color: '#ACD472',
+    },
+    div2: {
+        marginRight: '2%'
+
+    },
     img: {
-        width: 30,
-        height: 30
+        width: 25,
+        height: 22
     },
 });
