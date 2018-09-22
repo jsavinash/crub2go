@@ -5,14 +5,20 @@ export const styles = StyleSheet.create({
         margin: 14,
     },
     image: {
-        height: 35,
-        width: 40,
+        height: '40%',
+        width: '10%',  
+    },
+    image1: {
+        height: '30%',
+        width: '15%',
         position: 'absolute',
-        right: 0,
-        marginTop: 25
+        left: 3,
+        bottom: '15%'
     },
     txtField: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+
+        
     },
     txtFieldIn: {
         width: '100%'

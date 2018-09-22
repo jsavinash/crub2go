@@ -17,8 +17,10 @@ const Images = {
     VERIFICATION: require('../assets/app-images/verification.png'),
     RESET: require('../assets/app-images/reset.png'),
     LIGHT_RIGHT_SWIPE: require('../assets/app-images/light_right_swipe.png'),
-    DARK_RIGHT_SWIPE: require('../assets/app-images/dark_right_swipe.png')
-    
+    DARK_RIGHT_SWIPE: require('../assets/app-images/dark_right_swipe.png'),
+    CARD_PAYMENT: require('../assets/app-images/card_payment.png'),
+    ADD_BUTTON: require('../assets/app-images/add_btn.png'),
+    ADD_BUTTON_DARK: require('../assets/app-images/add_btn_h.png')
 }
 
 

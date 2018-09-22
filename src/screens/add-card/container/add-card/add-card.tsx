@@ -1,22 +1,47 @@
 import * as React from "react"
-import { ImageBackground, View, Text, Image } from "react-native";
+import { ImageBackground, ScrollView } from "react-native";
+import SplashScreen from 'react-native-splash-screen';
+import { Images } from '@themes';
 import { styles } from './add-card-style';
-import { CardView } from '../../components';
-export const AddCard: React.StatelessComponent<{}> = () => {
-    return (
-        <ImageBackground
-            source={require('../../../../assets/app-images/bg.png')}
-            style={styles.bgImage}>
-            <Image
-                source={require('../../../../assets/app-images/card_payment.png')}
-                resizeMode="contain"
-                style={styles.image}>
-            </Image>
-            <View style={styles.div1}>
-                <Text
-                    style={styles.div1Txt}>Add Card</Text>
-            </View>
-            <CardView />
-        </ImageBackground>
-    )
+import {
+    CardView,
+    Header,
+    Logo,
+    Button,
+    Title,
+    CardLoader
+} from '../../components';
+export interface Props {
+    customerCreate: (payload: any) => any,
+    navigation: any,
+    customer: any,
+    connection: boolean
+}
+export class AddCard extends React.Component<Props, {}> {
+    dropdown: any
+    constructor(props: Props) {
+        super(props);
+    }
+    componentDidMount() {
+        SplashScreen.hide();
+    }
+
+    render() {
+        const { navigation } = this.props;
+
+        return (
+            <ScrollView>
+                <CardLoader />
+                <ImageBackground
+                    source={Images.BG_IMAGE}
+                    style={styles.bgImage}>
+                    <Header />
+                    <Logo />
+                    <Title />
+                    <CardView />
+                    <Button navigation={navigation} />
+                </ImageBackground>
+            </ScrollView>
+        )
+    }
 }

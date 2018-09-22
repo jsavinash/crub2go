@@ -4,12 +4,11 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 export const styles = StyleSheet.create({
     container: {
-        alignSelf: 'center',
-        borderColor: 'black',
-        borderRadius: 10,
-        width: ((SCREEN_WIDTH * 90) / 100),
-        height: ((SCREEN_HEIGHT * 50) / 100),
-        backgroundColor: 'white',
+        top: ((SCREEN_HEIGHT * 2) / 100),
+        marginLeft: ((SCREEN_HEIGHT * 3) / 100)
+    },
+    img: {
+        width: ((SCREEN_WIDTH * 8) / 100),
+        height: ((SCREEN_HEIGHT * 4) / 100),
     }
 });
-
