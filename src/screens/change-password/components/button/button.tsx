@@ -1,7 +1,7 @@
 import * as React from "react";
-import { TouchableOpacity } from "react-native";
+import { Image, TouchableWithoutFeedback, View } from "react-native";
 import { styles } from './button-style';
-import { Icon } from 'react-native-elements';
+import { Images } from '@themes';
 import { ICustomer, IChangePasswordState, IChangePass } from '@models';
 import { showAlert, logger } from '@common_service';
 import { CustomerRestService } from '../../../../services';
@@ -23,10 +23,20 @@ export interface ButtonProps {
     createCustomerAction: (customer: ICustomer) => any,
     changePasswordParamsAction: (changePassword: IChangePasswordState) => any
 }
-export const Button: React.StatelessComponent<ButtonProps> = (props) => {
 
-    const submit = () => {
-        const { old_password, new_password, cnf_password } = props['changePasswordParams'];
+export interface State {
+    onImage: boolean
+}
+export class Button extends React.Component<ButtonProps, State> {
+    constructor(props: ButtonProps) {
+        super(props);
+        this.state = {
+            onImage: true
+        }
+
+    }
+    private submit = () => {
+        const { old_password, new_password, cnf_password } = this.props['changePasswordParams'];
 
         if (!old_password) {
             showAlert(ErrTitle, ErrOldPass, 'danger');
@@ -44,10 +54,10 @@ export const Button: React.StatelessComponent<ButtonProps> = (props) => {
             showAlert(ErrTitle, ErrPassMatch, 'danger');
             return;
         }
-        delete props['changePasswordParams']['cnf_password'];
-        onChangePassword(props['changePasswordParams']);
+        delete this.props['changePasswordParams']['cnf_password'];
+        this.onChangePassword(this.props['changePasswordParams']);
     }
-    const onChangePassword = (change: IChangePass) => {
+    private onChangePassword = (change: IChangePass) => {
         const { navigation, token, changePasswordParams, changePasswordParamsAction } = props;
         const cpyChangePasswordParams = { ...changePasswordParams };
         cpyChangePasswordParams['isLoading'] = true;
@@ -74,14 +84,27 @@ export const Button: React.StatelessComponent<ButtonProps> = (props) => {
             showAlert(InternalServerErrorTitle, InternalServerError, 'warning');
         });
     }
-
-    return (
-        <TouchableOpacity
-            style={styles.btnTch}
-            onPress={() => {
-                submit();
-            }}>
-            <Icon name={"chevron-right"} size={70} color="white" />
-        </TouchableOpacity>
-    )
+    render() {
+        return (
+            <View style={styles.container}>
+                <TouchableWithoutFeedback
+                    onPressIn={() => {
+                        const { onImage } = this.state;
+                        this.setState({ onImage: !onImage });
+                    }}
+                    onPressOut={() => {
+                        const { onImage } = this.state;
+                        this.setState({ onImage: !onImage });
+                    }}
+                    onPress={() => {
+                        this.submit();
+                    }}>
+                    <Image
+                        source={this.state.onImage ? Images.LIGHT_RIGHT_SWIPE : Images.DARK_RIGHT_SWIPE}
+                        style={styles.image}>
+                    </Image>
+                </TouchableWithoutFeedback >
+            </View>
+        )
+    }
 }

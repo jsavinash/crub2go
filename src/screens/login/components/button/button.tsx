@@ -1,7 +1,6 @@
 import * as React from "react";
-import { TouchableOpacity, Image, Dimensions, TouchableWithoutFeedback, View } from "react-native";
+import { Image, Dimensions, TouchableWithoutFeedback, View } from "react-native";
 import { styles } from './button-style';
-import { Icon } from 'react-native-elements';
 import { ILoginState, ICustomer } from '@models';
 import { showAlert, logger } from '@common_service';
 import { CustomerRestService } from '../../../../services';

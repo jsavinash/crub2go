@@ -61,7 +61,7 @@ import styles from './styles/NavigationStyles'
 
 
 const initialRoute = (): string => {
-  return 'AppEntry';
+  return 'ChangePassword';
 }
 
 const stackRouterConfig: any = {
