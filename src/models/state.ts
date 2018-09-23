@@ -38,10 +38,18 @@ interface ForgotPasswordState {
     mobile_number: string,
     isLoading: boolean
 }
+interface AddCardState {
+    name: string,
+    cardNumber: string,
+    expiryDate: string,
+    cvv: string,
+    isLoading: boolean
+}
 export {
     LoginState as ILoginState,
     RegisterState as IRegisterState,
     ChangePasswordState as IChangePasswordState,
     ResetPasswordState as IResetPasswordState,
-    ForgotPasswordState as IForgotPasswordState
+    ForgotPasswordState as IForgotPasswordState,
+    AddCardState as IAddCardState
 }

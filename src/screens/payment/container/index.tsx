@@ -100,7 +100,9 @@ export class Payment extends React.Component<PaymentProps, PaymentState> {
         </Image>
         return (
             <View style={{
-                flex: 1
+                flex: 1,
+                top: 0,
+                left: 0
             }}>
                 <ScrollView contentContainerStyle={styles.container}>
                     {
@@ -117,9 +119,7 @@ export class Payment extends React.Component<PaymentProps, PaymentState> {
                                 <TouchableOpacity key={idx} onPress={() => {
                                     this.onCardSelect(card);
                                 }}>
-                                    <View style={{
-                                        flex: 1
-                                    }} >
+                                    <View>
                                         {CardName}
                                         <Text style={styles.txt}>{card.brand}</Text>
                                         <Text style={styles.txt2}>**** **** **** {card.last4}</Text>

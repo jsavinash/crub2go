@@ -1,9 +1,9 @@
 import * as React from "react";
-import { ILoginState } from '@models';
+import { IAddCardState } from '@models';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 export interface CardLoaderProps {
-    resetParams: ILoginState,
+    cardAddParams: IAddCardState,
 }
 export interface CardLoaderPropsState {
     loader: boolean
@@ -17,7 +17,7 @@ export class CardLoader extends React.Component<CardLoaderProps, CardLoaderProps
     }
 
     componentWillReceiveProps(nextProps: CardLoaderProps) {
-        const { isLoading } = nextProps['resetParams'];
+        const { isLoading } = nextProps['cardAddParams'];
         if (isLoading && isLoading == true)
             this.setState({ loader: true });
         else

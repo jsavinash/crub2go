@@ -11,7 +11,10 @@ import {
     ResetPasswordDefault,
     ChangePasswordDefault,
     LoginStateDefault,
-    RegisterStateDefault
+    RegisterStateDefault,
+    IAddCardState,
+    AddCardDefault
+
 } from '@models';
 export const CollectReducer = combineReducers<CollectState, CollectActions>({
     loginParams: (state: ILoginState = LoginStateDefault, action) => {
@@ -53,7 +56,15 @@ export const CollectReducer = combineReducers<CollectState, CollectActions>({
             default:
                 return state
         }
-    }
+    },
+    cardAddParams: (state: IAddCardState = AddCardDefault, action) => {
+        switch (action.type) {
+            case getType(collectAction.cardAddParamsAction):
+                return action['payload'];
+            default:
+                return state
+        }
+    },
 })
 
 

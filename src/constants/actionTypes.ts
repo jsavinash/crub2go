@@ -70,6 +70,8 @@ export const REGISTER = 'register/PARAMS';
 export const CHANGE_PASSWORD = 'changePassword/PARAMS';
 export const RESET_PASSWORD = 'resetPassword/PARAMS';
 export const FORGOT_PASSWORD = 'forgotPassword/PARAMS';
+export const CARD_ADD = 'cardAdd/PARAMS';
+
 
 //FAQ
 export const LIST_FAQ = 'faq/LIST';

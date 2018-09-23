@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     },
     image: {
         height: '40%',
-        width: '10%',  
+        width: '10%',
     },
     image1: {
         height: '30%',
@@ -16,9 +16,10 @@ export const styles = StyleSheet.create({
         bottom: '15%'
     },
     txtField: {
+        flexDirection: 'column',
+    },
+    txtField12: {
         flexDirection: 'row',
-
-        
     },
     txtFieldIn: {
         width: '100%'
@@ -30,6 +31,27 @@ export const styles = StyleSheet.create({
     },
     txtFieldIn1: {
         width: '100%'
+    },
+    div1: {
+        alignSelf: 'center'
+    },
+    image2: {
+        height: 30,
+        width: 30,
+    },
+    borderActive: {
+        borderBottomWidth: 2,
+        borderBottomColor: '#ACD472'
+    },
+    borderInactive: {
+        borderBottomWidth: 2,
+        borderBottomColor: '#aaa'
+    },
+    div2: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    div3: {
+        width: "48%"
     }
-
 });

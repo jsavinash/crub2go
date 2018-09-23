@@ -67,6 +67,15 @@ const ForgotPasswordDefault = {
     mobile_number: '',
     isLoading: false
 }
+
+const AddCardDefault = {
+    name: '',
+    cardNumber: '',
+    expiryDate: '',
+    cvv: '',
+    isLoading: false
+}
+
 export {
     LoginStateDefault,
     RegisterStateDefault,
@@ -74,5 +83,6 @@ export {
     ResetPasswordDefault,
     IResponseDefault,
     CartTotalDefault,
-    ForgotPasswordDefault
+    ForgotPasswordDefault,
+    AddCardDefault
 }

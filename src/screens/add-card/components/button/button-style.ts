@@ -3,7 +3,7 @@ const SCREEN_HEIGHT = Dimensions.get('window').width;
 export const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        bottom: '15%',
+        bottom: '18%',
         right: '4%'
     },
     image: {

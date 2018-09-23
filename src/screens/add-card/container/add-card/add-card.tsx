@@ -35,7 +35,7 @@ export class AddCard extends React.Component<Props, {}> {
                 <ImageBackground
                     source={Images.BG_IMAGE}
                     style={styles.bgImage}>
-                    <Header />
+                    <Header navigation={navigation}/>
                     <Logo />
                     <Title />
                     <CardView />

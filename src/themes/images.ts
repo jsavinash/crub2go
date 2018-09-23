@@ -20,7 +20,13 @@ const Images = {
     DARK_RIGHT_SWIPE: require('../assets/app-images/dark_right_swipe.png'),
     CARD_PAYMENT: require('../assets/app-images/card_payment.png'),
     ADD_BUTTON: require('../assets/app-images/add_btn.png'),
-    ADD_BUTTON_DARK: require('../assets/app-images/add_btn_h.png')
+    ADD_BUTTON_DARK: require('../assets/app-images/add_btn_h.png'),
+    LOCKER_ACTIVE: require('../assets/app-images/img_changepass.png'),
+    LOCKER_INACTIVE: require('../assets/app-images/img_changepass_h.png'),
+    CALENDER_ACTIVE: require('../assets/app-images/calndr_icon_h.png'),
+    CALENDER_INACTIVE: require('../assets/app-images/calndr_icon.png'),
+    CARD_ACTIVE: require('../assets/app-images/card_active.png'),    
+    CARD_INACTIVE: require('../assets/app-images/card_deactive.png'),    
 }
 
 

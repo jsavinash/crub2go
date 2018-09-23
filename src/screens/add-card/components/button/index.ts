@@ -4,10 +4,11 @@ import { custAction, collectAction } from "@state_action";
 import { RootState } from "@root_state";
 const mapDispatchToProps = {
     createCustomerAction: custAction['createCustomer'],
-    resetParamsAction: collectAction['resetParamsAction']
+    cardAddParamsAction: collectAction['cardAddParamsAction']
 }
 const mapStateToProps = (state: RootState) => ({
-    resetParams: state['collect']['resetParams']
+    cardAddParams: state['collect']['cardAddParams'],
+    customer: state['customer']['customer']
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Button)
 

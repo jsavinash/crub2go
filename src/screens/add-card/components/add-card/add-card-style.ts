@@ -8,9 +8,9 @@ export const styles = StyleSheet.create({
         borderColor: 'black',
         borderRadius: 22,
         width: ((SCREEN_WIDTH * 90) / 100),
-        height: ((SCREEN_HEIGHT * 44) / 100),
+        height: ((SCREEN_HEIGHT * 45) / 100),
         backgroundColor: 'white',
-        marginBottom:((SCREEN_HEIGHT * 26) / 100)
+        marginBottom:((SCREEN_HEIGHT * 32) / 100)
     }
 });
 
