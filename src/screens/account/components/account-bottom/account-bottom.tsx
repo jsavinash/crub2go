@@ -7,6 +7,7 @@ import { createReduxBoundAddListener } from 'react-navigation-redux-helpers';
 import { settings, supports } from '../account-constant';
 import { removeAsync } from '@common_service';
 import Dialog from "react-native-dialog";
+import Share from 'react-native-share';
 
 export interface AccountBottomProps {
     nav: NavigationState
@@ -30,7 +31,7 @@ export class AccountBottom extends React.Component<AccountBottomProps, State> {
         }
         this.initBlock();
     }
-    
+
     private handleDialog = (option: string) => {
         const _self = this;
         switch (option) {
@@ -48,7 +49,7 @@ export class AccountBottom extends React.Component<AccountBottomProps, State> {
     showDialog = () => {
         this.setState({ dialogVisible: true });
     };
-    
+
     private initBlock = () => {
         settings.forEach((setting: any, idx: number) => {
             if (idx == (settings.length - 1)) {
@@ -99,10 +100,23 @@ export class AccountBottom extends React.Component<AccountBottomProps, State> {
         }
     }
     private contactUs = () => {
+        const shareOptions = {
+            title: 'Send Email...',
+            url: 'Checkout Crub2go app for food ordering on Store https://play.google.com/apps/details?id=com.crub2go',
+            social: Share.Social.WHATSAPP,
+        };
+        return Share.open(shareOptions);
     }
     private tellFriends = () => {
-
-
+        this.onShare();
+    }
+    private onShare() {
+        const shareOptions = {
+            title: 'Share with',
+            url: 'Checkout Crub2go app for food ordering on Store https://play.google.com/apps/details?id=com.crub2go',
+            social: Share.Social.WHATSAPP
+        };
+        return Share.open(shareOptions);
     }
     private logout = () => {
         const _self = this;

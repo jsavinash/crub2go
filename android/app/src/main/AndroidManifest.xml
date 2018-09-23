@@ -15,6 +15,15 @@
       android:icon="@mipmap/ic_launcher"
       android:allowBackup="false"
       android:theme="@style/AppTheme">
+       <provider
+        android:name="android.support.v4.content.FileProvider"
+        android:authorities="${applicationId}.provider"
+        android:grantUriPermissions="true"
+        android:exported="false">
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/filepaths" />
+    </provider>
              <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyClIqoDD2VGA_FfWvFBrt_UacvjqNBLwao" />
