@@ -28,7 +28,7 @@ export class Upload extends React.Component<HeaderProps, HeaderState> {
     }
 
     private onImageChange = (image: any) => {
-        console.log("image", image);
+        if(image && !image['didCancel']){
         CompressImage.createCompressedImage(image['uri'], image['path']).then((response: any) => {
             console.log("response", response);
             const { registerParams, registerParamsAction } = this.props;
@@ -40,6 +40,7 @@ export class Upload extends React.Component<HeaderProps, HeaderState> {
             // Oops, something went wrong. Check that the filename is correct and
             // inspect err to get more details.
         });
+    }
 
     }
 

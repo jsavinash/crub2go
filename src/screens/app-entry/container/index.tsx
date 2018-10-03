@@ -33,8 +33,6 @@ export class AppEntry extends React.Component<AppEntryProps, {}> {
             const city = JSON.parse(retrievedUser[1][1]);
             console.log("retrievedUser", retrievedUser);
             let userWithCity: any = {};
-
-
             if (city) {
                 userWithCity['user_city'] = city['city_name'];
                 userWithCity['user_city_id'] = city['city_id'];
@@ -80,6 +78,7 @@ export class AppEntry extends React.Component<AppEntryProps, {}> {
     private deal = () => {
         const { dealAction } = this.props;
         DealsRestService.listDeals().then((dealData: any) => {
+            console.log("dealData", dealData);
             if (dealData['data']['settings']['success'] == 1) {
                 dealAction(dealData['data']['data']);
             }

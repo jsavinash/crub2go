@@ -32,7 +32,6 @@ export class Payment extends React.Component<PaymentProps, PaymentState> {
 
     }
     componentDidMount() {
-        SplashScreen.hide();
         this.getCard();
         this.initState();
         this.move();
@@ -46,6 +45,7 @@ export class Payment extends React.Component<PaymentProps, PaymentState> {
             user_stripe_id: stripId
         };
         CardRestService.listCard(transformToFromData(cardParams), token).then((success: any) => {
+            console.log("success card list", success);
             if (success['data']['settings']['success'] == 1) {
                 this.props.listCards(success['data']['data'][0]['customer_cards']);
             } else if (success['data']['settings']['success'] == 0) {
@@ -98,58 +98,92 @@ export class Payment extends React.Component<PaymentProps, PaymentState> {
             source={require('../../../assets/app-images/img_americanexp.png')}
             style={styles.img}>
         </Image>
-        return (
-            <View style={{
-                flex: 1,
-                top: 0,
-                left: 0
-            }}>
-                <ScrollView contentContainerStyle={styles.container}>
-                    {
-                        this.props.cards.map((card: any, idx: number) => {
-                            let CardName: any = AmericanExpressCard;
-                            if (card.brand == "MasterCard") {
-                                CardName = MasterCard;
-                            } else if (card.brand == "VisaCard") {
-                                CardName = VisaCard;
-                            } else {
-                                CardName = AmericanExpressCard;
-                            }
-                            return (
-                                <TouchableOpacity key={idx} onPress={() => {
-                                    this.onCardSelect(card);
-                                }}>
-                                    <View>
-                                        {CardName}
-                                        <Text style={styles.txt}>{card.brand}</Text>
-                                        <Text style={styles.txt2}>**** **** **** {card.last4}</Text>
-                                        {this.state['selectedCard'][card['id']] ?
-                                            < Image
-                                                source={require('../../../assets/app-images/img_tickbig.png')}
-                                                style={
-                                                    {
-                                                        position: 'absolute',
-                                                        height: ((SCREEN_HEIGHT * 13) / 100),
-                                                        width: ((SCREEN_HEIGHT * 22) / 100),
-                                                        alignSelf: 'center',
-                                                        marginTop: "14%"
+        if (this.props.cards.length > 0) {
+            return (
+                <View style={{
+                    flex: 1,
+                    top: 0,
+                    left: 0
+                }}>
+                    <ScrollView contentContainerStyle={styles.container}>
+                        {
+                            this.props.cards.map((card: any, idx: number) => {
+                                let CardName: any = AmericanExpressCard;
+                                if (card.brand == "MasterCard") {
+                                    CardName = MasterCard;
+                                } else if (card.brand == "VisaCard") {
+                                    CardName = VisaCard;
+                                } else {
+                                    CardName = AmericanExpressCard;
+                                }
+                                return (
+                                    <TouchableOpacity key={idx} onPress={() => {
+                                        this.onCardSelect(card);
+                                    }}>
+                                        <View>
+                                            {CardName}
+                                            <Text style={styles.txt}>{card.brand}</Text>
+                                            <Text style={styles.txt2}>**** **** **** {card.last4}</Text>
+                                            {this.state['selectedCard'][card['id']] ?
+                                                < Image
+                                                    source={require('../../../assets/app-images/img_tickbig.png')}
+                                                    style={
+                                                        {
+                                                            position: 'absolute',
+                                                            height: ((SCREEN_HEIGHT * 13) / 100),
+                                                            width: ((SCREEN_HEIGHT * 22) / 100),
+                                                            alignSelf: 'center',
+                                                            marginTop: "14%"
+                                                        }
                                                     }
-                                                }
-                                            >
-                                            </Image>
-                                            :
-                                            <View />
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            )
-                        })
-                    }
-                </ScrollView>
-                <FAB buttonColor="red" iconTextColor="#FFFFFF" onClickAction={() => { this.props.navigation.navigate('AddCard'); }} visible={true} iconTextComponent={<Icon name="plus" />} />
-            </View>
-        )
+                                                >
+                                                </Image>
+                                                :
+                                                <View />
+                                            }
+                                        </View>
+                                    </TouchableOpacity>
+                                )
+                            })
+                        }
+                    </ScrollView>
+                    <FAB buttonColor="red" iconTextColor="#FFFFFF" onClickAction={() => { this.props.navigation.navigate('AddCard'); }} visible={true} iconTextComponent={<Icon name="plus" />} />
+                </View>
+            )
+        } else {
+
+
+            return (
+                <View style={{
+                    top: "40%",
+                    position: 'absolute',
+                    alignSelf: 'center'
+                }}>
+                    <View style={{
+                        width: ((SCREEN_WIDTH * 95) / 100),
+                        height: ((SCREEN_HEIGHT * 18) / 100)
+                    }}>
+                        <Image
+                            source={require('../../../assets/app-images/img_noitems.png')}
+                            resizeMode={'contain'}
+                            style={{
+                                width: ((SCREEN_WIDTH * 95) / 100),
+                                height: ((SCREEN_HEIGHT * 15) / 100)
+                            }}
+                        ></Image>
+
+                    </View>
+                    <View>
+                        <Text style={{
+                            fontSize: 22,
+                            textAlign: 'center'
+                        }}>  No Card Added</Text>
+                    </View>
+                </View>
+            )
+        }
     }
+
 }
 
 

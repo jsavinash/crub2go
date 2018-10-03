@@ -14,9 +14,13 @@ interface RegisterCardFieldState {
     isMobile: boolean,
     isEmail: boolean,
     isPassword: boolean,
-    isCnfPassword: boolean
+    isCnfPassword: boolean,
 }
 export class RegisterCardField extends React.Component<RegisterCardFieldProps, RegisterCardFieldState> {
+    secondField: any;
+    thirdField: any;
+    fourField: any;
+    fifthField: any;
     constructor(props: RegisterCardFieldProps) {
         super(props);
         this.state =
@@ -27,8 +31,11 @@ export class RegisterCardField extends React.Component<RegisterCardFieldProps, R
                 isPassword: false,
                 isCnfPassword: false
             };
+        this.secondField = React.createRef();
+        this.thirdField = React.createRef();
+        this.fourField = React.createRef();
+        this.fifthField = React.createRef();
     }
-    
     private onNameChange = (name: string) => {
         const { registerParams, registerParamsAction } = this.props;
         const cpyRegisterParams = { ...registerParams };
@@ -69,7 +76,12 @@ export class RegisterCardField extends React.Component<RegisterCardFieldProps, R
                             textColor='black'
                             tintColor="#ACD472"
                             lineWidth={2}
+                            returnKeyType={"next"}
+                            autoFocus={true}
                             animationDuration={60}
+                            onSubmitEditing={() => {
+                                this.secondField.current.focus();
+                            }}
                             onFocus={() => {
                                 this.setState({ isName: true });
                             }}
@@ -95,9 +107,13 @@ export class RegisterCardField extends React.Component<RegisterCardFieldProps, R
                             baseColor='#aaa'
                             textColor='black'
                             tintColor="#ACD472"
+                            ref={this.secondField}
                             lineWidth={2}
                             keyboardType={'numeric'}
                             animationDuration={60}
+                            onSubmitEditing={() => {
+                                this.thirdField.current.focus();
+                            }}
                             onFocus={() => {
                                 this.setState({ isMobile: true });
                             }}
@@ -125,6 +141,10 @@ export class RegisterCardField extends React.Component<RegisterCardFieldProps, R
                             textColor='black'
                             tintColor="#ACD472"
                             lineWidth={2}
+                            onSubmitEditing={() => {
+                                this.fourField.current.focus();
+                            }}
+                            ref={this.thirdField}
                             animationDuration={60}
                             onFocus={() => {
                                 this.setState({ isEmail: true });
@@ -150,6 +170,10 @@ export class RegisterCardField extends React.Component<RegisterCardFieldProps, R
                     <View style={styles.txtFieldIn}>
                         <TextField label='Password'
                             baseColor='#aaa'
+                            ref={this.fourField}
+                            onSubmitEditing={() => {
+                                this.fifthField.current.focus();
+                            }}
                             textColor='black'
                             tintColor="#ACD472"
                             secureTextEntry={true}
@@ -180,6 +204,7 @@ export class RegisterCardField extends React.Component<RegisterCardFieldProps, R
                             baseColor='#aaa'
                             textColor='black'
                             tintColor="#ACD472"
+                            ref={this.fifthField}
                             lineWidth={2}
                             animationDuration={60}
                             secureTextEntry={true}
