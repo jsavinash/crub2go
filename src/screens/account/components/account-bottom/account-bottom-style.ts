@@ -32,8 +32,8 @@ export const styles = StyleSheet.create({
     image: {
         marginLeft: '5%',
         marginTop: '2%',
-        height: 40,
-        width: 40,
+        height: 25,
+        width: 25,
         left: 0
     },
     touchTxt: {
