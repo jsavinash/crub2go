@@ -26,7 +26,8 @@ export class Login extends React.Component<Props, {}> {
     getRouteParams = () => {
         const { navigation } = this.props;
         const screen = navigation.getParam('screen', '');
-        if (screen)
+        console.log("screen", screen);
+        if (screen == "Forgot")
             showAlert('crub2go', 'Password updated Successfully', 'success');
     }
     render() {
