@@ -57,7 +57,7 @@ export const Checkout = {
     header: null
 }
 export const Favourite = {
-    title: 'Favourite',
+    title: 'My Favorites',
     headerStyle: { backgroundColor: 'white' },
     headerTitleStyle: {
         color: '#4E4E4E',

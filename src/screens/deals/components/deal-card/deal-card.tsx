@@ -108,7 +108,7 @@ export const DealCard: React.StatelessComponent<DealCardProps> = (props) => {
                         <Text style={{
                             fontSize: 22,
                             textAlign: 'center'
-                        }}>  No offers avilable currently</Text>
+                        }}>  No offers available currently</Text>
                     </View>
                 </View>
 

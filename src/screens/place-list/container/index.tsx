@@ -142,7 +142,7 @@ export class PlaceList extends React.Component<Props, State> {
                     });
                 _self.props.listRestaurants(reconstruct);
             } else if (restaurantData['data']['settings']['success'] == 0) {
-                _self.props.listRestaurants([]);
+              //  _self.props.listRestaurants([]);
             }
             _self.props.restaurantParamsAction(params);
         }).catch((error) => {

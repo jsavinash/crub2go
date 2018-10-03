@@ -13,16 +13,13 @@ export interface MainBoxProps {
     onMenuSelect: (data: any) => any,
     onItemSelect: (data: any) => any,
 }
-
 interface MainBoxState {
     categorie: any
 }
-
 export class MainContainer extends React.Component<MainBoxProps, MainBoxState> {
     constructor(props: MainBoxProps) {
         super(props);
     }
-
     render() {
         return (
             <View style={styles.container}>
@@ -45,23 +42,22 @@ export class MainContainer extends React.Component<MainBoxProps, MainBoxState> {
                     :
                     <>
                         <View style={{
-                            top: "60%",
+                            top: "55%",
                             position: 'absolute',
                             alignSelf: 'center'
                         }}>
                             <View style={{
                                 width: ((SCREEN_WIDTH * 95) / 100),
-                                height: ((SCREEN_HEIGHT * 18) / 100)
+                                height: ((SCREEN_HEIGHT * 12) / 100)
                             }}>
                                 <Image
                                     source={require('../../../assets/app-images/img_noitems.png')}
                                     resizeMode={'contain'}
                                     style={{
                                         width: ((SCREEN_WIDTH * 95) / 100),
-                                        height: ((SCREEN_HEIGHT * 15) / 100)
+                                        height: ((SCREEN_HEIGHT * 12) / 100)
                                     }}
                                 ></Image>
-
                             </View>
                             <View>
                                 <Text style={{

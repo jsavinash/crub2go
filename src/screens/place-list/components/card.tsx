@@ -25,14 +25,14 @@ export class Card extends React.Component<CardProps, CardState> {
         this.props.navigation.navigate('City');
     }
     private favorite = (restaurant: any) => {
-        const { customer }  = this.props;
+        const { customer } = this.props;
         let data = {
             user_id: customer['user_id'],
-            restaurant_id:restaurant['restaurant_id']
+            restaurant_id: restaurant['restaurant_id']
         }
         RestaurantRestService.markFavoriteRestaurant(transformToFromData(data), customer['user_access_token']).then((fav: any) => {
-console.log("fav", fav);
-this.props.init();
+            console.log("fav", fav);
+            this.props.init();
         }).catch((error: any) => {
 
         })
