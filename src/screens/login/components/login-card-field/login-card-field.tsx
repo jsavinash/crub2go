@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Image } from "react-native";
+import { View, Image, Text, TouchableWithoutFeedback } from "react-native";
 import { TextField } from "react-native-material-textfield";
 import { Images } from "@themes";
 import { styles } from "./login-card-field-style";
@@ -12,7 +12,8 @@ export interface LoginCardFieldProps {
 
 interface LoginCardFieldState {
     isUserId: boolean,
-    isPassword: boolean
+    isPassword: boolean,
+    passInputType: boolean
 }
 
 export class LoginCardField extends React.Component<LoginCardFieldProps, LoginCardFieldState> {
@@ -22,6 +23,7 @@ export class LoginCardField extends React.Component<LoginCardFieldProps, LoginCa
         this.state = {
             isUserId: false,
             isPassword: false,
+            passInputType: true
         };
         this.secondField = React.createRef();
     }
@@ -36,6 +38,11 @@ export class LoginCardField extends React.Component<LoginCardFieldProps, LoginCa
         const cpyLoginParams = { ...loginParams };
         cpyLoginParams['user_password'] = password;
         loginParamsAction(cpyLoginParams)
+    }
+    private passSecure = () => {
+        const { passInputType } = this.state;
+        console.log("passInputType", passInputType);
+        this.setState({ passInputType: !passInputType });
     }
     render() {
         return (
@@ -80,7 +87,7 @@ export class LoginCardField extends React.Component<LoginCardFieldProps, LoginCa
                             lineWidth={2}
                             ref={this.secondField}
                             animationDuration={60}
-                            secureTextEntry={true}
+                            secureTextEntry={this.state.passInputType}
                             onChangeText={(password: string) => this.onPasswordChange(password)}
                             onFocus={() => {
                                 this.setState({ isPassword: true });
@@ -89,15 +96,27 @@ export class LoginCardField extends React.Component<LoginCardFieldProps, LoginCa
                                 this.setState({ isPassword: false });
                             }}
                         />
-                        <Image
-                            source={
-                                this.state['isPassword'] ?
-                                    Images.EYE_ACTIVE
-                                    :
-                                    Images.EYE_INACTIVE
-                            }
-                            style={styles.imageEye}
-                        ></Image>
+                        <TouchableWithoutFeedback onPress={() => {
+                            this.passSecure();
+                        }}>
+                            <Image
+                                source={Images.EYE_ACTIVE}
+                                style={styles.imageEye}
+                            ></Image>
+                        </TouchableWithoutFeedback>
+                        {this.state.passInputType ? <Text style={{
+                            position: 'absolute',
+                            fontSize: 24,
+                            fontWeight: '900',
+                            height: '40%',
+                            width: '8%',
+                            right: 0,
+                            bottom: '22%',
+                            color: '#ACD472',
+                        }}>\</Text> : <Text style={{
+                            position: 'absolute',
+                        }} />
+                        }
                     </View>
                 </View>
             </View>

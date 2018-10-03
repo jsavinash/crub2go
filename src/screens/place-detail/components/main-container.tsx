@@ -1,6 +1,9 @@
 import * as React from "react";
-import { StyleSheet, View } from 'react-native';
+import { View, Image, Text } from 'react-native';
 import { PlaceCard, Menu, ScrollText, ItemList } from './index';
+import { StyleSheet, Dimensions } from 'react-native';
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 export interface MainBoxProps {
     resturant: any,
     categories: any,
@@ -27,15 +30,48 @@ export class MainContainer extends React.Component<MainBoxProps, MainBoxState> {
                     navigation={this.props.navigation}
                     resturant={this.props.resturant}
                     customer={this.props.customer} />
-                <Menu />
-                <ScrollText
-                    categorySelect={this.props.onMenuSelect}
-                    categories={this.props.categories} />
-                <ItemList
-                    onItemSelect={this.props.onItemSelect}
-                    menuList={this.props.menuList}
-                    navigation={this.props.navigation}
-                />
+                {(this.props.menuList.length > 0) ?
+                    <>
+                        <Menu />
+                        <ScrollText
+                            categorySelect={this.props.onMenuSelect}
+                            categories={this.props.categories} />
+                        <ItemList
+                            onItemSelect={this.props.onItemSelect}
+                            menuList={this.props.menuList}
+                            navigation={this.props.navigation}
+                        />
+                    </>
+                    :
+                    <>
+                        <View style={{
+                            top: "60%",
+                            position: 'absolute',
+                            alignSelf: 'center'
+                        }}>
+                            <View style={{
+                                width: ((SCREEN_WIDTH * 95) / 100),
+                                height: ((SCREEN_HEIGHT * 18) / 100)
+                            }}>
+                                <Image
+                                    source={require('../../../assets/app-images/img_noitems.png')}
+                                    resizeMode={'contain'}
+                                    style={{
+                                        width: ((SCREEN_WIDTH * 95) / 100),
+                                        height: ((SCREEN_HEIGHT * 15) / 100)
+                                    }}
+                                ></Image>
+
+                            </View>
+                            <View>
+                                <Text style={{
+                                    fontSize: 22,
+                                    textAlign: 'center'
+                                }}>No Menu available</Text>
+                            </View>
+                        </View>
+                    </>
+                }
             </View>
         )
     }

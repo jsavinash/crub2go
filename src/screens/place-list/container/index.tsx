@@ -212,6 +212,7 @@ export class PlaceList extends React.Component<Props, State> {
     }
     selected = (resturant: any) => {
         const _self = this;
+        console.log("resturant", resturant);
         _self.props.selectedRestaurantAction(resturant);
         _self.props.navigation.navigate('PlaceDetail');
     }

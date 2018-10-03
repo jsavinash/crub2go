@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, TouchableOpacity, Text } from "react-native";
+import { View, TouchableWithoutFeedback, Text } from "react-native";
 import { styles } from './footer-style';
 export interface FooterProps {
     navigation: any
@@ -10,11 +10,13 @@ export const Footer: React.StatelessComponent<FooterProps> = (props) => {
             style={styles.container}>
             <View style={styles.div1}>
                 <Text style={styles.txt1}>Don't have an account?</Text>
-                <TouchableOpacity onPress={() => {
+                <TouchableWithoutFeedback onPress={() => {
                     props.navigation.navigate('Register');
                 }}>
-                    <Text style={styles.txt2}>Register</Text>
-                </TouchableOpacity>
+                    <View>
+                        <Text style={styles.txt2}>Register</Text>
+                    </View>
+                </TouchableWithoutFeedback>
             </View>
         </View>
     )

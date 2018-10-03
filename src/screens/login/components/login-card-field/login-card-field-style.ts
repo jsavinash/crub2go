@@ -12,6 +12,13 @@ export const styles = StyleSheet.create({
         bottom: '14%'
     },
     imageEye: {
+        height: '36%',
+        width: '12%',
+        position: 'absolute',
+        right: 0,
+        bottom: '20%'
+    },
+    imageEyeBlack: {
         height: '30%',
         width: '10%',
         position: 'absolute',
