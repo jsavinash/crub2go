@@ -5,7 +5,6 @@ import { Images } from '@themes';
 import { styles } from './login-style';
 import { showAlert } from '@common_service';
 import { LoginLoader, LoginCard, Skip, Logo, Footer, Button } from '../../components';
-
 export interface Props {
     customerCreate: (payload: any) => any,
     navigation: any,
@@ -26,7 +25,6 @@ export class Login extends React.Component<Props, {}> {
     getRouteParams = () => {
         const { navigation } = this.props;
         const screen = navigation.getParam('screen', '');
-        console.log("screen", screen);
         if (screen == "Forgot")
             showAlert('crub2go', 'Password updated Successfully', 'success');
     }
