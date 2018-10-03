@@ -51,7 +51,6 @@ export class Button extends React.Component<ButtonProps, State> {
     private submit = () => {
         const { cardAddParamsAction, cardAddParams } = this.props;
         const { user_access_token, user_stripe_id } = this.props['customer'];
-        console.log(" this.props['cardAddParams']", this.props['cardAddParams']);
         let expDate = this.props['cardAddParams']['expiryDate'];
         let split = expDate.split("/");
         let dateMonth = parseInt(split[0]);
@@ -74,7 +73,6 @@ export class Button extends React.Component<ButtonProps, State> {
                 stripe_token_id: tokenId
             }
             CardRestService.addCard(transformToFromData(stripeParams), user_access_token).then((addedCard: any) => {
-                console.log("addedCard", addedCard);
                 const cpyCardAddParams = { ...cardAddParams };
                 cpyCardAddParams['isLoading'] = false;
                 cardAddParamsAction(cpyCardAddParams);

@@ -31,7 +31,6 @@ export class AppEntry extends React.Component<AppEntryProps, {}> {
         const getUser = (retrievedUser: any) => {
             const user = JSON.parse(retrievedUser[0][1]);
             const city = JSON.parse(retrievedUser[1][1]);
-            console.log("retrievedUser", retrievedUser);
             let userWithCity: any = {};
             if (city) {
                 userWithCity['user_city'] = city['city_name'];

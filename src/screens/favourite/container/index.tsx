@@ -41,10 +41,8 @@ export class Favourite extends React.Component<Props, State> {
     initRestaurants = () => {
         const _self = this;
         const { customer } = this.props;
-        let params: IRestaurantsParams;
         let reconstruct: any = [];
         RestaurantRestService.listFavoriteRestaurant(customer['user_access_token'] ? customer['user_access_token'] : '').then((restaurantData: any) => {
-            console.log("restaurantData.........", restaurantData);
             if (restaurantData['data']['settings']['success'] == 1) {
                 restaurantData['data']['data'].forEach((restaurant: any, idx: number) => {
                     restaurant.restaurant_image = restaurant.restaurant_image[0];

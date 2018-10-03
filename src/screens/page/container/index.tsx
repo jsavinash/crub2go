@@ -32,7 +32,6 @@ export class Page extends React.Component<PageProps, PageState> {
     getRouteParams = () => {
         const { navigation } = this.props;
         const type = navigation.getParam('type', '');
-        console.log("type", type);
         this.setState({ currentPage: type });
         if (this.props.aboutUsContent.content != "" && type == "aboutus")
             return;

@@ -203,7 +203,6 @@ export class CheckoutActionSheet extends React.Component<CheckoutActionSheetProp
         checkoutParamsAction(cpyCheckoutParams);
     }
     render() {
-        console.log("this.props.checkoutParams", this.props.checkoutParams);
         if (this.props.checkoutParams && (this.props.checkoutParams.isCheckoutSheet == true)) {
             return (
                 <View style={styles.container}>

@@ -43,12 +43,11 @@ export const Cities: React.StatelessComponent<CitiesProps> = (props) => {
             {
                 props.cities.map((city, idx) => {
                     return (
-                        <View style={styles.container}>
+                        <View style={styles.container} key={idx}>
                             <TouchableOpacity
                                 onPress={() => {
                                     selectedCity(city)
                                 }}
-                                key={idx}
                             >
                                 <View style={styles.div1}>
                                     <View>

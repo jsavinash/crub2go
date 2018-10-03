@@ -82,7 +82,6 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
         let formData = transformToFromData(cartToCartParams);
         if (customer && customer['user_access_token']) {
             CartRestService.addToCart(formData, customer['user_access_token']).then((success: any) => {
-             console.log("success['data'] 12345", success['data']);
                 if (success['data']['settings']['success'] == 1) {
                         this.getCartDetails();
 

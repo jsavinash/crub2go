@@ -105,8 +105,6 @@ export class AddCardField extends React.Component<LoginCardFieldProps, LoginCard
                                     placeholder={'1234 1234 1234 1234'}
                                     refInput={cardNum => { this.input1 = cardNum }}
                                     onChangeText={(formatted: any, extracted: any) => {
-                                        console.log(formatted) // +1 (123) 456-78-90
-                                        console.log(extracted) // 1234567890
                                         this.cardNumber(extracted);
                                     }}
                                     mask={"[0000] [0000] [0000] [0000]"}
@@ -160,8 +158,6 @@ export class AddCardField extends React.Component<LoginCardFieldProps, LoginCard
                                         placeholder={'Expiry date'}
                                         refInput={expiry => { this.input2 = expiry }}
                                         onChangeText={(formatted: any, extracted: any) => {
-                                            console.log(formatted) // +1 (123) 456-78-90
-                                            console.log(extracted) // 1234567890
                                             this.expiryDate(formatted);
                                         }}
                                         style={{
@@ -215,8 +211,6 @@ export class AddCardField extends React.Component<LoginCardFieldProps, LoginCard
                                     placeholder={'123'}
                                     refInput={cvvRef => { this.input3 = cvvRef }}
                                     onChangeText={(formatted: any, extracted: any) => {
-                                        console.log(formatted) // +1 (123) 456-78-90
-                                        console.log(extracted) // 1234567890
                                         this.cvv(extracted);
                                     }}
                                     style={{

@@ -25,8 +25,6 @@ export class BottomCheckout extends React.Component<BottomCheckoutProps, BottomC
     }
     render() {
         const { cartTotal, cart, nav } = this.props;
-        console.log(" render this.props", this.props);
-        console.log("render this.nav", nav);
         let currentRouteName = "";
         if (nav && nav['routes']) {
             currentRouteName = nav['routes'][nav['routes'].length - 1]['routeName'];

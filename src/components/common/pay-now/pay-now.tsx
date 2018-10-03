@@ -32,28 +32,17 @@ export class PayNow extends React.Component<PayNowProps, PayNowState> {
 
     private submit = () => {
         const { checkoutParams, token } = this.props;
-
         OrderRestService.placeOrder(transformToFromData(checkoutParams), token).then((success: any) => {
-            console.log("payment", success);
-            this.navigation.dispatch(NavigationActions.reset(
-                {
-                    index: 0,
-                    actions: [
-                        NavigationActions.navigate({ routeName: 'PaymentSuccess', params: {
-                            data: success['data']['data']
-                        }})
-                    ]
-                }));
             if (success['data']['settings']['success'] == 1) {
-                // this.navigation.dispatch(NavigationActions.reset(
-                //     {
-                //         index: 0,
-                //         actions: [
-                //             NavigationActions.navigate({ routeName: 'PaymentSuccess', params: {
-                //                 data: success['data']['data']
-                //             }})
-                //         ]
-                //     }));
+                this.navigation.dispatch(NavigationActions.reset(
+                    {
+                        index: 0,
+                        actions: [
+                            NavigationActions.navigate({ routeName: 'PaymentSuccess', params: {
+                                data: success['data']['data']
+                            }})
+                        ]
+                    }));
             
             } else if (success['data']['settings']['success'] == 0) {
                 // this.navigation.dispatch(NavigationActions.reset(

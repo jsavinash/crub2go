@@ -17,6 +17,7 @@ export class RegisterLoader extends React.Component<RegisterLoaderProps, Registe
     }
 
     componentWillReceiveProps(nextProps: RegisterLoaderProps) {
+        console.log("nextProps['registerParams']", nextProps['registerParams']);
         const { isLoading } = nextProps['registerParams'];
         if (isLoading)
             this.setState({ loader: true });
@@ -24,7 +25,9 @@ export class RegisterLoader extends React.Component<RegisterLoaderProps, Registe
             this.setState({ loader: false });
     }
 
+    
     render() {
+        console.log("this.state.loader", this.state.loader);
         return (
             <Spinner visible={this.state.loader} textStyle={{ color: '#FFF' }} />
         )

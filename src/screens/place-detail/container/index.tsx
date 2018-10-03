@@ -43,7 +43,6 @@ export class PlaceDetail extends React.Component<PlaceDetailProps, PlaceDetailPr
         let currentCategory: any = {};
         let filterData: any = [];
         RestaurantRestService.listMenuRestaurant(transformToFromData(menuParams)).then((menu: any) => {
-            console.log("menuParams", menu);
             if (menu['data']['settings']['success'] == 1) {
                 this.props.listCategoriesAction(menu['data']['data'][0]['category']);
                 this.props.listMenuListAction(menu['data']['data'][0]['item']);
@@ -76,9 +75,6 @@ export class PlaceDetail extends React.Component<PlaceDetailProps, PlaceDetailPr
         }
     }
     render() {
-        console.log("this.props.cart", this.props.cart);
-        console.log("this.props.cartTotal", this.props.cartTotal);
-
         return (
             <View style={styles.container}>
                 <MainContainer

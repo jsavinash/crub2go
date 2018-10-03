@@ -16,12 +16,14 @@ interface LoginCardFieldState {
 }
 
 export class LoginCardField extends React.Component<LoginCardFieldProps, LoginCardFieldState> {
+    secondField: any;
     constructor(props: LoginCardFieldProps) {
         super(props);
         this.state = {
             isUserId: false,
             isPassword: false,
         };
+        this.secondField = React.createRef();
     }
     private onUserIdChange = (userId: string) => {
         const { loginParams, loginParamsAction } = this.props;
@@ -45,6 +47,10 @@ export class LoginCardField extends React.Component<LoginCardFieldProps, LoginCa
                             textColor='black'
                             tintColor="#ACD472"
                             lineWidth={2}
+                            returnKeyType={"next"}
+                            onSubmitEditing={() => {
+                                this.secondField.current.focus();
+                            }}
                             animationDuration={60}
                             onChangeText={(userId: string) => this.onUserIdChange(userId)}
                             onFocus={() => {
@@ -72,6 +78,7 @@ export class LoginCardField extends React.Component<LoginCardFieldProps, LoginCa
                             textColor='black'
                             tintColor="#ACD472"
                             lineWidth={2}
+                            ref={this.secondField}
                             animationDuration={60}
                             secureTextEntry={true}
                             onChangeText={(password: string) => this.onPasswordChange(password)}

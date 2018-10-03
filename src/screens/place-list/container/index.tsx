@@ -161,7 +161,6 @@ export class PlaceList extends React.Component<Props, State> {
             params.filter = 1;
         let reconstruct: any = [];
         RestaurantRestService.listRestaurant(transformToFromData(params), this.props.customer['user_access_token']).then((restaurantData: any) => {
-            console.log("restaurantData", restaurantData);
             if (restaurantData['data']['settings']['success'] == 1) {
                 if (restaurantData['data']['data'].length > 0)
                     restaurantData['data']['data'].forEach((restaurant: any, idx: number) => {
@@ -203,7 +202,6 @@ export class PlaceList extends React.Component<Props, State> {
         })
     }
     scrollEnd = () => {
-        console.log("Card scroll aned");
         this.pullToRefresh();
     }
     sort = (sort: string) => {

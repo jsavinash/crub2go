@@ -76,9 +76,9 @@ export class RegisterCardField extends React.Component<RegisterCardFieldProps, R
                             textColor='black'
                             tintColor="#ACD472"
                             lineWidth={2}
+                            animationDuration={60}
                             returnKeyType={"next"}
                             autoFocus={true}
-                            animationDuration={60}
                             onSubmitEditing={() => {
                                 this.secondField.current.focus();
                             }}

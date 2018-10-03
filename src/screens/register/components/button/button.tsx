@@ -88,10 +88,6 @@ export class Button extends React.Component<ButtonProps, State> {
         cpyRegisterParams['isLoading'] = true;
         registerParamsAction(cpyRegisterParams);
         CustomerRestService.customerVerification(transformToFromData(verification)).then((verifyUser: any) => {
-
-
-
-            registerParamsAction(cpyRegisterParams);
             if (verifyUser.problem === "NETWORK_ERROR") {
                 showAlert(ErrTitle, ErrInternetCon, 'info');
                 setTimeout(() => {

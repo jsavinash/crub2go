@@ -30,7 +30,6 @@ export class Upload extends React.Component<HeaderProps, HeaderState> {
     private onImageChange = (image: any) => {
         if(image && !image['didCancel']){
         CompressImage.createCompressedImage(image['uri'], image['path']).then((response: any) => {
-            console.log("response", response);
             const { registerParams, registerParamsAction } = this.props;
             const cpyRegisterParams = { ...registerParams };
             cpyRegisterParams['user_profile'] = response;
