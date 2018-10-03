@@ -5,14 +5,21 @@ export const styles = StyleSheet.create({
         margin: 14,
     },
     image: {
-        height: 35,
-        width: 40,
+        height: '40%',
+        width: '10%',
+    },
+    image1: {
+        height: '30%',
+        width: '15%',
         position: 'absolute',
-        right: 0,
-        marginTop: 25
+        left: 3,
+        bottom: '15%'
     },
     txtField: {
-        flexDirection: 'row'
+        flexDirection: 'column',
+    },
+    txtField12: {
+        flexDirection: 'row',
     },
     txtFieldIn: {
         width: '100%'
@@ -24,6 +31,27 @@ export const styles = StyleSheet.create({
     },
     txtFieldIn1: {
         width: '100%'
+    },
+    div1: {
+        alignSelf: 'center'
+    },
+    image2: {
+        height: 30,
+        width: 30,
+    },
+    borderActive: {
+        borderBottomWidth: 2,
+        borderBottomColor: '#ACD472'
+    },
+    borderInactive: {
+        borderBottomWidth: 2,
+        borderBottomColor: '#aaa'
+    },
+    div2: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    div3: {
+        width: "48%"
     }
-
 });

@@ -1,15 +1,22 @@
 import { Payment } from './container';
 import { connect } from 'react-redux'
-import { cardAction } from '@state_action';
+import { cardAction, orderAction } from '@state_action';
 import { RootState } from '../../reducers/RootReducer';
 const mapDispatchToProps = {
-    listCards: cardAction.listCards,
+    listCards: cardAction['listCards'],
+    checkoutParamsAction: orderAction['checkoutParams'],
+
 }
 
 const mapStateToProps = (state: RootState) => ({
     cards: state['cards']['cards'],
-    customer: state['customer']['customer']
+    total: state['cart']['cartTotal'],
+    customer: state['customer']['customer'],
+    checkoutParams: state['order']['checkoutParams'],
+    nav: state['nav']
 })
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Payment)
 

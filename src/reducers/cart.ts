@@ -7,6 +7,7 @@ export const CartReducer = combineReducers<CartState, CartActions>({
         switch (action.type) {
             case getType(cartAction.viewCart):
                 return action['payload'];
+                
             default:
                 return state
         }

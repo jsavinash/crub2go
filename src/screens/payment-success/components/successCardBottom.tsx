@@ -1,12 +1,23 @@
 import * as React from "react"
 import { StyleSheet, Dimensions, View, Text, TouchableOpacity } from "react-native";
 import { Button } from 'react-native-elements';
+import { NavigationActions} from "react-navigation";
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 interface Props {
+    navigation: any
 }
 export const SuccessCardBottom: React.StatelessComponent<Props> = (props) => {
     const submitLoginCredentials = () => {
+
+        props.navigation.dispatch(NavigationActions.reset(
+            {
+                index: 0,
+                actions: [
+                    NavigationActions.navigate({ routeName: 'Home',
+                    })
+                ]
+            }));
 
     }
     return (
@@ -14,7 +25,7 @@ export const SuccessCardBottom: React.StatelessComponent<Props> = (props) => {
             <View style={styles.containerIn}>
                 <Button
                     onPress={submitLoginCredentials}
-                    title="Submit"
+                    title="My Order"
                     buttonStyle={styles.containerInBtnStyle}
                     containerViewStyle={styles.containerInBtnCnt} />
             </View>

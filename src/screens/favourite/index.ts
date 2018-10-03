@@ -1,16 +1,21 @@
 import { Favourite } from './container';
 import { connect } from 'react-redux'
 import { RootState } from '../../reducers/RootReducer';
-import { restaurantsAction } from '@state_action';
+import { citiesAction, restaurantsAction } from '@state_action';
 
 const mapDispatchToProps = {
-    listFavRestaurant: restaurantsAction.listFavRestaurant
+    listCites: citiesAction.listCites,
+    listFavRestaurant: restaurantsAction.listFavRestaurant,
+    restaurantParamsAction: restaurantsAction.restaurantParamsValue,
+    selectedRestaurantAction: restaurantsAction.selectedRestaurantValue
 }
-
 const mapStateToProps = (state: RootState) => ({
-    favRestaurants: state['restaurants']['favRestaurants']
+    cities: state['cities']['cities'],
+    favRestaurants: state['restaurants']['favRestaurants'],
+    restaurantParamsValue: state['restaurants']['restaurantParamsValue'],
+    selectedRestaurantValue: state['restaurants']['selectedRestaurant'],
+    customer: state['customer']['customer']
 })
-
 export default connect(mapStateToProps, mapDispatchToProps)(Favourite)
 
 

@@ -1,17 +1,16 @@
 import { combineReducers } from 'redux'
 import { getType } from 'typesafe-actions'
-import { CitiesActions, CitiesState, citiesAction } from '../state_action'
-import { ICities } from '@models';
+import { FaqActions, FaqState, faqAction } from '../state_action'
+import { IFAQResponse } from '@models';
 
-export const FAQReducer = combineReducers<CitiesState, CitiesActions>({
-    cities: (state = [], action) => {
+export const FAQReducer = combineReducers<FaqState, FaqActions>({
+    faq: (state: IFAQResponse[] = [], action) => {
         switch (action.type) {
-            case getType(citiesAction.listCites):
+            case getType(faqAction.listFaq):
                 return action['payload'];
             default:
                 return state
         }
-
     }
 })
 

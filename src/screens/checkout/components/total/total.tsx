@@ -2,17 +2,29 @@ import * as React from "react";
 import { View, Text } from 'react-native';
 import { styles } from './total-style';
 import { Button } from 'react-native-elements';
+import { showAlert, logger } from '@common_service';
 
 export interface TotalProps {
     cartTotal: any,
     checkoutParams: any,
+    checkoutParamsAction: (checkout: any) => any
 }
-
 export const Total: React.StatelessComponent<TotalProps> = (props) => {
     const checkout = () => {
-        console.log("checkoutParams", props.checkoutParams);
-
+        const { checkoutParams, checkoutParamsAction } = props;
+        const cpyCheckoutParams = { ...checkoutParams }
+        if (!cpyCheckoutParams['pickup_time']) {
+            showAlert('Crub2go', 'Please select your order pick time', 'danger');
+            return;
+        }
+        if (cpyCheckoutParams['isError']) {
+            showAlert('Crub2go', cpyCheckoutParams['error'], 'danger');
+            return;
+        }
+        cpyCheckoutParams.isCheckoutSheet = true;
+        checkoutParamsAction(cpyCheckoutParams)
     }
+    
     return (
         <View style={styles.container}>
             <View style={styles.contMargin}>

@@ -1,4 +1,4 @@
-import { Register } from './container';
+import { Register } from './container/register/register';
 import { connect } from 'react-redux'
 import { custAction } from '@state_action';
 import { RootState } from '../../reducers/RootReducer';

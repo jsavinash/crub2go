@@ -8561,6 +8561,10 @@ react-native-collapsible@^0.13.0:
   dependencies:
     prop-types "^15.6.2"
 
+react-native-compress-image@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-compress-image/-/react-native-compress-image-2.0.1.tgz#f14d701be7f6fcf6973a34dd5ef51436d63fb469"
+
 react-native-config@^0.11.5:
   version "0.11.5"
   resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.11.5.tgz#516cb7b6ec437c7739236ca075971db3aabdcb95"
@@ -8740,6 +8744,10 @@ react-native-modal@^6.2.0, react-native-modal@^6.4.0:
     prop-types "^15.6.1"
     react-native-animatable "^1.2.4"
 
+react-native-navigation-actions@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-navigation-actions/-/react-native-navigation-actions-1.0.4.tgz#774f06980f7e1ecfa0af89f05a2cf6ccf94c88eb"
+
 react-native-offline@^3.11.1:
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/react-native-offline/-/react-native-offline-3.12.0.tgz#44d7c3b393357f0b0111ad1e8370fe8a7114e169"
@@ -8751,6 +8759,10 @@ react-native-offline@^3.11.1:
 react-native-orientation@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/react-native-orientation/-/react-native-orientation-3.1.3.tgz#d45803841fe94b6cce9acbe904fd5ca191a3711e"
+
+react-native-phone-call@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/react-native-phone-call/-/react-native-phone-call-1.0.8.tgz#9c1e5d26957d9b573cf8cae212ef288d640eb3bc"
 
 react-native-photo-upload@^1.2.0:
   version "1.3.0"
@@ -8802,9 +8814,9 @@ react-native-settings-list@^1.8.0:
     create-react-class "^15.6.2"
     prop-types "^15.5.10"
 
-react-native-share@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-1.1.1.tgz#8c50c67c3fa519607f3352c03f56076c0481edeb"
+react-native-share@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-1.1.2.tgz#f205265b9a3563eb20b9e247f17b8cab574a38dc"
 
 react-native-splash-screen@^3.1.1:
   version "3.1.1"
@@ -8830,6 +8842,10 @@ react-native-swiper@^1.5.13:
   resolved "https://codeload.github.com/react-navigation/react-native-tab-view/tar.gz/36ebd834d78b841fc19778c966465d02fd1213bb"
   dependencies:
     prop-types "^15.6.0"
+
+react-native-text-input-mask@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/react-native-text-input-mask/-/react-native-text-input-mask-0.8.0.tgz#30f0de0215644db10719c4b1d29610605fb57262"
 
 react-native-text-ticker@^0.13.0:
   version "0.13.0"

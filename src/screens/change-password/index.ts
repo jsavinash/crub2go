@@ -1,2 +1,2 @@
-import { ChangePassword } from './container';
+import ChangePassword from './container';
 export default ChangePassword;

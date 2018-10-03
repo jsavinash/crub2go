@@ -55,4 +55,23 @@ export const CHECKOUT_PARAMS = 'checkout/PARAMS';
 
 
 
+//Navigation
+export const Navigator = 'Navigation/NAVIGATE';
 
+//Order
+export const LIST_ORDERS = 'order/LIST';
+export const SELECTED_ORDER = 'order/SELECTED';
+export const SELECTED_ORDER_ITEM = 'order/ORDERITEM';
+export const SELECTED_ORDER_DETAILS = 'order/ORDERDETAILS';
+
+//Params Action
+export const LOGIN = 'login/PARAMS';
+export const REGISTER = 'register/PARAMS';
+export const CHANGE_PASSWORD = 'changePassword/PARAMS';
+export const RESET_PASSWORD = 'resetPassword/PARAMS';
+export const FORGOT_PASSWORD = 'forgotPassword/PARAMS';
+export const CARD_ADD = 'cardAdd/PARAMS';
+
+
+//FAQ
+export const LIST_FAQ = 'faq/LIST';

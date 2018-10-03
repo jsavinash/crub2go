@@ -5,20 +5,41 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 import { SuccessCard } from '../components';
 export interface Props {
-    navigation: any
+    navigation: any,
+    checkoutParamsAction: (data: any) => any,
+    cartTotalAction: (data: any) => any,
+    viewCartAction: (data: any) => any,
 }
 
-
 interface State {
-
+    orderNumber: any,
+    pickUpTime: any
 }
 export class PaymentSuccess extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
+        this.state = {
+            orderNumber: '',
+            pickUpTime: ''
+        };
     }
     componentDidMount() {
         SplashScreen.hide();
+        this.props.checkoutParamsAction({});
+        this.props.cartTotalAction({})
+        this.props.viewCartAction([]);
+        this.getRouteParams();
     }
+
+    getRouteParams = () => {
+        const { navigation } = this.props;
+        const data = navigation.getParam('data', '');
+        this.setState({
+            orderNumber: data['order_details'][0]['order_id'],
+            pickUpTime: data['order_details'][0]['order_pickup_time']
+        })
+    }
+
     navigateTo = (screen: string): any => {
         this.props.navigation.navigate(`${screen}`);
     };
@@ -40,9 +61,11 @@ export class PaymentSuccess extends React.Component<Props, State> {
                         style={{
                             color: 'white',
                             fontSize: 25
-                        }}>Payment Successfull</Text>
+                        }}>Thank You for Your Order</Text>
                 </View>
-                <SuccessCard />
+                <SuccessCard
+                    navigation={this.props.navigation}
+                    order={this.state} />
             </ImageBackground>
         )
     }

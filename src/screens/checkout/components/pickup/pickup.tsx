@@ -10,12 +10,13 @@ export interface PickUpProps {
     token: any,
     resturantId: any,
     checkoutParamsAction: (checkout: any) => any,
-    checkoutParams: any
+    checkoutParams: any,
 }
 export interface PickUpState {
     isDateTimePickerVisible: boolean
 }
 export class PickUp extends React.Component<PickUpProps, PickUpState> {
+ 
     constructor(props: PickUpProps) {
         super(props);
         this.state = {
@@ -41,7 +42,7 @@ export class PickUp extends React.Component<PickUpProps, PickUpState> {
         }
         OrderRestService.checkPickUpTime(transformToFromData(params), token).then((time: any) => {
             if (time['data']['settings']['success'] == 1) {
-
+                cpyCheckoutParams['isError'] = false;
             }
             else if (time['data']['settings']['success'] == 0) {
                 cpyCheckoutParams['isError'] = true;

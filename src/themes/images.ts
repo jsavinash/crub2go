@@ -1,0 +1,33 @@
+const Images = {
+    BG_IMAGE: require('../assets/app-images/bg.png'),
+    LOGIN_LOGO: require('../assets/app-images/login_logo.png'),
+    USER_ACTIVE: require('../assets/app-images/user_active.png'),
+    USER_INACTIVE: require('../assets/app-images/user_deactive.png'),
+    EYE_ACTIVE: require('../assets/app-images/activated_eye.png'),
+    EYE_INACTIVE: require('../assets/app-images/deactivated_eye.png'),
+    STARTED_USER: require('../assets/app-images/started_user.png'),
+    CAMERA_OPEN: require('../assets/app-images/cemera_s_2.png'),
+    CAMERA_CLOSE: require('../assets/app-images/cemera_s_2_h.png'),
+    MOBILE_ACTIVE: require('../assets/app-images/mobile_active.png'),
+    MOBILE_INACTIVE: require('../assets/app-images/mobile_deactive.png'),
+    EMAIL_ACTIVE: require('../assets/app-images/email_active.png'),
+    EMAIL_DEACTIVE: require('../assets/app-images/email_deactive.png'),
+    LEFT_WHITE_BACK_ARROW: require('../assets/app-images/back_btn_s_1a.png'),
+    FORGOT: require('../assets/app-images/forgot.png'),
+    VERIFICATION: require('../assets/app-images/verification.png'),
+    RESET: require('../assets/app-images/reset.png'),
+    LIGHT_RIGHT_SWIPE: require('../assets/app-images/light_right_swipe.png'),
+    DARK_RIGHT_SWIPE: require('../assets/app-images/dark_right_swipe.png'),
+    CARD_PAYMENT: require('../assets/app-images/card_payment.png'),
+    ADD_BUTTON: require('../assets/app-images/add_btn.png'),
+    ADD_BUTTON_DARK: require('../assets/app-images/add_btn_h.png'),
+    LOCKER_ACTIVE: require('../assets/app-images/img_changepass.png'),
+    LOCKER_INACTIVE: require('../assets/app-images/img_changepass_h.png'),
+    CALENDER_ACTIVE: require('../assets/app-images/calndr_icon_h.png'),
+    CALENDER_INACTIVE: require('../assets/app-images/calndr_icon.png'),
+    CARD_ACTIVE: require('../assets/app-images/card_active.png'),    
+    CARD_INACTIVE: require('../assets/app-images/card_deactive.png'),    
+}
+
+
+export default Images

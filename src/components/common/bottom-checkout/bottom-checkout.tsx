@@ -25,11 +25,15 @@ export class BottomCheckout extends React.Component<BottomCheckoutProps, BottomC
     }
     render() {
         const { cartTotal, cart, nav } = this.props;
-        if (cartTotal && (cart.length > 0) && ((nav.index == 1) || (nav && nav['routes'] && (nav['routes'].length == 3) && nav['routes'][2] && nav['routes'][2]['routeName'] && (nav['routes'][2]['routeName'] == "PlaceDetail")))) {
+        let currentRouteName = "";
+        if (nav && nav['routes']) {
+            currentRouteName = nav['routes'][nav['routes'].length - 1]['routeName'];
+        }
+        if (nav && nav['routes'] && cartTotal && (cart.length > 0) && (currentRouteName == "Home" || currentRouteName == "PlaceDetail")) {
             return (
                 <TouchableOpacity onPress={() => {
                     this.navigation.navigate('Checkout', { resturantId: cartTotal['restaurant_id'] });
-                }} style={nav.index == 1 ? styles.container1 : styles.container2}>
+                }} style={currentRouteName == "PlaceDetail" ? styles.container2 : styles.container1}>
                     <View>
                         <View style={styles.div1}>
                             <View style={styles.txtDiv1}>

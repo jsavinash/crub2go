@@ -12,6 +12,7 @@ export interface PlaceDetailProps {
     seletedAttributeAction: (payload: any) => any,
     cartAction: (cart: any) => any,
     cartTotalAction: (cartTotal: any) => any,
+    navigation: any,
     //Store Variable
     customer: ICustomer,
     selectedItem: IItem,
@@ -39,8 +40,8 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
         this.initPrice();
     }
     initPrice = () => {
-        const { item_original_price } = this.props.selectedItem;
-        const originalPrice: string = item_original_price.toString();
+        const { item_discounted_price } = this.props.selectedItem;
+        const originalPrice: string = item_discounted_price.toString();
         let data: ITotalPrice = {
             totalPrice: parseFloat(originalPrice),
             quantity: 1,
@@ -55,7 +56,9 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
             selectedCategory,
             selectedItem,
             selectedAttribute,
-            totalPrice } = this.props;
+            totalPrice,
+            customer,
+            navigation } = this.props;
         let construct: any = [];
         selectedAttribute.forEach((attr: any) => {
             let obj: any = {};
@@ -77,24 +80,32 @@ export class ItemDetail extends React.Component<PlaceDetailProps, PlaceDetailPro
             item_variation: JSON.stringify(construct)
         }
         let formData = transformToFromData(cartToCartParams);
-        CartRestService.addToCart(formData, this.props.customer.user_access_token).then((success: any) => {
-            if (success['data']['settings']['success'] == 1) {
-                this.getCartDetails();
-            } else if (success['data']['settings']['success'] == 0) {
+        if (customer && customer['user_access_token']) {
+            CartRestService.addToCart(formData, customer['user_access_token']).then((success: any) => {
+                if (success['data']['settings']['success'] == 1) {
+                        this.getCartDetails();
 
-            }
-        }).catch((error) => {
-            console.log("error......................", error);
-        })
+                } else if (success['data']['settings']['success'] == 0) {
+
+                }
+            }).catch((error) => {
+                console.log("error......................", error);
+            })
+        } else {
+            navigation.navigate('Login', { screen: 'checkout' });
+        }
     }
     getCartDetails = () => {
         const _self = this;
         const { customer } = this.props;
-        console.log("customer['user_access_token']", customer['user_access_token']);
         CartRestService.viewCart(customer['user_access_token']).then((cart: any) => {
+            console.log("cart update.........................", cart);
             if (cart['data']['settings']['success'] == 1) {
+                setTimeout(() => {
                 _self.props.cartAction(cart['data']['data']['cart_item']);
                 _self.props.cartTotalAction(cart['data']['data']['cart_final_total']);
+                }, 400);
+                this.props.navigation.goBack();
             }
         }).catch((error) => {
 

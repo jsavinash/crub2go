@@ -3,7 +3,7 @@ import { View, StyleSheet, Dimensions, Text } from "react-native";
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 export interface Props {
-
+    order: any
 }
 
 interface State {
@@ -15,18 +15,17 @@ export class SuccessCardContent extends React.Component<Props, State> {
         super(props);
     }
     render() {
+
         return (
             <View style={styles.container}>
                 <Text style={styles.content}>You have successfully</Text>
                 <Text style={styles.content}>Placed your order</Text>
                 <View style={styles.border}></View>
-
                 <Text style={styles.content}>Order Number</Text>
-                <Text style={styles.content1}># 032451</Text>
+                <Text style={styles.content1}># {this.props.order.orderNumber}</Text>
                 <View style={styles.border}></View>
-
                 <Text style={styles.content}>Estimated Pickup Time</Text>
-                <Text style={styles.content1}>30 mins</Text>
+                <Text style={styles.content1}>{this.props.order.pickUpTime}</Text>
             </View>
         )
     }

@@ -57,18 +57,23 @@ export const Checkout = {
     header: null
 }
 export const Favourite = {
-    title: 'Favourite',
+    title: 'My Favorites',
     headerStyle: { backgroundColor: 'white' },
     headerTitleStyle: {
         color: '#4E4E4E',
-        marginLeft: ((SCREEN_WIDTH * 22) / 100)
+        marginLeft: ((SCREEN_WIDTH * 18) / 100)
     }
 }
 export const Orders = {
     header: null
 }
 export const OrderSummary = {
-    header: null
+    title: 'Order Summary',
+    headerStyle: { backgroundColor: 'white' },
+    headerTitleStyle: {
+        color: '#4E4E4E',
+        marginLeft: ((SCREEN_WIDTH * 15) / 100)
+    }
 }
 export const Payment = {
     title: 'Payment Method',
@@ -89,3 +94,11 @@ export const Policy = {
     header: null
 }
 
+export const FAQ = {
+    title: 'FAQ`s',
+    headerStyle: { backgroundColor: 'white' },
+    headerTitleStyle: {
+        color: '#4E4E4E',
+        marginLeft: ((SCREEN_WIDTH * 28) / 100)
+    }
+}

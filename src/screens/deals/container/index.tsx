@@ -37,8 +37,7 @@ export class Deals extends React.Component<Props, State> {
                 </View>
                 <DealCard 
                 restaurantName={this.state.restaurantName}
-                navigation={this.props.navigation}
-                />
+                navigation={this.props.navigation}/>
             </View>
         )
     }

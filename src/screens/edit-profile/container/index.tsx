@@ -42,13 +42,15 @@ export class EditProfile extends React.Component<RegisterProps, RegisterState> {
         this.props.navigation.navigate(`${screen}`);
     };
     onSubmit = (user: any) => {
-        console.log("user....................", user);
+        const { customer } = this.props;
+const cpyCustomer = customer;
+
+
         let _self = this;
         const { photo } = this.state;
         let edit: IEditProfile = {
-            user_name: user['mobile'],
+            user_name: user['username'],
         };
-
         let data: any = transformToFromData(edit);
         if (_self.state.photo && _self.state.photo.uri) {
             data.append('user_profile', {
@@ -57,27 +59,24 @@ export class EditProfile extends React.Component<RegisterProps, RegisterState> {
                 name: photo.fileName
             });
         }
-        _self.setState({ loader: true });
-        CustomerRestService.customerProfileEdit(data).then((editProfile: any) => {
-            console.log('editProfile', editProfile);
+
+        CustomerRestService.customerProfileEdit(data, this.props.customer['user_access_token']).then((editProfile: any) => {
             if (editProfile.problem === "NETWORK_ERROR") {
-                _self.setState({ loader: false });
                 showAlert(ErrTitle, ErrInternetCon, 'info');
-                return;
             }
             let customerData: ICustomer = editProfile['data']['data'][0];
             if (editProfile['data']['settings']['success'] == 1) {
-                this.props.navigation.navigate('Account');
-                _self.setState({ loader: false });
-                _self.props.customerCreate(customerData);
+                this.props.navigation.goBack();
+                cpyCustomer['user_profile'] = customerData['user_profile']
+                cpyCustomer['user_name'] = customerData['user_name']
+                _self.props.customerCreate(customer);
                 showAlert(ErrTitle, editProfile['data']['settings']['message'], 'success');
             }
+
             else if (editProfile['data']['settings']['success'] == 0) {
-                _self.setState({ loader: false });
                 showAlert(ErrTitle, editProfile['data']['settings']['message'], 'danger');
             }
         }).catch((error) => {
-            _self.setState({ loader: false });
             logger('Edit Profile', 'ERROR', error);
             showAlert(InternalServerErrorTitle, InternalServerError, 'warning');
         });
@@ -102,7 +101,7 @@ export class EditProfile extends React.Component<RegisterProps, RegisterState> {
                 keyboardVerticalOffset={(-((SCREEN_HEIGHT * 48) / 100))}
                 behavior={"position"}
                 enabled>
-                <Spinner visible={this.state.loader} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
+                <Spinner visible={this.state.loader} textStyle={{ color: '#FFF' }} />
                 <ImageBackground
                     source={require('../../../assets/app-images/bg.png')}
                     style={styles.bgImage}>
@@ -144,7 +143,8 @@ var styles = StyleSheet.create({
     },
     headerIn: {
         color: 'white',
-        fontSize: 20
+        fontSize: 20,
+        marginBottom: '3%'
     },
     headerImg: {
         alignSelf: 'center',
@@ -155,8 +155,14 @@ var styles = StyleSheet.create({
         borderRadius: 22,
         borderColor: 'transparent',
         alignItems: 'center',
-        marginTop: '5%',
         marginBottom: 10
+
+
+
+
+
+
+
     },
     headerImgStyle: {
         width: ((SCREEN_WIDTH * 35) / 100),

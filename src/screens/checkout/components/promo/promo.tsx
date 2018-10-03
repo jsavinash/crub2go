@@ -19,9 +19,9 @@ export const Promo: React.StatelessComponent<PromoProps> = (props) => {
         state: props.nav,
         addListener: createReduxBoundAddListener('root'),
     });
-    
+
     const navigateTo = (path: string) => {
-        navigation.navigate(`${path}`, {restaurant_name: props.restaurant_name });
+        navigation.navigate(`${path}`, { restaurant_name: props.restaurant_name });
     }
     const apply = () => {
 

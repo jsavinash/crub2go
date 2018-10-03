@@ -6,7 +6,7 @@ const mapDispatchToProps = {
     customerCreate: custAction['createCustomer'],
     cartAction: cartAction['viewCart'],
     cartTotalAction: cartAction['cartTotal'],
-    listDealsAction: dealAction['listDeals']
+    dealAction: dealAction['listDeals'],
 }
 const mapStateToProps = (state: RootState) => ({
     customer: state['customer']['customer']

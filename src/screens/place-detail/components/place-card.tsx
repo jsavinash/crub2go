@@ -2,52 +2,93 @@ import * as React from "react";
 import { Text, StyleSheet, View, Dimensions, Image, TouchableHighlight } from 'react-native';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
+import ImageOverlay from "react-native-image-overlay";
+import { transformToFromData } from '@common_service';
+import { RestaurantRestService } from '../../../services';
+
 export interface PlaceCardProps {
     navigation: any,
-    resturant: any
+    resturant: any,
+    customer: any
 }
-export const PlaceCard: React.StatelessComponent<PlaceCardProps> = (props) => {
-    const navigateTo = () => {
+export interface state {
+    fav: boolean
+}
+export class PlaceCard extends React.Component<PlaceCardProps, state> {
+
+    constructor(props: PlaceCardProps) {
+        super(props);
+        this.state = {
+            fav: (this.props.resturant['restaurant_favourite'] == "1") ? true : false 
+        }
     }
-    return (
-        < View style={styles.card} >
-            <View>
-                <Image
-                    source={{ uri: props.resturant.restaurant_image }}
-                    style={styles.cardImg} />
-                <TouchableHighlight
-                    style={styles.fav}
-                // onPress={() => { this.favorite(restaurant) }}
-                >
-                    <Image
-                        source={require('../../../assets/app-images/like_btn_s_3_h.png')}
-                        style={styles.favImg}
-                    />
-                </TouchableHighlight>
-                <TouchableHighlight
-                    style={styles.info} onPress={() => {
-                        props.navigation.navigate('Location', { resturant: props.resturant });
-                    }}>
-                    <Image
-                        source={require('../../../assets/app-images/img_info_h.png')}
-                        style={styles.infoImg} />
-                </TouchableHighlight>
-                <View style={styles.cardContent}>
-                    <View style={styles.row1}>
-                        <Text style={styles.row1Left}>{props.resturant.restaurant_name}</Text>
-                        <Text style={styles.row1Right}>Ratings</Text>
-                    </View>
-                    <View style={styles.row2}>
-                        <Text style={styles.row2Left}>{props.resturant.restaurant_distance} Miles away</Text>
-                        <Text style={styles.row2Right}>{props.resturant.restaurant_rating}</Text>
-                    </View>
-                    <View style={styles.row2}>
-                        <Text style={styles.row2Left}>{props.resturant.restaurant_address}</Text>
+    private favorite = (restaurant: any) => {
+        const { customer } = this.props;
+        let data = {
+            user_id: customer['user_id'],
+            restaurant_id: restaurant['restaurant_id']
+        }
+        RestaurantRestService.markFavoriteRestaurant(transformToFromData(data), customer['user_access_token']).then((fav: any) => {
+            console.log("fav", fav);
+            this.setState({ fav: !this.state.fav });
+        }).catch((error: any) => {
+
+        })
+    }
+    render() {
+        return (
+            <View style={styles.card} >
+                <View>
+                    {(this.props.resturant['restaurant_open'] == 1) ?
+                        <Image
+                            source={{ uri: this.props.resturant.restaurant_image }}
+                            style={styles.cardImg} /> :
+                        <ImageOverlay source={{ uri: this.props.resturant['restaurant_image'] }}
+                            containerStyle={styles.cardImg} />
+                    }
+                    {this.props.customer['user_access_token'] ?
+                        <TouchableHighlight
+                            style={styles.fav}
+                            onPress={() => { this.favorite(this.props.resturant) }}
+                        >
+                            <Image
+                                source={((this.state.fav)) ?
+                                    require('../../../assets/app-images/like_btn_s_3_h.png')
+                                    :
+                                    require('../../../assets/app-images/like_btn_s_3.png')
+                                }
+                                style={styles.favImg}
+                            />
+                        </TouchableHighlight>
+
+                        : <View />
+                    }
+
+                    <TouchableHighlight
+                        style={styles.info} onPress={() => {
+                            this.props.navigation.navigate('Location', { resturant: this.props.resturant });
+                        }}>
+                        <Image
+                            source={require('../../../assets/app-images/img_info_white.png')}
+                            style={styles.infoImg} />
+                    </TouchableHighlight>
+                    <View style={styles.cardContent}>
+                        <View style={styles.row1}>
+                            <Text style={styles.row1Left}>{this.props.resturant.restaurant_name}</Text>
+                            <Text style={styles.row1Right}>Ratings</Text>
+                        </View>
+                        <View style={styles.row2}>
+                            <Text style={styles.row2Left}>{this.props.resturant.restaurant_distance} Miles away</Text>
+                            <Text style={styles.row2Right}>{this.props.resturant.restaurant_rating}</Text>
+                        </View>
+                        <View style={styles.row2}>
+                            <Text style={styles.row2Left}>{this.props.resturant.restaurant_address}</Text>
+                        </View>
                     </View>
                 </View>
-            </View>
-        </View >
-    )
+            </View >
+        )
+    }
 }
 var styles = StyleSheet.create({
     card: {

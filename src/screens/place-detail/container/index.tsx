@@ -20,7 +20,9 @@ export interface PlaceDetailProps {
     selectedMenu: IMenuList[],
     selectedResturant: IRestaurants,
     categories: ICategories[],
-    menuList: IMenuList[]
+    menuList: IMenuList[],
+    cart: any,
+    cartTotal: any
 }
 interface PlaceDetailPropsState {
 
@@ -66,8 +68,11 @@ export class PlaceDetail extends React.Component<PlaceDetailProps, PlaceDetailPr
     }
     private itemSelect = (item: any) => {
         const _self = this;
-        _self.props.selectedItemAction(item);
-        _self.props.navigation.navigate('ItemDetail');
+        const { selectedResturant } = this.props;
+        if (selectedResturant['restaurant_open'] === '1') {
+            _self.props.selectedItemAction(item);
+            _self.props.navigation.navigate('ItemDetail');
+        }
     }
     render() {
         return (
@@ -79,6 +84,7 @@ export class PlaceDetail extends React.Component<PlaceDetailProps, PlaceDetailPr
                     categories={this.props.categories}
                     menuList={this.props.selectedMenu}
                     navigation={this.props.navigation}
+                    customer={this.props.customer}
                 />
             </View>
         )
